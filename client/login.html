@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In / Register — CelebrationCraft</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/platform.css">
+  <style>
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(circle at 10% 20%, rgba(255, 232, 238, 0.6) 0%, rgba(240, 230, 255, 0.4) 50%, #FAF7F2 100%);
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 36px;
+      background: rgba(255, 255, 255, 0.94);
+    }
+    .auth-tabs {
+      display: flex;
+      border-bottom: 2px solid #F0EAE4;
+      margin-bottom: 28px;
+    }
+    .auth-tab-btn {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all 0.25s ease;
+    }
+    .auth-tab-btn.active {
+      color: var(--primary-gold-dark);
+      border-color: var(--primary-gold);
+    }
+    .demo-pill {
+      background: #FFF9E6;
+      border: 1px dashed var(--primary-gold);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .btn-google {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      background: #FFFFFF;
+      color: #374151;
+      border: 1.5px solid #E5E7EB;
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      margin-bottom: 18px;
+    }
+    .btn-google:hover {
+      background: #F9FAFB;
+      border-color: #D1D5DB;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+    .btn-google:active {
+      transform: translateY(0);
+    }
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      margin: 18px 0;
+      color: #9CA3AF;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid #E5E7EB;
+    }
+    .auth-divider:not(:empty)::before {
+      margin-right: 12px;
+    }
+    .auth-divider:not(:empty)::after {
+      margin-left: 12px;
+    }
+  </style>
+</head>
+<body class="auth-page">
+
+  <div class="auth-card glass-panel">
+    <div style="text-align: center; margin-bottom: 24px;">
+      <a href="/" class="platform-brand" style="justify-content: center; margin-bottom: 8px;">
+        <i class="fa-solid fa-crown"></i>
+        <span>CelebrationCraft</span>
+      </a>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Secure Multi-Tenant Event Studio</p>
+    </div>
+
+    <!-- Quick Demo Sign In Box -->
+    <div class="demo-pill">
+      <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary-gold-dark); margin-bottom: 4px;">
+        <i class="fa-solid fa-bolt"></i> Instant Demo Login
+      </div>
+      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">
+        Explore pre-seeded Indian, Muslim, and Birthday templates:
+      </p>
+      <button type="button" id="demo-login-btn" class="btn-gold btn-sm" style="width: 100%; justify-content: center;">
+        <i class="fa-solid fa-user-check"></i> Sign In as Demo (Vijay & Rashima)
+      </button>
+    </div>
+
+    <!-- Google 1-Click Sign-In -->
+    <button type="button" id="google-login-btn" class="btn-google" onclick="window.handleGoogleSignIn && window.handleGoogleSignIn()">
+      <svg width="18" height="18" viewBox="0 0 18 18">
+        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.616z"/>
+        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
+        <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.59.102-1.167.282-1.707V4.961H.957C.347 6.173 0 7.547 0 9s.347 2.827.957 4.039l3.007-2.332z"/>
+        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.961L3.964 7.293C4.672 5.166 6.656 3.58 9 3.58z"/>
+      </svg>
+      <span>Continue with Google</span>
+    </button>
+
+    <div class="auth-divider">or with email & password</div>
+
+    <!-- Tab Switcher -->
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" id="tab-login" onclick="switchTab('login')">Sign In</button>
+      <button class="auth-tab-btn" id="tab-register" onclick="switchTab('register')">Create Account</button>
+    </div>
+
+    <!-- Sign In Form -->
+    <form id="login-form">
+      <div style="margin-bottom: 16px;">
+        <label for="login-email" class="form-label">Email Address</label>
+        <input type="email" id="login-email" class="form-input" placeholder="you@example.com" required>
+      </div>
+      <div style="margin-bottom: 24px;">
+        <label for="login-password" class="form-label">Password</label>
+        <input type="password" id="login-password" class="form-input" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn-gold" style="width: 100%; justify-content: center; padding: 12px;">
+        <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Dashboard
+      </button>
+    </form>
+
+    <!-- Register Form (Hidden by default) -->
+    <form id="register-form" style="display: none;">
+      <div style="margin-bottom: 14px;">
+        <label for="reg-name" class="form-label">Full Name or Couple Names</label>
+        <input type="text" id="reg-name" class="form-input" placeholder="e.g. Vijay & Rashima" required>
+      </div>
+      <div style="margin-bottom: 14px;">
+        <label for="reg-email" class="form-label">Email Address</label>
+        <input type="email" id="reg-email" class="form-input" placeholder="you@example.com" required>
+      </div>
+      <div style="margin-bottom: 24px;">
+        <label for="reg-password" class="form-label">Password (Min. 8 characters)</label>
+        <input type="password" id="reg-password" class="form-input" placeholder="••••••••" minlength="8" required>
+      </div>
+      <button type="submit" class="btn-gold" style="width: 100%; justify-content: center; padding: 12px;">
+        <i class="fa-solid fa-user-plus"></i> Create Free Account
+      </button>
+    </form>
+
+    <div style="text-align: center; margin-top: 24px; font-size: 0.82rem; color: var(--text-muted);">
+      By signing in, you agree to our <a href="/privacy" style="color: var(--primary-gold-dark); text-decoration: underline;">Privacy Policy</a> and strict tenant isolation guidelines.
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyBgFCtxtFswlCUdmkKraJWo6TbTGrKC7Ac",
+      authDomain: "wedding-28db4.firebaseapp.com",
+      projectId: "wedding-28db4",
+      storageBucket: "wedding-28db4.firebasestorage.app",
+      messagingSenderId: "632488301739",
+      appId: "1:632488301739:web:94b785b0aecc0c119193ee",
+      measurementId: "G-DW6RSKTWKC"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    try {
+      getAnalytics(app);
+    } catch (e) {}
+
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    window.handleGoogleSignIn = async function() {
+      const btn = document.getElementById('google-login-btn');
+      const originalHtml = btn.innerHTML;
+      try {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span> Connecting with Google...</span>';
+        
+        const result = await signInWithPopup(auth, provider);
+        const fbUser = result.user;
+        const idToken = await fbUser.getIdToken();
+
+        // Exchange with backend session
+        await API.firebaseLogin(fbUser.email, fbUser.displayName, fbUser.uid, idToken);
+        API.showToast(`Welcome, ${fbUser.displayName || fbUser.email}!`);
+        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
+      } catch (err) {
+        console.error('Firebase Auth Error:', err);
+        if (err.code !== 'auth/popup-closed-by-user') {
+          alert(`Google Sign-In: ${err.message || 'Authentication was cancelled or failed.'}`);
+        }
+        btn.disabled = false;
+        btn.innerHTML = originalHtml;
+      }
+    };
+  </script>
+  <script>
+    function switchTab(tab) {
+      const loginTab = document.getElementById('tab-login');
+      const registerTab = document.getElementById('tab-register');
+      const loginForm = document.getElementById('login-form');
+      const registerForm = document.getElementById('register-form');
+
+      if (tab === 'register') {
+        loginTab.classList.remove('active');
+        registerTab.classList.add('active');
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+      } else {
+        registerTab.classList.remove('active');
+        loginTab.classList.add('active');
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+      }
+    }
+
+    // Check URL parameters for mode=signup
+    if (new URLSearchParams(window.location.search).get('mode') === 'signup') {
+      switchTab('register');
+    }
+
+    // Demo Login 1-Click
+    document.getElementById('demo-login-btn').addEventListener('click', async () => {
+      try {
+        await API.login('demo@eventmaker.com', 'Password123!');
+        API.showToast('Welcome back, Vijay & Rashima!');
+        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    // Handle Login
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const pass = document.getElementById('login-password').value;
+      try {
+        await API.login(email, pass);
+        API.showToast('Logged in successfully!');
+        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    // Handle Register
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value;
+      const email = document.getElementById('reg-email').value;
+      const pass = document.getElementById('reg-password').value;
+      try {
+        await API.register(email, pass, name);
+        API.showToast('Account created successfully!');
+        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+  </script>
+</body>
+</html>

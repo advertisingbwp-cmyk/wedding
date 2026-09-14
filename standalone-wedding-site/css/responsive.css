@@ -1,0 +1,276 @@
+/* ===================================================
+   VIJAY & RASHIMA WEDDING - RESPONSIVE STYLES
+   =================================================== */
+
+/* Tablet & Smaller Screens (< 1024px) */
+@media (max-width: 1024px) {
+  .hero-names {
+    font-size: 3.8rem;
+  }
+
+  .hero-grid {
+    gap: 32px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .family-group {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dress-code-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .venue-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .venue-map-card {
+    min-height: 350px;
+  }
+}
+
+/* Tablet & Mobile Screens (< 868px) */
+@media (max-width: 868px) {
+  .section {
+    padding: 70px 0;
+  }
+
+  .section-title {
+    font-size: 2.1rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.9rem;
+  }
+
+  /* Nav Menu Mobile Drawer */
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 70px);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 36px 28px;
+    gap: 20px;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    transition: right 0.4s ease;
+    border-left: 1px solid var(--glass-border);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.05rem;
+  }
+
+  /* Hero Mobile */
+  .hero-section {
+    padding: 110px 0 50px;
+    min-height: auto;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-quote {
+    padding-left: 0;
+    border-left: none;
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    padding: 16px 0;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .hero-date-badge {
+    justify-content: center;
+  }
+
+  .hero-quick-badges {
+    justify-content: center;
+  }
+
+  .sticker-1 {
+    top: 5px;
+    left: 5px;
+  }
+
+  .sticker-2 {
+    bottom: 10px;
+    right: 5px;
+  }
+
+  .sticker-3 {
+    display: none;
+  }
+
+  /* Reveal / Countdown */
+  .reveal-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  /* Events Card Stack */
+  .event-card,
+  .event-card.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .event-art {
+    min-height: 320px;
+    max-height: 360px;
+  }
+
+  .event-details {
+    padding: 32px 24px;
+  }
+
+  .event-title {
+    font-size: 1.85rem;
+  }
+
+  /* Story Timeline Single Column */
+  .story-timeline::before {
+    left: 24px;
+  }
+
+  .story-node {
+    left: 24px;
+  }
+
+  .story-item,
+  .story-item:nth-child(odd) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 60px;
+    margin-bottom: 50px;
+  }
+
+  .story-card {
+    width: 100%;
+    padding: 24px;
+  }
+
+  /* RSVP Form */
+  .rsvp-box {
+    padding: 30px 20px;
+  }
+
+  .rsvp-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rsvp-form-grid .full-width {
+    grid-column: span 1;
+  }
+
+  .checkbox-group-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Guestbook */
+  .guestbook-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Travel Grid */
+  .travel-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dress-code-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hashtag-main {
+    font-size: 2.2rem;
+  }
+
+  .lightbox-prev {
+    left: -20px;
+  }
+
+  .lightbox-next {
+    right: -20px;
+  }
+}
+
+/* Extra Small Phones (< 480px) */
+@media (max-width: 480px) {
+  .hero-names {
+    font-size: 2.9rem;
+  }
+
+  .hero-names span.heart-icon {
+    font-size: 2rem;
+  }
+
+  .countdown-number {
+    font-size: 1.7rem;
+  }
+
+  .countdown-box {
+    padding: 12px 4px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .family-group {
+    grid-template-columns: 1fr;
+  }
+
+  .dress-code-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkbox-group-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 0.88rem;
+  }
+
+  .hero-cta-group .btn {
+    width: 100%;
+  }
+
+  .hashtag-banner {
+    padding: 40px 18px;
+  }
+
+  .hashtag-main {
+    font-size: 1.75rem;
+    word-break: break-all;
+  }
+}

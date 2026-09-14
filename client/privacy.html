@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy & Security Architecture — CelebrationCraft</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/platform.css">
+</head>
+<body>
+
+  <header class="platform-navbar">
+    <a href="/" class="platform-brand">
+      <i class="fa-solid fa-crown"></i>
+      <span>CelebrationCraft</span>
+    </a>
+    <div>
+      <a href="/login" class="btn-outline btn-sm">Log In</a>
+      <a href="/login?mode=signup" class="btn-gold btn-sm">Create Account</a>
+    </div>
+  </header>
+
+  <main style="max-width: 860px; margin: 40px auto; padding: 0 24px;">
+    <div class="glass-panel" style="padding: 44px; background: #FFFFFF;">
+      <h1 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 12px;">
+        Privacy Policy & Data Security
+      </h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px;">
+        Effective Date: September 14, 2026 • Version 2.4
+      </p>
+
+      <section style="margin-bottom: 28px;">
+        <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-gold-dark);">
+          1. Multi-Tenant Data Isolation & Row-Level Security
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 10px;">
+          CelebrationCraft is architected as an isolated multi-tenant platform. Every user account, event website, uploaded media, guest list, and RSVP submission is strictly partitioned.
+        </p>
+        <ul style="padding-left: 20px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.8;">
+          <li>Users can only view, edit, and manage their own event websites and data.</li>
+          <li>Database queries enforce server-side Row-Level Security checks using <code>ownerUserId</code> and <code>eventId</code>.</li>
+          <li>Unauthorized cross-tenant access attempts trigger instant 403 Forbidden responses and are flagged in security audit logs.</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom: 28px;">
+        <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-gold-dark);">
+          2. Encryption at Rest for API Keys & Sensitive Integrations
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 10px;">
+          If you configure third-party integration keys (such as Google Maps API or SendGrid keys):
+        </p>
+        <ul style="padding-left: 20px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.8;">
+          <li>All API keys are encrypted at rest using industry-standard <strong>AES-256-GCM</strong> encryption.</li>
+          <li>Raw keys are never exposed in frontend code, browser local storage, public API responses, or logs.</li>
+          <li>Only masked previews (e.g. <code>sk-••••••••1234</code>) are visible in your private dashboard.</li>
+          <li>You can revoke or delete your integration keys at any moment.</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom: 28px;">
+        <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-gold-dark);">
+          3. Three-Tier Privacy & Selective Sharing Modes
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-dark); margin-bottom: 10px;">
+          Event creators have full sovereign control over who can view their invitation website:
+        </p>
+        <ul style="padding-left: 20px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.8;">
+          <li><strong>Draft Mode:</strong> Strictly inaccessible to anyone other than the authenticated creator.</li>
+          <li><strong>Private Share Mode:</strong> Protected behind a secret guest passcode or single-use expiring invite links. Unauthenticated visitors cannot view protected ceremony details, venue addresses, or photos.</li>
+          <li><strong>Public Mode:</strong> Publicly viewable, while all administrative settings, guest lists, and RSVP details remain strictly owner-only.</li>
+        </ul>
+      </section>
+
+      <section style="margin-bottom: 28px;">
+        <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-gold-dark);">
+          4. Notice Regarding Authorized Recipient Sharing
+        </h2>
+        <div style="background: #FFF9E6; border-left: 4px solid var(--primary-gold); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 0.9rem; color: var(--text-dark); line-height: 1.6;">
+          <strong>Important Disclosure:</strong> While CelebrationCraft enforces rigorous access gating, token expiration, and server authorization, no software platform can prevent an authorized recipient from manually taking screenshots or sharing content they have legitimately been granted access to view. We recommend inviting only trusted family and friends for private events.
+        </div>
+      </section>
+
+      <section style="margin-bottom: 28px;">
+        <h2 style="font-size: 1.3rem; margin-bottom: 10px; color: var(--primary-gold-dark);">
+          5. Guest RSVP Data Confidentiality
+        </h2>
+        <p style="font-size: 0.95rem; color: var(--text-dark);">
+          RSVP responses (including guest phone numbers, meal preferences, and personal blessing messages) are never public and are made accessible strictly to the event host in their private dashboard.
+        </p>
+      </section>
+
+      <div style="text-align: center; margin-top: 36px;">
+        <a href="/" class="btn-gold"><i class="fa-solid fa-arrow-left"></i> Return to Homepage</a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 24px; font-size: 0.82rem; color: var(--text-muted);">
+    © 2026 CelebrationCraft Platform • Strict Privacy & Tenant Isolation Architecture
+  </footer>
+</body>
+</html>

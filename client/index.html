@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CelebrationCraft — Luxury Multi-Tenant Event Website Builder</title>
+  <meta name="description" content="Create bespoke, privacy-first invitation websites for Indian Weddings, Muslim Weddings, and Birthday Celebrations with cartoon illustrations, scratch cards, and real-time RSVPs.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Platform Styles -->
+  <link rel="stylesheet" href="css/platform.css">
+  <style>
+    .landing-hero {
+      padding: 90px 20px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--primary-gold-dark);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+    .landing-title {
+      font-family: var(--font-display);
+      font-size: 3.4rem;
+      line-height: 1.2;
+      color: var(--text-dark);
+      max-width: 880px;
+      margin: 0 auto 20px;
+    }
+    .landing-subtitle {
+      font-size: 1.18rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+    }
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+    .showcase-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-card);
+      transition: transform 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .showcase-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+    .showcase-img {
+      width: 100%;
+      height: 240px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      margin-bottom: 18px;
+    }
+    .features-section {
+      background: #FFFFFF;
+      padding: 80px 20px;
+      border-top: 1px solid #ECE4DC;
+      border-bottom: 1px solid #ECE4DC;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .feature-box {
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--bg-sand);
+      border: 1px solid var(--border-light);
+    }
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary-gold-light);
+      color: var(--primary-gold-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 900px) {
+      .landing-title { font-size: 2.5rem; }
+      .showcase-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <header class="platform-navbar">
+    <a href="/" class="platform-brand">
+      <i class="fa-solid fa-crown"></i>
+      <span>CelebrationCraft</span>
+    </a>
+
+    <ul class="platform-nav-links">
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="/privacy">Privacy & Security</a></li>
+      <li><a href="/login" class="btn-outline btn-sm">Log In</a></li>
+      <li><a href="/login?mode=signup" class="btn-gold btn-sm">Get Started Free</a></li>
+    </ul>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="landing-hero">
+    <div class="landing-badge">
+      <i class="fa-solid fa-wand-magic-sparkles"></i> The Luxury Event Website Platform
+    </div>
+    <h1 class="landing-title">
+      Craft Dream Invitation Websites for Life's Greatest Milestones
+    </h1>
+    <p class="landing-subtitle">
+      Design bespoke, interactive invitation websites for <strong>Indian Weddings</strong>, <strong>Muslim Weddings</strong>, and <strong>Birthday Celebrations</strong> with custom cartoon characters, realistic scratch cards, live countdowns, and bank-grade privacy isolation.
+    </p>
+
+    <div class="cta-group">
+      <a href="/login?mode=signup" class="btn-gold" style="padding: 14px 36px; font-size: 1.05rem;">
+        <i class="fa-solid fa-plus-circle"></i> Create Your Event Website
+      </a>
+      <a href="#templates" class="btn-outline" style="padding: 14px 32px; font-size: 1.05rem;">
+        <i class="fa-regular fa-eye"></i> Explore Templates
+      </a>
+    </div>
+
+    <!-- Quick Demo Pill -->
+    <div style="font-size: 0.9rem; color: var(--text-muted);">
+      <i class="fa-solid fa-shield-halved" style="color: #2E7D32;"></i> 
+      Multi-tenant row-level security • AES-256 encrypted API keys • 1-click demo accounts
+    </div>
+  </section>
+
+  <!-- 3 Event Categories Showcase -->
+  <section id="templates" style="padding: 40px 0;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span style="font-family: var(--font-script); font-size: 2.2rem; color: var(--brand-pink); display: block;">Curated Elegance</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.4rem;">Three Distinct Celebration Experiences</h2>
+    </div>
+
+    <div class="showcase-grid">
+      <!-- 1. Indian Wedding -->
+      <div class="showcase-card">
+        <div>
+          <img src="assets/images/hero_couple.jpg" alt="Indian Wedding Couple" class="showcase-img">
+          <div class="badge-status badge-public" style="margin-bottom: 8px;">Indian Wedding</div>
+          <h3 style="font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px;">Vijay & Rashima</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
+            Pre-configured with Haldi (yellow floral), Mehendi (green ethnic), Sangeet (glam Indo-western), Sacred Mandap Wedding, and Grand Reception.
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 14px;">
+          <a href="/event/vijay-rashima-wedding" target="_blank" class="btn-outline btn-sm" style="padding: 8px 12px;" title="Live Preview">
+            <i class="fa-solid fa-eye"></i> Preview
+          </a>
+          <button onclick="tryTemplate('indian_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Try This Template
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Muslim Wedding -->
+      <div class="showcase-card">
+        <div>
+          <img src="assets/images/muslim_couple.jpg" alt="Muslim Wedding Couple" class="showcase-img">
+          <div class="badge-status badge-public" style="margin-bottom: 8px;">Muslim Wedding</div>
+          <h3 style="font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px;">Zain & Ayla</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
+            Pre-configured with Dholki, Mehendi, Sacred Nikah, and Grand Walima. Designed with Islamic geometric patterns, emerald and gold elegance.
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 14px;">
+          <a href="/event/zain-ayla-nikah" target="_blank" class="btn-outline btn-sm" style="padding: 8px 12px;" title="Live Preview">
+            <i class="fa-solid fa-eye"></i> Preview
+          </a>
+          <button onclick="tryTemplate('muslim_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Try This Template
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Birthday Celebration -->
+      <div class="showcase-card">
+        <div>
+          <img src="assets/images/birthday_hero.jpg" alt="Birthday Celebration" class="showcase-img">
+          <div class="badge-status badge-public" style="margin-bottom: 8px;">Birthday Celebration</div>
+          <h3 style="font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px;">Aria's Sweet 16</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
+            Pre-configured with Red Carpet Welcome, Interactive Games, Cake Cutting, Dinner Buffet, and DJ Dance Party with luxury pastel themes.
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 14px;">
+          <a href="/event/arias-sweet-16" target="_blank" class="btn-outline btn-sm" style="padding: 8px 12px;" title="Live Preview">
+            <i class="fa-solid fa-eye"></i> Preview
+          </a>
+          <button onclick="tryTemplate('birthday')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Try This Template
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Platform Features Grid -->
+  <section id="features" class="features-section">
+    <div style="text-align: center; margin-bottom: 50px;">
+      <span style="font-family: var(--font-script); font-size: 2.2rem; color: var(--primary-gold-dark); display: block;">Architected for Perfection</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.3rem;">Enterprise Security & Creative Freedom</h2>
+    </div>
+
+    <div class="feature-grid">
+      <!-- 1 -->
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-paintbrush"></i></div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Live Interactive Studio</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Drag, reorder, hide, rename, and customize sections with real-time responsive device previews (Desktop, Tablet, Mobile).
+        </p>
+      </div>
+
+      <!-- 2 -->
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Realistic Scratch Cards</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Delight guests with interactive HTML5 canvas scratch cards coated in gold or silver foil that dissolve into confetti upon reveal!
+        </p>
+      </div>
+
+      <!-- 3 -->
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-user-lock"></i></div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">3-Tier Privacy Control</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Choose between Draft (owner-only), Private Share (gated with guest passcode or expiring single-use invite tokens), or Public.
+        </p>
+      </div>
+
+      <!-- 4 -->
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Encrypted API Keys</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Third-party keys (Google Maps, SendGrid) are encrypted with AES-256-GCM at rest and masked in the UI. Strict row-level security.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding: 40px 20px; text-align: center; font-size: 0.88rem; color: var(--text-muted);">
+    <div style="margin-bottom: 14px;">
+      <a href="/privacy" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">Privacy Policy</a> |
+      <a href="/terms" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">Terms of Service</a> |
+      <a href="/login" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">User Dashboard</a>
+    </div>
+    <p>© 2026 CelebrationCraft Platform. All rights reserved. Crafted with love and bank-grade privacy.</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script>
+    async function tryTemplate(type) {
+      const token = API.getToken();
+      if (!token) {
+        // Automatically sign in with instant demo account so user can test the template without friction!
+        try {
+          await API.login('demo@eventmaker.com', 'Password123!');
+          window.location.href = `/dashboard?tryTemplate=${type}`;
+        } catch {
+          window.location.href = `/login?tryTemplate=${type}`;
+        }
+      } else {
+        window.location.href = `/dashboard?tryTemplate=${type}`;
+      }
+    }
+  </script>
+</body>
+</html>

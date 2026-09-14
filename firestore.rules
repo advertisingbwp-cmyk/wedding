@@ -1,0 +1,76 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- Helper Functions ---
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function event(eventId) {
+      return get(/databases/$(database)/documents/events/$(eventId));
+    }
+
+    function isOwner(eventId) {
+      return signedIn() && event(eventId).data.ownerId == request.auth.uid;
+    }
+
+    function isMember(eventId) {
+      return signedIn() && exists(/databases/$(database)/documents/events/$(eventId)/members/$(request.auth.uid));
+    }
+
+    function canManage(eventId) {
+      return isOwner(eventId) || isMember(eventId);
+    }
+
+    // --- User Profiles ---
+    // Har user sirf apna profile document read, create, update ya delete kar sake
+    match /users/{uid} {
+      allow read, create, update, delete: if signedIn() && request.auth.uid == uid;
+    }
+
+    // --- Event Websites ---
+    match /events/{eventId} {
+      // Owner apna event create kare; kisi aur ka ownerId set na kar sake
+      allow create: if signedIn() && request.resource.data.ownerId == request.auth.uid;
+
+      // Public website visitors sirf published event dekhein (visibility == "public");
+      // Private events sirf owner ya invited members dekhein.
+      allow read: if resource.data.visibility == "public" || canManage(eventId);
+
+      // Event ko sirf owner ya authorised editor update kare (ownerId immutable hona chahiye)
+      allow update: if canManage(eventId) && request.resource.data.ownerId == resource.data.ownerId;
+
+      // Sirf primary owner hi event delete kar sakta hai
+      allow delete: if isOwner(eventId);
+
+      // --- Members Subcollection (True Private Access) ---
+      // Selected logon ko Firebase login / invite ke zariye members/{uid} me add kiya jata hai
+      match /members/{uid} {
+        allow read: if isOwner(eventId) || (signedIn() && request.auth.uid == uid);
+        allow create, update, delete: if isOwner(eventId);
+      }
+
+      // --- RSVP Subcollection ---
+      // RSVP submissions sirf owner/editor dekh sakein
+      // (Best practice: Client direct write ke bajaye Cloud Function se submit karwayein)
+      match /rsvps/{rsvpId} {
+        allow read, update, delete: if canManage(eventId);
+        allow create: if true;
+      }
+
+      // --- Private Settings & Sensitive Data Subcollection ---
+      // Sensitive guest data, private notes, credentials: NEVER public
+      match /private/{docId} {
+        allow read, write: if canManage(eventId);
+      }
+
+      // --- Digital Guestbook Subcollection ---
+      // Owner/editor read aur moderate kar sakte hain; public guests submit kar sakte hain
+      match /guestbook/{messageId} {
+        allow read, update, delete: if canManage(eventId);
+        allow create: if true;
+      }
+    }
+  }
+}

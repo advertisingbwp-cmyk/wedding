@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">Invitation Celebration</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Core Theme Stylesheets -->
+  <link rel="stylesheet" href="/css/platform.css">
+  <link rel="stylesheet" href="/css/templates-indian.css">
+  <link rel="stylesheet" href="/css/templates-muslim.css">
+  <link rel="stylesheet" href="/css/templates-bday.css">
+
+  <style>
+    /* Full Event Experience Styling */
+    .event-wrapper {
+      min-height: 100vh;
+      position: relative;
+    }
+    .preview-banner {
+      background: #2F200A;
+      color: #F5E7B2;
+      padding: 8px;
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .hero-full {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 60px 24px;
+      position: relative;
+    }
+    .hero-container {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-avatar-box {
+      position: relative;
+      border-radius: 36px;
+      overflow: hidden;
+      border: 6px solid #FFFFFF;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      background: #FFFFFF;
+    }
+    .hero-avatar-img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .event-section-wrap {
+      padding: 80px 24px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      font-family: var(--font-script);
+      font-size: 2.2rem;
+      color: var(--primary-gold-dark);
+      display: block;
+    }
+    .countdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 500px;
+      margin: 0 auto 30px;
+    }
+    .countdown-box {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 16px 8px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+    .countdown-number {
+      font-size: 2rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      display: block;
+    }
+    .countdown-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .scratch-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      height: 200px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+      border: 3px dashed var(--primary-gold);
+    }
+    .scratch-secret {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+    }
+    #scratch-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      cursor: grab;
+      touch-action: none;
+    }
+    .functions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .func-card {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-card);
+    }
+    .func-card:nth-child(even) {
+      grid-template-columns: 1.2fr 1fr;
+      direction: rtl;
+    }
+    .func-card:nth-child(even) > div {
+      direction: ltr;
+    }
+    .func-img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+    }
+    .func-details {
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .lightbox-modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(20, 15, 16, 0.92);
+      backdrop-filter: blur(10px);
+      z-index: 3000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    .lightbox-modal.active { display: flex; }
+    @media (max-width: 868px) {
+      .hero-container { grid-template-columns: 1fr; text-align: center; }
+      .func-card, .func-card:nth-child(even) { grid-template-columns: 1fr; direction: ltr; }
+      .func-img { height: 260px; }
+      .func-details { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Particles Canvas -->
+  <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1;"></canvas>
+  <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999;"></canvas>
+
+  <div id="preview-mode-banner" class="preview-banner" style="display: none;">
+    <i class="fa-solid fa-eye"></i> You are viewing this website in <strong>Live Preview Mode</strong> (Owner Access).
+  </div>
+
+  <!-- PASSCODE GATE SCREEN (FOR PRIVATE SHARE) -->
+  <div id="passcode-gate-screen" style="display: none; min-height: 100vh; align-items: center; justify-content: center; padding: 20px;">
+    <div class="glass-panel" style="width: 100%; max-width: 440px; padding: 40px 30px; text-align: center; background: #FFFFFF;">
+      <i class="fa-solid fa-lock" style="font-size: 2.4rem; color: var(--primary-gold); margin-bottom: 16px;"></i>
+      <h2 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 8px;" id="gate-event-names">Private Invitation</h2>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;" id="gate-message">
+        This is a protected private event invitation. Please enter your guest passcode to view event details and RSVP.
+      </p>
+      <form id="passcode-form">
+        <input type="password" id="gate-passcode-input" class="form-input" placeholder="Enter Guest Passcode" style="text-align: center; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 16px;" required>
+        <button type="submit" class="btn-gold" style="width: 100%; justify-content: center; padding: 12px;">
+          <i class="fa-solid fa-key"></i> Unlock Invitation
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DRAFT RESTRICTION SCREEN -->
+  <div id="draft-gate-screen" style="display: none; min-height: 100vh; align-items: center; justify-content: center; padding: 20px;">
+    <div class="glass-panel" style="width: 100%; max-width: 480px; padding: 40px 30px; text-align: center; background: #FFFFFF;">
+      <i class="fa-solid fa-hourglass-half" style="font-size: 2.5rem; color: var(--text-muted); margin-bottom: 16px;"></i>
+      <h2 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 8px;">Coming Soon</h2>
+      <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px;">
+        This event website is currently in private Draft mode and being lovingly prepared. Please check back once the host publishes the invitation!
+      </p>
+      <a href="/" class="btn-outline btn-sm"><i class="fa-solid fa-arrow-left"></i> Return Home</a>
+    </div>
+  </div>
+
+  <!-- MAIN EVENT PAGE CONTAINER -->
+  <div id="event-content" class="event-wrapper" style="display: none;">
+    <!-- Ambient Romantic Flute / Synth Player -->
+    <div style="position: fixed; bottom: 24px; left: 24px; z-index: 1000;">
+      <button id="music-player-btn" class="btn-outline btn-sm" style="background: rgba(255,255,255,0.9); box-shadow: var(--shadow-card);" title="Toggle Romantic Melody">
+        <i class="fa-solid fa-music"></i> <span id="music-btn-label">Music</span>
+      </button>
+    </div>
+
+    <!-- DYNAMIC SECTIONS CONTAINER -->
+    <div id="dynamic-sections">
+      <!-- Injected by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <div style="position: relative; max-width: 800px; text-align: center;">
+      <button id="lightbox-close" style="position: absolute; top: -40px; right: 0; background: transparent; border: none; color: #FFF; font-size: 2rem; cursor: pointer;">&times;</button>
+      <img id="lightbox-img" src="" style="max-width: 100%; max-height: 80vh; border-radius: 12px; border: 4px solid #FFF;">
+      <div id="lightbox-caption" style="color: #FFF; font-size: 1.1rem; margin-top: 14px; font-family: var(--font-display);"></div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script>
+    const pathParts = window.location.pathname.split('/');
+    const slug = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+    const urlParams = new URLSearchParams(window.location.search);
+    const inviteToken = urlParams.get('invite') || '';
+    let enteredPasscode = '';
+
+    let eventData = null;
+    let sectionsList = [];
+    let functionsList = [];
+
+    async function loadEvent() {
+      try {
+        const res = await API.getPublicEvent(slug, inviteToken, enteredPasscode);
+
+        // Check if passcode is required
+        if (res.requires_auth) {
+          document.getElementById('passcode-gate-screen').style.display = 'flex';
+          document.getElementById('gate-event-names').textContent = res.primary_names || 'Private Celebration';
+          if (res.message) document.getElementById('gate-message').textContent = res.message;
+          return;
+        }
+
+        eventData = res.event;
+        sectionsList = res.sections || [];
+        functionsList = res.functions || [];
+
+        // Apply theme class to body
+        if (eventData.event_type === 'muslim_wedding') {
+          document.body.className = 'theme-muslim';
+        } else if (eventData.event_type === 'birthday') {
+          document.body.className = 'theme-birthday';
+        } else {
+          document.body.className = 'theme-indian';
+        }
+
+        // Set Page Title
+        document.getElementById('page-title').textContent = `${eventData.primary_names} — ${eventData.title}`;
+
+        // Show preview mode banner if owner is testing
+        if (eventData.is_preview) {
+          document.getElementById('preview-mode-banner').style.display = 'block';
+        }
+
+        document.getElementById('passcode-gate-screen').style.display = 'none';
+        document.getElementById('draft-gate-screen').style.display = 'none';
+        document.getElementById('event-content').style.display = 'block';
+
+        renderEventContent();
+        initParticles();
+      } catch (err) {
+        if (err.message && err.message.includes('Draft')) {
+          document.getElementById('draft-gate-screen').style.display = 'flex';
+        } else {
+          alert(err.message || 'Failed to load event.');
+        }
+      }
+    }
+
+    // Handle Passcode Unlock Form
+    document.getElementById('passcode-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      enteredPasscode = document.getElementById('gate-passcode-input').value;
+      loadEvent();
+    });
+
+    // Render Event Sections Dynamically
+    function renderEventContent() {
+      const container = document.getElementById('dynamic-sections');
+      container.innerHTML = '';
+
+      // Render Each Enabled Section
+      sectionsList.forEach((sec) => {
+        let contentObj = {};
+        try {
+          contentObj = typeof sec.custom_content_json === 'object' ? sec.custom_content_json : JSON.parse(sec.custom_content_json || '{}');
+        } catch {}
+
+        if (sec.section_key === 'hero') {
+          container.innerHTML += renderHeroSection(contentObj);
+        } else if (sec.section_key === 'reveal') {
+          container.innerHTML += renderRevealSection(contentObj);
+        } else if (sec.section_key === 'story') {
+          container.innerHTML += renderStorySection(contentObj);
+        } else if (sec.section_key === 'events') {
+          container.innerHTML += renderFunctionsSection();
+        } else if (sec.section_key === 'gallery') {
+          container.innerHTML += renderGallerySection(contentObj);
+        } else if (sec.section_key === 'venue') {
+          container.innerHTML += renderVenueSection();
+        } else if (sec.section_key === 'family') {
+          container.innerHTML += renderFamilySection(contentObj);
+        } else if (sec.section_key === 'dress_code') {
+          container.innerHTML += renderDressCodeSection(contentObj);
+        } else if (sec.section_key === 'travel') {
+          container.innerHTML += renderTravelSection(contentObj);
+        } else if (sec.section_key === 'registry') {
+          container.innerHTML += renderRegistrySection(contentObj);
+        } else if (sec.section_key === 'rsvp') {
+          container.innerHTML += renderRsvpSection();
+        } else if (sec.section_key === 'guestbook') {
+          container.innerHTML += renderGuestbookSection();
+        } else if (sec.section_key === 'faqs') {
+          container.innerHTML += renderFaqsSection(contentObj);
+        } else if (sec.section_key === 'thank_you') {
+          container.innerHTML += renderThankYouSection();
+        }
+      });
+
+      initCountdownTimer();
+      initScratchCanvas();
+      loadGuestbookMessages();
+    }
+
+    // 1. Hero Section
+    function renderHeroSection(content) {
+      const bismillahHtml = eventData.event_type === 'muslim_wedding' ? `<div class="arabic-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>` : '';
+      return `
+        <section class="hero-full event-hero">
+          <div class="hero-container">
+            <div>
+              ${bismillahHtml}
+              <div class="badge-status badge-public" style="margin-bottom: 18px;">
+                <i class="fa-solid fa-heart"></i> ${content.subtitle || 'Celebrate With Us'}
+              </div>
+              <h1 style="font-family: var(--font-script); font-size: 4.2rem; line-height: 1.1; margin-bottom: 12px;">
+                ${eventData.primary_names}
+              </h1>
+              <div style="font-size: 1.25rem; font-family: var(--font-display); letter-spacing: 2px; color: var(--primary-gold-dark); margin-bottom: 18px;">
+                ${eventData.title}
+              </div>
+              <p style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 30px; font-style: italic;">
+                "${eventData.headline || 'Join us for a celebration filled with laughter, love, and timeless memories.'}"
+              </p>
+              <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                <a href="#section-rsvp" class="btn-gold" style="padding: 12px 30px;">
+                  <i class="fa-solid fa-envelope-open-text"></i> RSVP Now
+                </a>
+                <a href="#section-reveal" class="btn-outline" style="padding: 12px 26px;">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i> Reveal Secret Date
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <div class="hero-avatar-box">
+                <img src="${eventData.hero_image_url || 'assets/images/hero_couple.jpg'}" alt="${eventData.primary_names}" class="hero-avatar-img">
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    // 2. Countdown & Scratch Card
+    function renderRevealSection(content) {
+      return `
+        <section id="section-reveal" class="event-section-wrap" style="background: rgba(255, 255, 255, 0.6);">
+          <div class="section-header">
+            <span class="section-subtitle">Save The Date</span>
+            <h2 class="section-title">The Big Reveal & Countdown</h2>
+            <p style="color: var(--text-muted);">Scratch the golden foil below with your finger or mouse to unlock our official celebration date!</p>
+          </div>
+
+          <!-- Countdown -->
+          <div class="countdown-grid">
+            <div class="countdown-box"><span class="countdown-number" id="c-days">00</span><span class="countdown-label">Days</span></div>
+            <div class="countdown-box"><span class="countdown-number" id="c-hours">00</span><span class="countdown-label">Hours</span></div>
+            <div class="countdown-box"><span class="countdown-number" id="c-mins">00</span><span class="countdown-label">Mins</span></div>
+            <div class="countdown-box"><span class="countdown-number" id="c-secs">00</span><span class="countdown-label">Secs</span></div>
+          </div>
+
+          <!-- Scratch Box -->
+          <div class="scratch-wrapper">
+            <div class="scratch-secret">
+              <span style="font-family: var(--font-script); font-size: 1.8rem; color: var(--primary-gold-dark);">Official Date</span>
+              <div style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; margin: 4px 0;">
+                ${eventData.event_date}
+              </div>
+              <div style="font-size: 0.9rem; color: var(--text-muted);">${eventData.venue_name || 'The Royal Grounds'}</div>
+            </div>
+            <canvas id="scratch-canvas"></canvas>
+          </div>
+        </section>
+      `;
+    }
+
+    // 3. Story / Milestones
+    function renderStorySection(content) {
+      const milestones = content.milestones || [
+        { title: 'The First Spark', date: 'Day One', desc: 'Where the beautiful journey first began.' },
+        { title: 'The Forever Decision', date: 'Milestone', desc: 'Deciding on a lifetime together.' }
+      ];
+
+      let listHtml = milestones.map((m) => `
+        <div class="glass-panel" style="padding: 24px; margin-bottom: 20px; max-width: 700px; margin-left: auto; margin-right: auto;">
+          ${m.img ? `<img src="${m.img}" style="width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 14px;">` : ''}
+          <span style="font-size: 0.82rem; font-weight: 700; color: var(--primary-gold-dark); text-transform: uppercase;">${m.date}</span>
+          <h3 style="font-size: 1.3rem; margin: 4px 0 8px;">${m.title}</h3>
+          <p style="font-size: 0.92rem; color: var(--text-muted);">${m.desc}</p>
+        </div>
+      `).join('');
+
+      return `
+        <section class="event-section-wrap">
+          <div class="section-header">
+            <span class="section-subtitle">Moments That Matter</span>
+            <h2 class="section-title">Our Journey</h2>
+          </div>
+          ${listHtml}
+        </section>
+      `;
+    }
+
+    // 4. Functions / Ceremonies
+    function renderFunctionsSection() {
+      let cardsHtml = functionsList.map((f, i) => `
+        <div class="func-card">
+          <img src="${f.illustration_url || 'assets/images/hero_couple.jpg'}" alt="${f.title}" class="func-img">
+          <div class="func-details">
+            <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary-gold-dark); text-transform: uppercase; letter-spacing: 1px;">Event 0${i + 1}</span>
+            <h3 style="font-size: 1.8rem; font-family: var(--font-display); margin: 6px 0;">${f.title}</h3>
+            ${f.subtitle ? `<div style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 14px;">${f.subtitle}</div>` : ''}
+            <div style="font-size: 0.92rem; margin-bottom: 12px;">
+              <div><i class="fa-regular fa-clock" style="color: var(--primary-gold);"></i> ${f.date_time || 'Check itinerary'}</div>
+              <div><i class="fa-solid fa-location-dot" style="color: var(--primary-gold);"></i> ${f.venue_name || eventData.venue_name}</div>
+              ${f.dress_code ? `<div><i class="fa-solid fa-shirt" style="color: var(--primary-gold);"></i> <strong>Dress Code:</strong> ${f.dress_code}</div>` : ''}
+            </div>
+            <p style="font-size: 0.92rem; color: var(--text-muted);">${f.description || ''}</p>
+          </div>
+        </div>
+      `).join('');
+
+      return `
+        <section class="event-section-wrap" style="background: rgba(255, 255, 255, 0.5);">
+          <div class="section-header">
+            <span class="section-subtitle">Celebrations & Itinerary</span>
+            <h2 class="section-title">Ceremony Highlights</h2>
+          </div>
+          <div class="functions-list">
+            ${cardsHtml}
+          </div>
+        </section>
+      `;
+    }
+
+    // 5. Gallery
+    function renderGallerySection(content) {
+      const photos = content.photos || [
+        { src: eventData.hero_image_url || 'assets/images/hero_couple.jpg', caption: eventData.primary_names }
+      ];
+
+      let gridHtml = photos.map((p) => `
+        <div style="border-radius: 12px; overflow: hidden; height: 240px; cursor: pointer; border: 3px solid #FFF; box-shadow: var(--shadow-card);" onclick="openLightbox('${p.src}', '${p.caption || ''}')">
+          <img src="${p.src}" alt="${p.caption || ''}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        </div>
+      `).join('');
+
+      return `
+        <section class="event-section-wrap">
+          <div class="section-header">
+            <span class="section-subtitle">Photo Album</span>
+            <h2 class="section-title">Memories & Smiles</h2>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto;">
+            ${gridHtml}
+          </div>
+        </section>
+      `;
+    }
+
+    // 6. Venue & Map
+    function renderVenueSection() {
+      return `
+        <section class="event-section-wrap" style="background: rgba(255, 255, 255, 0.7);">
+          <div class="section-header">
+            <span class="section-subtitle">Join Us Here</span>
+            <h2 class="section-title">The Celebration Venue</h2>
+          </div>
+          <div style="max-width: 800px; margin: 0 auto; text-align: center;" class="glass-panel" style="padding: 36px;">
+            <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 8px;">${eventData.venue_name || 'The Royal Grounds'}</h3>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">${eventData.venue_address || 'Detailed address will be shared with invited guests.'}</p>
+            <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+              <a href="https://maps.google.com/?q=${encodeURIComponent((eventData.venue_name || '') + ' ' + (eventData.venue_address || ''))}" target="_blank" class="btn-gold">
+                <i class="fa-solid fa-diamond-turn-right"></i> Open In Google Maps
+              </a>
+              <button class="btn-outline" onclick="navigator.clipboard.writeText('${eventData.venue_address || eventData.venue_name}'); API.showToast('Address copied to clipboard!');">
+                <i class="fa-regular fa-copy"></i> Copy Address
+              </button>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    // 7. Family
+    function renderFamilySection(content) {
+      return `
+        <section class="event-section-wrap">
+          <div class="section-header">
+            <span class="section-subtitle">The Pillars of Joy</span>
+            <h2 class="section-title">Meet The Family & Friends</h2>
+          </div>
+          <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p style="font-style: italic; color: var(--text-muted); font-size: 1.1rem;">
+              "Blessed with the warmest smiles and deepest love from both our families."
+            </p>
+          </div>
+        </section>
+      `;
+    }
+
+    // 8. Dress Code
+    function renderDressCodeSection(content) {
+      return `
+        <section class="event-section-wrap" style="background: rgba(255, 255, 255, 0.5);">
+          <div class="section-header">
+            <span class="section-subtitle">Palette Inspirations</span>
+            <h2 class="section-title">Dress Code Guide</h2>
+          </div>
+          <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1rem; color: var(--text-muted);">
+              Please refer to the individual ceremony cards above for suggested styles, colors, and festive vibes!
+            </p>
+          </div>
+        </section>
+      `;
+    }
+
+    // 9. Travel
+    function renderTravelSection(content) {
+      return `
+        <section class="event-section-wrap">
+          <div class="section-header">
+            <span class="section-subtitle">Comfortable Arrival</span>
+            <h2 class="section-title">Travel & Hospitality</h2>
+          </div>
+          <div class="glass-panel" style="max-width: 700px; margin: 0 auto; padding: 28px; text-align: center;">
+            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 14px;">
+              ${content.airport || 'Airport pickups and partner hotel accommodations are arranged for visiting guests.'}
+            </p>
+            ${content.hotelPromo ? `<span class="badge-status badge-public">${content.hotelPromo}</span>` : ''}
+          </div>
+        </section>
+      `;
+    }
+
+    // 10. Registry
+    function renderRegistrySection(content) {
+      return `
+        <section class="event-section-wrap">
+          <div class="section-header">
+            <span class="section-subtitle">Gift of Love</span>
+            <h2 class="section-title">Wishlist & Blessings</h2>
+          </div>
+          <div class="glass-panel" style="max-width: 600px; margin: 0 auto; padding: 28px; text-align: center;">
+            <p style="font-size: 0.95rem; color: var(--text-muted);">
+              ${content.note || 'Your presence, blessings, and warm smiles are the greatest gifts we could ever ask for.'}
+            </p>
+          </div>
+        </section>
+      `;
+    }
+
+    // 11. RSVP Form
+    function renderRsvpSection() {
+      return `
+        <section id="section-rsvp" class="event-section-wrap" style="background: rgba(255, 255, 255, 0.85);">
+          <div class="section-header">
+            <span class="section-subtitle">Be Our Guest</span>
+            <h2 class="section-title">Confirm Your RSVP</h2>
+            <p style="color: var(--text-muted);">Kindly respond so we can reserve your royal welcome.</p>
+          </div>
+
+          <div class="glass-panel" style="max-width: 640px; margin: 0 auto; padding: 36px;">
+            <form id="public-rsvp-form">
+              <div style="margin-bottom: 14px;">
+                <label class="form-label">Full Name *</label>
+                <input type="text" id="rsvp-name" class="form-input" placeholder="e.g. Ananya & Rohit Verma" required>
+              </div>
+              <div style="margin-bottom: 14px;">
+                <label class="form-label">WhatsApp / Phone Number *</label>
+                <input type="tel" id="rsvp-phone" class="form-input" placeholder="+91 98765 43210" required>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+                <div>
+                  <label class="form-label">Number of Guests</label>
+                  <select id="rsvp-count" class="form-select">
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="3">3 Guests</option>
+                    <option value="4+">Family (4+)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Attendance</label>
+                  <select id="rsvp-attendance" class="form-select">
+                    <option value="attending">Joyfully Attending</option>
+                    <option value="maybe">Maybe</option>
+                    <option value="not_attending">Regretfully Declining</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-bottom: 14px;">
+                <label class="form-label">Meal Preference</label>
+                <select id="rsvp-meal" class="form-select">
+                  <option value="Vegetarian">Vegetarian (Standard)</option>
+                  <option value="Jain Vegetarian">Jain (No Onion / Garlic)</option>
+                  <option value="Non-Vegetarian">Non-Vegetarian</option>
+                  <option value="Vegan / Special">Vegan / Special Dietary</option>
+                </select>
+              </div>
+              <div style="margin-bottom: 20px;">
+                <label class="form-label">Warm Wishes Note</label>
+                <textarea id="rsvp-message" class="form-textarea" rows="3" placeholder="Leave a sweet blessing note for the host!"></textarea>
+              </div>
+              <button type="submit" class="btn-gold" style="width: 100%; justify-content: center; padding: 14px;">
+                <i class="fa-solid fa-paper-plane"></i> Submit RSVP
+              </button>
+            </form>
+          </div>
+        </section>
+      `;
+    }
+
+    // 12. Guestbook
+    function renderGuestbookSection() {
+      return `
+        <section class="event-section-wrap">
+          <div class="section-header">
+            <span class="section-subtitle">Blessings & Duas</span>
+            <h2 class="section-title">Digital Guestbook</h2>
+          </div>
+
+          <div style="max-width: 700px; margin: 0 auto;">
+            <div class="glass-panel" style="padding: 24px; margin-bottom: 24px;">
+              <form id="public-guestbook-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                  <input type="text" id="gb-name" class="form-input" placeholder="Your Name" required>
+                  <input type="text" id="gb-relation" class="form-input" placeholder="Relation (e.g. Cousin, Friend)">
+                </div>
+                <textarea id="gb-msg" class="form-textarea" rows="2" placeholder="Write a blessing wish..." required style="margin-bottom: 12px;"></textarea>
+                <button type="submit" class="btn-gold btn-sm"><i class="fa-solid fa-paper-plane"></i> Post Wish</button>
+              </form>
+            </div>
+
+            <div id="guestbook-posts-wall" style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Loaded dynamically -->
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    // 13. FAQs
+    function renderFaqsSection(content) {
+      const faqs = content.questions || [
+        { q: 'What is the dress code?', a: 'Please see our ceremony section for theme guidance.' },
+        { q: 'Are gifts required?', a: 'Your presence and blessings are our greatest joy!' }
+      ];
+
+      let listHtml = faqs.map((f) => `
+        <div class="glass-panel" style="padding: 18px 24px; margin-bottom: 12px;">
+          <h4 style="font-size: 1.05rem; margin-bottom: 6px;"><i class="fa-solid fa-circle-question" style="color: var(--primary-gold);"></i> ${f.q}</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">${f.a}</p>
+        </div>
+      `).join('');
+
+      return `
+        <section class="event-section-wrap" style="background: rgba(255, 255, 255, 0.5);">
+          <div class="section-header">
+            <span class="section-subtitle">Helpful Notes</span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+          </div>
+          <div style="max-width: 700px; margin: 0 auto;">
+            ${listHtml}
+          </div>
+        </section>
+      `;
+    }
+
+    // 14. Thank You
+    function renderThankYouSection() {
+      return `
+        <footer style="padding: 80px 24px 40px; text-align: center; border-top: 1px solid var(--border-light);">
+          <div style="font-family: var(--font-script); font-size: 3.2rem; color: var(--primary-gold-dark); margin-bottom: 10px;">
+            ${eventData.primary_names}
+          </div>
+          <p style="font-family: var(--font-display); font-size: 1.25rem; font-style: italic; max-width: 600px; margin: 0 auto 24px; color: var(--text-muted);">
+            "Thank you for being part of our lives, our stories, and our memories."
+          </p>
+          ${eventData.hashtag ? `<div class="badge-status badge-public" style="font-size: 1rem; padding: 6px 20px;">${eventData.hashtag}</div>` : ''}
+          <div style="margin-top: 40px; font-size: 0.8rem; color: var(--text-muted);">
+            Powered with love by CelebrationCraft Platform
+          </div>
+        </footer>
+      `;
+    }
+
+    // Countdown Timer logic
+    function initCountdownTimer() {
+      if (!eventData || !eventData.event_date) return;
+      const target = new Date(eventData.event_date).getTime();
+
+      function tick() {
+        const now = Date.now();
+        const diff = target - now;
+        if (diff <= 0) return;
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const dEl = document.getElementById('c-days');
+        const hEl = document.getElementById('c-hours');
+        const mEl = document.getElementById('c-mins');
+        const sEl = document.getElementById('c-secs');
+
+        if (dEl) dEl.textContent = String(d).padStart(2, '0');
+        if (hEl) hEl.textContent = String(h).padStart(2, '0');
+        if (mEl) mEl.textContent = String(m).padStart(2, '0');
+        if (sEl) sEl.textContent = String(s).padStart(2, '0');
+      }
+
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    // Scratch Card
+    function initScratchCanvas() {
+      const canvas = document.getElementById('scratch-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+
+      // Draw metallic gold cover
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, '#E5C378');
+      grad.addColorStop(0.5, '#D4AF37');
+      grad.addColorStop(1, '#C49726');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#3F2C08';
+      ctx.font = 'bold 15px "Cinzel", Georgia, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('✦ SCRATCH TO REVEAL DATE ✦', canvas.width / 2, canvas.height / 2);
+
+      let isDrawing = false;
+      function scratchAt(x, y) {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(x, y, 24, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      canvas.addEventListener('mousedown', () => isDrawing = true);
+      window.addEventListener('mouseup', () => isDrawing = false);
+      canvas.addEventListener('mousemove', (e) => {
+        if (!isDrawing) return;
+        const b = canvas.getBoundingClientRect();
+        scratchAt(e.clientX - b.left, e.clientY - b.top);
+      });
+
+      canvas.addEventListener('touchmove', (e) => {
+        const b = canvas.getBoundingClientRect();
+        const t = e.touches[0];
+        scratchAt(t.clientX - b.left, t.clientY - b.top);
+      }, { passive: true });
+    }
+
+    // Lightbox
+    function openLightbox(src, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-caption').textContent = caption;
+      document.getElementById('lightbox-modal').classList.add('active');
+    }
+    document.getElementById('lightbox-close').onclick = () => {
+      document.getElementById('lightbox-modal').classList.remove('active');
+    };
+
+    // RSVP Submit
+    document.addEventListener('submit', async (e) => {
+      if (e.target && e.target.id === 'public-rsvp-form') {
+        e.preventDefault();
+        const name = document.getElementById('rsvp-name').value;
+        const phone = document.getElementById('rsvp-phone').value;
+        const count = document.getElementById('rsvp-count').value;
+        const attendance = document.getElementById('rsvp-attendance').value;
+        const meal = document.getElementById('rsvp-meal').value;
+        const msg = document.getElementById('rsvp-message').value;
+
+        try {
+          await API.submitRSVP(eventData.id, {
+            guest_name: name,
+            phone,
+            guest_count: count,
+            attendance,
+            meal_preference: meal,
+            message: msg
+          });
+          API.showToast('Thank you! Your RSVP has been confirmed.');
+          e.target.reset();
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+
+      if (e.target && e.target.id === 'public-guestbook-form') {
+        e.preventDefault();
+        const name = document.getElementById('gb-name').value;
+        const rel = document.getElementById('gb-relation').value;
+        const msg = document.getElementById('gb-msg').value;
+
+        try {
+          await API.postGuestbook(eventData.id, { guest_name: name, relation: rel, message: msg });
+          API.showToast('Wish posted to guestbook!');
+          e.target.reset();
+          loadGuestbookMessages();
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+    });
+
+    // Load Guestbook
+    async function loadGuestbookMessages() {
+      if (!eventData) return;
+      try {
+        const data = await API.getGuestbook(eventData.id);
+        const wall = document.getElementById('guestbook-posts-wall');
+        if (!wall) return;
+        wall.innerHTML = '';
+
+        const msgs = data.messages || [];
+        if (msgs.length === 0) {
+          wall.innerHTML = `<p style="color: var(--text-muted); font-size: 0.88rem; text-align: center;">Be the first to post a warm blessing!</p>`;
+          return;
+        }
+
+        msgs.forEach((m) => {
+          const item = document.createElement('div');
+          item.className = 'glass-panel';
+          item.style = 'padding: 14px 18px; border-left: 4px solid var(--primary-gold);';
+          item.innerHTML = `
+            <div style="display: flex; justify-content: space-between; font-weight: 600; font-size: 0.9rem; margin-bottom: 4px;">
+              <span>${m.guest_name} <small style="color: var(--text-muted); font-weight: normal;">(${m.relation})</small></span>
+              <span>${m.emoji || '❤️'}</span>
+            </div>
+            <p style="font-size: 0.88rem; color: var(--text-dark);">${m.message}</p>
+          `;
+          wall.appendChild(item);
+        });
+      } catch (err) {}
+    }
+
+    // Floating Petals / Hearts Animation
+    function initParticles() {
+      const canvas = document.getElementById('particles-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = window.innerHeight;
+
+      const particles = [];
+      for (let i = 0; i < 30; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: Math.random() * 8 + 6,
+          speedY: Math.random() * 0.8 + 0.4,
+          speedX: Math.random() * 0.6 - 0.3,
+          color: 'rgba(255, 182, 193, 0.65)'
+        });
+      }
+
+      function render() {
+        ctx.clearRect(0, 0, w, h);
+        particles.forEach((p) => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          if (p.y > h) p.y = -10;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(render);
+      }
+      render();
+    }
+
+    // Music Synth Toggle
+    let audioCtx = null;
+    let isPlaying = false;
+    let musicInterval = null;
+    document.getElementById('music-player-btn').addEventListener('click', () => {
+      if (!isPlaying) {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        isPlaying = true;
+        document.getElementById('music-btn-label').textContent = 'Playing 🎵';
+
+        const freqs = [329.63, 369.99, 440.0, 493.88, 587.33, 659.25];
+        let idx = 0;
+        musicInterval = setInterval(() => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freqs[idx % freqs.length], audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.04, audioCtx.currentTime + 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.2);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 1.2);
+          idx++;
+        }, 500);
+      } else {
+        isPlaying = false;
+        clearInterval(musicInterval);
+        document.getElementById('music-btn-label').textContent = 'Music';
+      }
+    });
+
+    loadEvent();
+  </script>
+</body>
+</html>

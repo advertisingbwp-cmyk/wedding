@@ -1,0 +1,141 @@
+/* ===================================================
+   VIJAY & RASHIMA WEDDING - LUXURY ANIMATIONS
+   =================================================== */
+
+@keyframes heart-beat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.22);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.28);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float-gentle {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+@keyframes float-sticker {
+  0% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  100% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(212, 175, 55, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+  }
+}
+
+@keyframes shimmer-gold {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes sparkle-rotate {
+  0% {
+    transform: rotate(0deg) scale(0.9);
+    opacity: 0.6;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.9);
+    opacity: 0.6;
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Shimmer Highlight Utility */
+.shimmer-text {
+  background: linear-gradient(90deg, #A67C1E 0%, #D4AF37 30%, #FFF3C4 50%, #D4AF37 70%, #A67C1E 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer-gold 4s linear infinite;
+}
+
+/* Toast Notification Animation */
+.wedding-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: rgba(30, 20, 22, 0.94);
+  color: #FFFFFF;
+  padding: 14px 28px;
+  border-radius: var(--radius-full);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 3000;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.95rem;
+}
+
+.wedding-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.wedding-toast i {
+  color: var(--gold);
+  font-size: 1.2rem;
+}
+
+/* Celebration Confetti Canvas */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}

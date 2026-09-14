@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Event Studio — CelebrationCraft</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/platform.css">
+  <style>
+    .studio-header {
+      height: 65px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #EAE2DB;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+    .studio-tab-bar {
+      display: flex;
+      border-bottom: 1px solid #EAE2DB;
+      background: #FDFBF8;
+    }
+    .studio-tab-btn {
+      flex: 1;
+      padding: 12px 10px;
+      text-align: center;
+      background: transparent;
+      border: none;
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .studio-tab-btn.active {
+      color: var(--primary-gold-dark);
+      border-color: var(--primary-gold);
+      background: #FFFFFF;
+    }
+    .studio-tab-content {
+      padding: 24px;
+      display: none;
+    }
+    .studio-tab-content.active {
+      display: block;
+    }
+    .section-item-card {
+      background: #FDFBF9;
+      border: 1px solid #EAE2DB;
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .function-edit-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+  </style>
+</head>
+<body style="overflow: hidden;">
+
+  <!-- Studio Top Navigation -->
+  <header class="studio-header">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="/dashboard" class="btn-outline btn-sm" title="Return to Dashboard">
+        <i class="fa-solid fa-arrow-left"></i> Dashboard
+      </a>
+      <span style="font-size: 1.15rem; font-family: var(--font-display); font-weight: 700;" id="studio-event-title">
+        Loading Studio...
+      </span>
+      <span id="studio-event-badge" class="badge-status badge-draft">Draft</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button id="save-studio-btn" class="btn-gold btn-sm">
+        <i class="fa-solid fa-cloud-arrow-up"></i> Save Changes
+      </button>
+      <a id="preview-new-tab-btn" href="#" target="_blank" class="btn-outline btn-sm">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Site
+      </a>
+    </div>
+  </header>
+
+  <!-- Split Studio Workspace -->
+  <div class="editor-layout">
+    <!-- Left Sidebar Editor -->
+    <aside class="editor-sidebar">
+      <div class="studio-tab-bar">
+        <button class="studio-tab-btn active" onclick="switchStudioTab('tab-details')">
+          <i class="fa-solid fa-sliders"></i> Details
+        </button>
+        <button class="studio-tab-btn" onclick="switchStudioTab('tab-sections')">
+          <i class="fa-solid fa-layer-group"></i> Sections
+        </button>
+        <button class="studio-tab-btn" onclick="switchStudioTab('tab-functions')">
+          <i class="fa-solid fa-calendar-days"></i> Functions
+        </button>
+        <button class="studio-tab-btn" onclick="switchStudioTab('tab-privacy')">
+          <i class="fa-solid fa-lock"></i> Privacy
+        </button>
+      </div>
+
+      <!-- TAB 1: BASIC DETAILS -->
+      <div class="studio-tab-content active" id="tab-details">
+        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">Core Event Information</h3>
+        <div style="margin-bottom: 14px;">
+          <label class="form-label" for="edit-names">Celebrant / Couple Names</label>
+          <input type="text" id="edit-names" class="form-input">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label class="form-label" for="edit-title">Event Title</label>
+          <input type="text" id="edit-title" class="form-input">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label class="form-label" for="edit-headline">Romantic Headline / Tagline</label>
+          <input type="text" id="edit-headline" class="form-input">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <div>
+            <label class="form-label" for="edit-date">Event Date</label>
+            <input type="date" id="edit-date" class="form-input">
+          </div>
+          <div>
+            <label class="form-label" for="edit-theme">Color Theme</label>
+            <select id="edit-theme" class="form-select">
+              <option value="luxury_pastel">Luxury Pastel & Gold</option>
+              <option value="emerald_ivory">Emerald, Ivory & Gold</option>
+              <option value="royal_navy">Royal Navy & Platinum</option>
+              <option value="princess_pink">Princess Pink & Sparkles</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label class="form-label" for="edit-venue-name">Venue Name</label>
+          <input type="text" id="edit-venue-name" class="form-input">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label class="form-label" for="edit-venue-address">Venue Address</label>
+          <input type="text" id="edit-venue-address" class="form-input">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label class="form-label" for="edit-hashtag">Official Hashtag</label>
+          <input type="text" id="edit-hashtag" class="form-input">
+        </div>
+        <div style="margin-bottom: 14px;">
+          <label class="form-label">Hero / Cover Image</label>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <img id="edit-hero-preview" src="" style="width: 55px; height: 55px; border-radius: var(--radius-sm); object-fit: cover; border: 1px solid #CCC;">
+            <input type="file" id="edit-hero-file" accept="image/*" class="form-input" style="padding: 6px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: SECTIONS MANAGER -->
+      <div class="studio-tab-content" id="tab-sections">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-size: 1.1rem;">Website Sections</h3>
+            <small style="color: var(--text-muted);">Reorder, rename, or toggle visibility</small>
+          </div>
+        </div>
+        <div id="sections-list-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- TAB 3: FUNCTIONS / CEREMONIES -->
+      <div class="studio-tab-content" id="tab-functions">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <h3 style="font-size: 1.1rem;">Ceremonies & Activities</h3>
+            <small style="color: var(--text-muted);">Tailor each function's outfits & mood</small>
+          </div>
+          <button id="add-func-btn" class="btn-gold btn-sm">
+            <i class="fa-solid fa-plus"></i> Add Function
+          </button>
+        </div>
+        <div id="functions-list-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- TAB 4: SHARING & PRIVACY -->
+      <div class="studio-tab-content" id="tab-privacy">
+        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">Sharing & Privacy Settings</h3>
+        <div style="margin-bottom: 20px;">
+          <label class="form-label">Select Visibility</label>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #DDD; border-radius: var(--radius-sm); cursor: pointer;">
+              <input type="radio" name="studio_visibility" value="draft">
+              <div>
+                <strong>Draft / Private</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Visible strictly to you (the owner) while setting up.</div>
+              </div>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #DDD; border-radius: var(--radius-sm); cursor: pointer;">
+              <input type="radio" name="studio_visibility" value="private_share">
+              <div>
+                <strong>Private Share (Recommended)</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Gated with a secret passcode or individual invite links.</div>
+              </div>
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #DDD; border-radius: var(--radius-sm); cursor: pointer;">
+              <input type="radio" name="studio_visibility" value="public">
+              <div>
+                <strong>Public</strong>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">Anyone with the direct link can view and RSVP.</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div id="studio-passcode-box" style="margin-bottom: 20px; display: none;">
+          <label class="form-label" for="studio-passcode">Guest Passcode</label>
+          <input type="text" id="studio-passcode" class="form-input" placeholder="e.g. UDAIPUR2026">
+          <small style="color: var(--text-muted);">Guests visiting your link will be prompted for this code.</small>
+        </div>
+
+        <button id="save-privacy-btn" class="btn-gold btn-sm" style="width: 100%;">
+          <i class="fa-solid fa-lock"></i> Update Sharing Settings
+        </button>
+      </div>
+    </aside>
+
+    <!-- Right Live Responsive Preview Container -->
+    <section class="editor-preview-container">
+      <div class="editor-preview-toolbar">
+        <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-dark);">
+          <i class="fa-solid fa-display"></i> Live Device Preview
+        </div>
+
+        <div class="device-switcher">
+          <button class="device-btn active" onclick="setDevice('desktop')">
+            <i class="fa-solid fa-desktop"></i> Desktop
+          </button>
+          <button class="device-btn" onclick="setDevice('tablet')">
+            <i class="fa-solid fa-tablet-screen-button"></i> Tablet
+          </button>
+          <button class="device-btn" onclick="setDevice('mobile')">
+            <i class="fa-solid fa-mobile-screen"></i> Mobile
+          </button>
+        </div>
+
+        <button class="btn-outline btn-sm" onclick="reloadPreview()" title="Refresh Preview Frame">
+          <i class="fa-solid fa-rotate-right"></i> Refresh
+        </button>
+      </div>
+
+      <div class="preview-frame-wrapper">
+        <iframe id="preview-iframe" class="preview-iframe preview-desktop" src="about:blank"></iframe>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const eventId = urlParams.get('id');
+
+    if (!eventId) {
+      alert('Event ID is missing.');
+      window.location.href = '/dashboard';
+    }
+
+    let eventData = null;
+    let sectionsData = [];
+    let functionsData = [];
+
+    function switchStudioTab(tabId) {
+      document.querySelectorAll('.studio-tab-btn').forEach((b) => b.classList.remove('active'));
+      document.querySelectorAll('.studio-tab-content').forEach((c) => c.classList.remove('active'));
+
+      event.currentTarget.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function setDevice(device) {
+      const iframe = document.getElementById('preview-iframe');
+      document.querySelectorAll('.device-btn').forEach((b) => b.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      iframe.className = `preview-iframe preview-${device}`;
+    }
+
+    function reloadPreview() {
+      if (eventData && eventData.slug) {
+        document.getElementById('preview-iframe').src = `/event/${eventData.slug}?preview=true&t=${Date.now()}`;
+      }
+    }
+
+    async function loadStudio() {
+      try {
+        const data = await API.getEvent(eventId);
+        eventData = data.event;
+        sectionsData = data.sections || [];
+        functionsData = data.functions || [];
+
+        // Header info
+        document.getElementById('studio-event-title').textContent = eventData.primary_names;
+        const badge = document.getElementById('studio-event-badge');
+        badge.textContent = eventData.visibility.replace('_', ' ').toUpperCase();
+        badge.className = `badge-status badge-${eventData.visibility === 'public' ? 'public' : (eventData.visibility === 'private_share' ? 'private' : 'draft')}`;
+        document.getElementById('preview-new-tab-btn').href = `/event/${eventData.slug}`;
+
+        // Basic Tab Inputs
+        document.getElementById('edit-names').value = eventData.primary_names || '';
+        document.getElementById('edit-title').value = eventData.title || '';
+        document.getElementById('edit-headline').value = eventData.headline || '';
+        document.getElementById('edit-date').value = eventData.event_date || '';
+        document.getElementById('edit-theme').value = eventData.theme_id || 'luxury_pastel';
+        document.getElementById('edit-venue-name').value = eventData.venue_name || '';
+        document.getElementById('edit-venue-address').value = eventData.venue_address || '';
+        document.getElementById('edit-hashtag').value = eventData.hashtag || '';
+        document.getElementById('edit-hero-preview').src = eventData.hero_image_url || 'assets/images/hero_couple.jpg';
+
+        // Privacy Tab
+        document.querySelectorAll('input[name="studio_visibility"]').forEach((r) => {
+          r.checked = (r.value === eventData.visibility);
+        });
+        document.getElementById('studio-passcode-box').style.display = (eventData.visibility === 'private_share' ? 'block' : 'none');
+
+        // Render Sections Tab
+        renderSectionsTab();
+
+        // Render Functions Tab
+        renderFunctionsTab();
+
+        // Load Live Preview
+        reloadPreview();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    // Render Sections List
+    function renderSectionsTab() {
+      const container = document.getElementById('sections-list-container');
+      container.innerHTML = '';
+
+      sectionsData.forEach((sec, idx) => {
+        const item = document.createElement('div');
+        item.className = 'section-item-card';
+        item.innerHTML = `
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <input type="checkbox" id="sec-enable-${sec.id}" ${sec.is_enabled ? 'checked' : ''} onchange="toggleSection(${sec.id})">
+            <input type="text" class="form-input" style="padding: 4px 8px; font-weight: 600; width: 220px;" value="${sec.title}" onchange="renameSection(${sec.id}, this.value)">
+          </div>
+          <div style="display: flex; gap: 4px;">
+            <button class="btn-outline btn-sm" onclick="moveSection(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}><i class="fa-solid fa-arrow-up"></i></button>
+            <button class="btn-outline btn-sm" onclick="moveSection(${idx}, 1)" ${idx === sectionsData.length - 1 ? 'disabled' : ''}><i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function toggleSection(id) {
+      const sec = sectionsData.find((s) => s.id === id);
+      if (sec) {
+        sec.is_enabled = sec.is_enabled ? 0 : 1;
+        saveSections();
+      }
+    }
+
+    function renameSection(id, newTitle) {
+      const sec = sectionsData.find((s) => s.id === id);
+      if (sec) {
+        sec.title = newTitle;
+        saveSections();
+      }
+    }
+
+    function moveSection(index, direction) {
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= sectionsData.length) return;
+      const temp = sectionsData[index];
+      sectionsData[index] = sectionsData[targetIndex];
+      sectionsData[targetIndex] = temp;
+
+      sectionsData.forEach((s, i) => s.sort_order = i);
+      renderSectionsTab();
+      saveSections();
+    }
+
+    async function saveSections() {
+      try {
+        await API.updateSections(eventId, sectionsData);
+        reloadPreview();
+      } catch (err) {
+        console.error('Save sections failed:', err);
+      }
+    }
+
+    // Render Functions Tab
+    function renderFunctionsTab() {
+      const container = document.getElementById('functions-list-container');
+      container.innerHTML = '';
+
+      functionsData.forEach((func) => {
+        const card = document.createElement('div');
+        card.className = 'function-edit-card';
+        card.innerHTML = `
+          <div style="display: flex; gap: 14px; margin-bottom: 10px;">
+            <img src="${func.illustration_url || 'assets/images/hero_couple.jpg'}" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover;">
+            <div style="flex-grow: 1;">
+              <input type="text" class="form-input" style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;" value="${func.title}" onchange="updateFuncField(${func.id}, 'title', this.value)">
+              <input type="text" class="form-input" style="font-size: 0.85rem;" placeholder="Subtitle / Ritual" value="${func.subtitle || ''}" onchange="updateFuncField(${func.id}, 'subtitle', this.value)">
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label class="form-label" style="font-size: 0.78rem;">Time / Date</label>
+              <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.date_time || ''}" onchange="updateFuncField(${func.id}, 'date_time', this.value)">
+            </div>
+            <div>
+              <label class="form-label" style="font-size: 0.78rem;">Venue Hall</label>
+              <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.venue_name || ''}" onchange="updateFuncField(${func.id}, 'venue_name', this.value)">
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label class="form-label" style="font-size: 0.78rem;">Dress Code Advice</label>
+            <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.dress_code || ''}" onchange="updateFuncField(${func.id}, 'dress_code', this.value)">
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #EEE; padding-top: 8px; margin-top: 8px;">
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Ceremony #${func.sort_order + 1}</span>
+            <button class="btn-danger btn-sm" onclick="deleteFunction(${func.id})">
+              <i class="fa-solid fa-trash"></i> Delete
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    async function updateFuncField(funcId, field, val) {
+      const payload = {};
+      payload[field] = val;
+      try {
+        await API.updateFunction(eventId, funcId, payload);
+        reloadPreview();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    async function deleteFunction(funcId) {
+      if (!confirm('Are you sure you want to remove this ceremony/activity?')) return;
+      try {
+        await API.deleteFunction(eventId, funcId);
+        functionsData = functionsData.filter((f) => f.id !== funcId);
+        renderFunctionsTab();
+        reloadPreview();
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    document.getElementById('add-func-btn').addEventListener('click', async () => {
+      const title = prompt('Enter Ceremony / Activity Name:');
+      if (!title) return;
+      try {
+        const res = await API.addFunction(eventId, { title });
+        functionsData.push({ id: res.functionId, title, sort_order: functionsData.length });
+        renderFunctionsTab();
+        reloadPreview();
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    // Image Upload
+    document.getElementById('edit-hero-file').addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        const res = await API.uploadImage(file);
+        document.getElementById('edit-hero-preview').src = res.url;
+        await API.updateEvent(eventId, { hero_image_url: res.url });
+        API.showToast('Hero image updated!');
+        reloadPreview();
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    // Save Overall Details
+    document.getElementById('save-studio-btn').addEventListener('click', async () => {
+      const payload = {
+        primary_names: document.getElementById('edit-names').value,
+        title: document.getElementById('edit-title').value,
+        headline: document.getElementById('edit-headline').value,
+        event_date: document.getElementById('edit-date').value,
+        theme_id: document.getElementById('edit-theme').value,
+        venue_name: document.getElementById('edit-venue-name').value,
+        venue_address: document.getElementById('edit-venue-address').value,
+        hashtag: document.getElementById('edit-hashtag').value
+      };
+      try {
+        await API.updateEvent(eventId, payload);
+        API.showToast('All changes saved successfully!');
+        reloadPreview();
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    // Privacy Controls
+    document.querySelectorAll('input[name="studio_visibility"]').forEach((r) => {
+      r.addEventListener('change', () => {
+        document.getElementById('studio-passcode-box').style.display = (r.value === 'private_share' ? 'block' : 'none');
+      });
+    });
+
+    document.getElementById('save-privacy-btn').addEventListener('click', async () => {
+      const vis = document.querySelector('input[name="studio_visibility"]:checked').value;
+      const pass = document.getElementById('studio-passcode').value;
+      try {
+        await API.updateVisibility(eventId, vis, pass);
+        API.showToast(`Privacy mode updated to ${vis}!`);
+        const badge = document.getElementById('studio-event-badge');
+        badge.textContent = vis.replace('_', ' ').toUpperCase();
+        badge.className = `badge-status badge-${vis === 'public' ? 'public' : (vis === 'private_share' ? 'private' : 'draft')}`;
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    loadStudio();
+  </script>
+</body>
+</html>

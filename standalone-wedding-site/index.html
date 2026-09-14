@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vijay & Rashima — The Royal Wedding Celebration | December 14, 2026</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Join us in celebrating the royal wedding of Vijay & Rashima in Udaipur. Event details, live countdown, scratch reveal, itinerary, and RSVP. #ViShimaForever">
+  <meta name="keywords" content="Vijay and Rashima Wedding, Indian Wedding, Udaipur Wedding, Royal Palace, Save The Date, RSVP, Wedding Itinerary">
+  <meta name="author" content="Vijay & Rashima">
+  
+  <!-- OpenGraph / Social Sharing -->
+  <meta property="og:title" content="Vijay & Rashima's Royal Wedding Celebration">
+  <meta property="og:description" content="We invite you to celebrate our forever with us. Discover our love story, event schedule, and RSVP.">
+  <meta property="og:image" content="assets/images/hero_couple.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Background Petals & Hearts Particle Layer -->
+  <canvas id="particles-canvas"></canvas>
+  <!-- Confetti Celebration Layer -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- ===================================================
+       HEADER & NAVIGATION
+       =================================================== -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo">
+        <span>V</span>
+        <span class="ampersand">&</span>
+        <span>R</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#reveal" class="nav-link">Date & Countdown</a></li>
+          <li><a href="#story" class="nav-link">Our Story</a></li>
+          <li><a href="#events" class="nav-link">Ceremonies</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#venue" class="nav-link">Venue</a></li>
+          <li><a href="#dress-code" class="nav-link">Dress Code</a></li>
+          <li><a href="#travel" class="nav-link">Travel</a></li>
+          <li><a href="#family" class="nav-link">Family</a></li>
+          <li><a href="#guestbook" class="nav-link">Guestbook</a></li>
+          <li><a href="#faqs" class="nav-link">FAQs</a></li>
+          <li><a href="#rsvp" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.82rem;">RSVP</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Floating Romantic Music Player -->
+        <button id="music-toggle-btn" class="music-toggle-btn" title="Play Romantic Wedding Music" aria-label="Toggle Romantic Music">
+          <i class="fa-solid fa-music"></i>
+        </button>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="mobile-menu-toggle" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================
+       1. HERO BANNER
+       =================================================== -->
+  <section id="home" class="hero-section">
+    <div class="hero-backdrop-glow"></div>
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Text & Invitation Content -->
+        <div class="hero-content">
+          <div class="hero-tagline">
+            <i class="fa-solid fa-dove"></i> We are getting married! <i class="fa-solid fa-dove"></i>
+          </div>
+          <h1 class="hero-names">
+            Vijay <span class="heart-icon"><i class="fa-solid fa-heart"></i></span> Rashima
+          </h1>
+          <div class="hero-date-badge">
+            <span class="hero-date-text">December 14, 2026</span>
+            <span class="hero-city-tag"><i class="fa-solid fa-location-dot"></i> Udaipur, Rajasthan</span>
+          </div>
+          <p class="hero-quote">
+            "Two souls, one heartbeat, and an eternity of smiles. Together with our families, we invite you to celebrate the start of our greatest adventure."
+          </p>
+          <div class="hero-cta-group">
+            <a href="#reveal" class="btn btn-primary">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Scratch To Reveal Date
+            </a>
+            <a href="#rsvp" class="btn btn-secondary">
+              <i class="fa-solid fa-envelope-open-text"></i> RSVP Now
+            </a>
+          </div>
+          <div class="hero-quick-badges">
+            <div class="quick-badge-item">
+              <i class="fa-solid fa-ring"></i>
+              <span>Royal Palace Nuptials</span>
+            </div>
+            <div class="quick-badge-item">
+              <i class="fa-solid fa-champagne-glasses"></i>
+              <span>3-Day Gala Festivities</span>
+            </div>
+            <div class="quick-badge-item">
+              <i class="fa-solid fa-hashtag"></i>
+              <span>#ViShimaForever</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Custom Couple Cartoon Showcase -->
+        <div class="hero-art-showcase">
+          <div class="hero-frame-container">
+            <!-- Floating Love Stickers -->
+            <div class="sticker-element sticker-1">
+              <i class="fa-solid fa-heart"></i> Perfect Match!
+            </div>
+            <div class="sticker-element sticker-2">
+              <i class="fa-solid fa-gem"></i> She Said YES!
+            </div>
+            <div class="sticker-element sticker-3">
+              <i class="fa-solid fa-infinity"></i> Forever & Always
+            </div>
+            <div class="sticker-ring" title="Gold Wedding Band">
+              <i class="fa-solid fa-ring"></i>
+            </div>
+
+            <!-- Main Illustration Frame -->
+            <div class="hero-illustration-frame">
+              <img src="assets/images/hero_couple.jpg" alt="Vijay & Rashima Cartoon Couple" class="hero-illustration-img">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       2. COUNTDOWN TIMER & SECRET SCRATCH CARD
+       =================================================== -->
+  <section id="reveal" class="section reveal-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Auspicious Countdown</span>
+        <h2 class="section-title">The Big Reveal</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Every second brings us closer to our forever. Scratch the golden foil card below to unveil our official wedding date and add it to your calendar!
+        </p>
+      </div>
+
+      <div class="reveal-grid">
+        <!-- Live Countdown Timer Card -->
+        <div class="countdown-card glass-card">
+          <h3 class="countdown-heading">Counting Down To Forever</h3>
+          <p class="countdown-sub" id="countdown-status-text">December 14, 2026 • 10:00 AM IST</p>
+          
+          <div class="countdown-boxes">
+            <div class="countdown-box">
+              <span class="countdown-number" id="count-days">00</span>
+              <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-number" id="count-hours">00</span>
+              <span class="countdown-label">Hours</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-number" id="count-minutes">00</span>
+              <span class="countdown-label">Mins</span>
+            </div>
+            <div class="countdown-box">
+              <span class="countdown-number" id="count-seconds">00</span>
+              <span class="countdown-label">Secs</span>
+            </div>
+          </div>
+
+          <button id="add-to-calendar-btn" class="btn btn-primary calendar-action-btn">
+            <i class="fa-brands fa-google"></i> Save To Google Calendar
+          </button>
+        </div>
+
+        <!-- Realistic Interactive Scratch Card -->
+        <div class="scratch-card-wrapper glass-card">
+          <div class="scratch-header">
+            <h3 style="font-size: 1.5rem; margin-bottom: 4px;">Exclusive Save-The-Date Card</h3>
+            <span class="scratch-instruction">
+              <i class="fa-solid fa-hand-pointer"></i> Use your mouse or finger to scratch off the gold layer!
+            </span>
+          </div>
+
+          <!-- Scratch Canvas Box -->
+          <div class="scratch-box">
+            <!-- Hidden Date Content -->
+            <div class="scratch-secret-content">
+              <span class="scratch-secret-tag">Save The Auspicious Date</span>
+              <div class="scratch-secret-date">DECEMBER 14, 2026</div>
+              <div class="scratch-secret-venue">The Oberoi Udaivilas • Udaipur, Rajasthan</div>
+              <div class="scratch-secret-sparkle">
+                ✨ Vijay & Rashima Solemnize Their Vows ✨
+              </div>
+            </div>
+
+            <!-- Canvas Scratch Overlay -->
+            <canvas id="scratch-canvas"></canvas>
+          </div>
+
+          <!-- Scratch Status & Progress -->
+          <div class="scratch-status-bar">
+            <span>Progress:</span>
+            <div class="scratch-progress-track">
+              <div id="scratch-progress" class="scratch-progress-fill"></div>
+            </div>
+            <span id="scratch-percent-text" style="font-weight: 600;">0% Scratched</span>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <button id="quick-reveal-btn" class="btn btn-secondary" style="padding: 6px 18px; font-size: 0.8rem;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Instant Reveal
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       3. OUR LOVE STORY TIMELINE
+       =================================================== -->
+  <section id="story" class="section story-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">How It All Began</span>
+        <h2 class="section-title">Our Love Story</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          From a casual hello to endless late-night calls and the magical sunset proposal. Here's a glimpse into the chapters that led us here.
+        </p>
+      </div>
+
+      <div class="story-timeline">
+        <!-- Milestone 1 -->
+        <div class="story-item">
+          <div class="story-node"><i class="fa-solid fa-comment-heart"></i></div>
+          <div class="story-card glass-card">
+            <span class="story-date-badge">Chapter I • October 2022</span>
+            <h3 class="story-title">The Serendipitous Hello</h3>
+            <p class="story-text">
+              Introduced by mutual close friends during Diwali festivities. Amid sparklers and sweet chatter, Vijay was captivated by Rashima's infectious laughter, and Rashima found Vijay's quiet wit irresistibly charming.
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 2 -->
+        <div class="story-item">
+          <div class="story-node"><i class="fa-solid fa-mug-hot"></i></div>
+          <div class="story-card glass-card">
+            <div class="story-card-img-wrap">
+              <img src="assets/images/first_date_couple.jpg" alt="Vijay & Rashima First Coffee Date">
+            </div>
+            <span class="story-date-badge">Chapter II • November 2022</span>
+            <h3 class="story-title">The 4-Hour Coffee Date</h3>
+            <p class="story-text">
+              What was planned as a quick 30-minute cappuccino turned into 4 hours of swapping childhood dreams, travel bucket lists, and shared playlists until the cafe staff began politely packing up chairs!
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 3 -->
+        <div class="story-item">
+          <div class="story-node"><i class="fa-solid fa-ring"></i></div>
+          <div class="story-card glass-card">
+            <div class="story-card-img-wrap">
+              <img src="assets/images/proposal_couple.jpg" alt="Romantic Proposal in Udaipur">
+            </div>
+            <span class="story-date-badge">Chapter III • February 2025</span>
+            <h3 class="story-title">The Sunset Proposal at Udaipur</h3>
+            <p class="story-text">
+              Overlooking Lake Pichola as twilight turned the skies into shades of lavender and peach, Vijay knelt on one knee with a ring and asked for a lifetime of tomorrows. Through joyful tears and beaming smiles, Rashima said YES!
+            </p>
+          </div>
+        </div>
+
+        <!-- Milestone 4 -->
+        <div class="story-item">
+          <div class="story-node"><i class="fa-solid fa-infinity"></i></div>
+          <div class="story-card glass-card">
+            <span class="story-date-badge">Chapter IV • December 2026</span>
+            <h3 class="story-title">Forever Begins Today</h3>
+            <p class="story-text">
+              With the blessings of our parents, the cheers of our friends, and our hearts completely intertwined, we take our sacred Saat Phere to start our forever chapter.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       4. WEDDING EVENT TIMELINE (THE 5 CEREMONIES)
+       =================================================== -->
+  <section id="events" class="section events-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Celebrations & Rituals</span>
+        <h2 class="section-title">The Wedding Itinerary</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Five vibrant functions, five distinctive vibes, and memories to cherish forever. Every ceremony features unique traditional attire and festive spirit!
+        </p>
+      </div>
+
+      <div class="events-container">
+        <!-- 1. HALDI CEREMONY -->
+        <div class="event-card glass-card" id="event-haldi">
+          <div class="event-art">
+            <span class="event-art-badge theme-haldi">
+              <i class="fa-solid fa-sun"></i> Haldi Ritual
+            </span>
+            <img src="assets/images/haldi_couple.jpg" alt="Vijay & Rashima Haldi Function" class="event-art-img">
+          </div>
+          <div class="event-details">
+            <span class="event-number">Event 01</span>
+            <h3 class="event-title">Haldi Ceremony</h3>
+            <div class="event-meta-list">
+              <div class="event-meta-item">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span><strong>Date:</strong> Saturday, December 12, 2026</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-regular fa-clock"></i>
+                <span><strong>Time:</strong> 10:00 AM – 01:30 PM (Lunch to follow)</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span><strong>Venue:</strong> Chandani Courtyard, The Oberoi Udaivilas</span>
+              </div>
+            </div>
+            <p class="event-description">
+              Get ready for turmeric splashes, marigold petal showers, playful laughter, and traditional dhol beats! Join us in blessing Vijay & Rashima with auspicious sunshine vibes.
+            </p>
+            <div class="dress-code-badge theme-haldi">
+              <span><strong>Dress Code:</strong> Sunburst Yellow & Floral Jewelry</span>
+              <div class="palette-dots">
+                <span class="palette-dot" style="background-color: #FFD700;"></span>
+                <span class="palette-dot" style="background-color: #FFA000;"></span>
+                <span class="palette-dot" style="background-color: #FFF9C4;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. MEHENDI CEREMONY (REVERSE LAYOUT) -->
+        <div class="event-card reverse glass-card" id="event-mehendi">
+          <div class="event-art">
+            <span class="event-art-badge theme-mehendi">
+              <i class="fa-solid fa-seedling"></i> Henna & Folk
+            </span>
+            <img src="assets/images/mehendi_couple.jpg" alt="Vijay & Rashima Mehendi Function" class="event-art-img">
+          </div>
+          <div class="event-details">
+            <span class="event-number">Event 02</span>
+            <h3 class="event-title">Mehendi Carnival</h3>
+            <div class="event-meta-list">
+              <div class="event-meta-item">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span><strong>Date:</strong> Saturday, December 12, 2026</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-regular fa-clock"></i>
+                <span><strong>Time:</strong> 04:30 PM – 08:30 PM</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span><strong>Venue:</strong> Poolside Palm Gardens, The Oberoi Udaivilas</span>
+              </div>
+            </div>
+            <p class="event-description">
+              Intricate henna art, live bangles artisan stall, bohemian fairy tents, acoustic Rajasthani folk vocalists, and an authentic chaat street buffet by the shimmering lake.
+            </p>
+            <div class="dress-code-badge theme-mehendi">
+              <span><strong>Dress Code:</strong> Emerald Greens, Mint & Boho Florals</span>
+              <div class="palette-dots">
+                <span class="palette-dot" style="background-color: #2E7D32;"></span>
+                <span class="palette-dot" style="background-color: #81C784;"></span>
+                <span class="palette-dot" style="background-color: #E8F5E9;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. SANGEET NIGHT -->
+        <div class="event-card glass-card" id="event-sangeet">
+          <div class="event-art">
+            <span class="event-art-badge theme-sangeet">
+              <i class="fa-solid fa-music"></i> Sangeet Night
+            </span>
+            <img src="assets/images/sangeet_couple.jpg" alt="Vijay & Rashima Sangeet Night" class="event-art-img">
+          </div>
+          <div class="event-details">
+            <span class="event-number">Event 03</span>
+            <h3 class="event-title">Sangeet Extravaganza</h3>
+            <div class="event-meta-list">
+              <div class="event-meta-item">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span><strong>Date:</strong> Sunday, December 13, 2026</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-regular fa-clock"></i>
+                <span><strong>Time:</strong> 07:00 PM onwards</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span><strong>Venue:</strong> Royal Grand Ballroom, Udaivilas</span>
+              </div>
+            </div>
+            <p class="event-description">
+              The ultimate family dance battle! Dazzling stage lighting, celebrity DJ, signature cocktail bars, and non-stop Bollywood choreography that will keep you dancing until dawn!
+            </p>
+            <div class="dress-code-badge theme-sangeet">
+              <span><strong>Dress Code:</strong> Midnight Blue, Glitz & Indo-Western</span>
+              <div class="palette-dots">
+                <span class="palette-dot" style="background-color: #1A237E;"></span>
+                <span class="palette-dot" style="background-color: #D4AF37;"></span>
+                <span class="palette-dot" style="background-color: #EDE7F6;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. THE SACRED WEDDING (REVERSE LAYOUT) -->
+        <div class="event-card reverse glass-card" id="event-wedding">
+          <div class="event-art">
+            <span class="event-art-badge theme-wedding">
+              <i class="fa-solid fa-fire-burner"></i> Saat Phere & Mandap
+            </span>
+            <img src="assets/images/wedding_couple.jpg" alt="Vijay & Rashima Wedding Mandap" class="event-art-img">
+          </div>
+          <div class="event-details">
+            <span class="event-number">Event 04</span>
+            <h3 class="event-title">The Sacred Wedding</h3>
+            <div class="event-meta-list">
+              <div class="event-meta-item">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span><strong>Date:</strong> Monday, December 14, 2026</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-regular fa-clock"></i>
+                <span><strong>Time:</strong> 10:30 AM Baraat • 12:30 PM Varmala & Phere</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span><strong>Venue:</strong> Lakeside Royal Floral Mandap</span>
+              </div>
+            </div>
+            <p class="event-description">
+              The grand royal Baraat procession, emotional Milni, exchange of rose Varmala garlands, and the holy Vedic Saat Phere around the sacred fire overlooking Lake Pichola.
+            </p>
+            <div class="dress-code-badge theme-wedding">
+              <span><strong>Dress Code:</strong> Regal Crimson, Ivory & Royal Pastels</span>
+              <div class="palette-dots">
+                <span class="palette-dot" style="background-color: #B71C1C;"></span>
+                <span class="palette-dot" style="background-color: #D4AF37;"></span>
+                <span class="palette-dot" style="background-color: #FFF8E1;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. GRAND RECEPTION -->
+        <div class="event-card glass-card" id="event-reception">
+          <div class="event-art">
+            <span class="event-art-badge theme-reception">
+              <i class="fa-solid fa-wine-glass"></i> Black Tie Gala
+            </span>
+            <img src="assets/images/reception_couple.jpg" alt="Vijay & Rashima Grand Reception" class="event-art-img">
+          </div>
+          <div class="event-details">
+            <span class="event-number">Event 05</span>
+            <h3 class="event-title">Grand Wedding Reception</h3>
+            <div class="event-meta-list">
+              <div class="event-meta-item">
+                <i class="fa-regular fa-calendar-check"></i>
+                <span><strong>Date:</strong> Monday, December 14, 2026</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-regular fa-clock"></i>
+                <span><strong>Time:</strong> 07:30 PM onwards</span>
+              </div>
+              <div class="event-meta-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span><strong>Venue:</strong> The Palace Grand Lawn, Udaivilas</span>
+              </div>
+            </div>
+            <p class="event-description">
+              A black-tie evening of sheer luxury under sparkling crystal chandeliers. An opulent multi-course royal feast, champagne toasts, wedding cake cutting, and live string symphony.
+            </p>
+            <div class="dress-code-badge theme-reception">
+              <span><strong>Dress Code:</strong> Black Tie, Tuxedos & Champagne Gowns</span>
+              <div class="palette-dots">
+                <span class="palette-dot" style="background-color: #212121;"></span>
+                <span class="palette-dot" style="background-color: #F8BBD0;"></span>
+                <span class="palette-dot" style="background-color: #F5F5F5;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. COUPLE GALLERY & LIGHTBOX
+       =================================================== -->
+  <section id="gallery" class="section gallery-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Moments Frozen In Time</span>
+        <h2 class="section-title">Couple Gallery</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Click any portrait to open the full-screen interactive lightbox and relive our favourite smiles and memories.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="gallery-filters">
+        <button class="gallery-filter-btn active" data-filter="all">All Photos</button>
+        <button class="gallery-filter-btn" data-filter="prewedding">Pre-Wedding & Romance</button>
+        <button class="gallery-filter-btn" data-filter="ceremony">Ceremony Outfits</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid">
+        <!-- Card 1: Hero -->
+        <div class="gallery-card" data-category="prewedding">
+          <img src="assets/images/hero_couple.jpg" alt="Vijay & Rashima Official Portrait">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">Vijay & Rashima</div>
+            <div class="gallery-overlay-caption">The Wedding Announcement Portrait</div>
+          </div>
+        </div>
+
+        <!-- Card 2: Proposal -->
+        <div class="gallery-card" data-category="prewedding">
+          <img src="assets/images/proposal_couple.jpg" alt="Romantic Lake Pichola Proposal">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">The Sunset Proposal</div>
+            <div class="gallery-overlay-caption">Udaipur • When She Said Yes</div>
+          </div>
+        </div>
+
+        <!-- Card 3: Coffee Date -->
+        <div class="gallery-card" data-category="prewedding">
+          <img src="assets/images/first_date_couple.jpg" alt="First Coffee Date">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">Where It All Began</div>
+            <div class="gallery-overlay-caption">The 4-Hour First Date</div>
+          </div>
+        </div>
+
+        <!-- Card 4: Haldi -->
+        <div class="gallery-card" data-category="ceremony">
+          <img src="assets/images/haldi_couple.jpg" alt="Haldi Joy">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">Sunshine & Turmeric</div>
+            <div class="gallery-overlay-caption">Haldi Ritual & Phoolon Ki Holi</div>
+          </div>
+        </div>
+
+        <!-- Card 5: Mehendi -->
+        <div class="gallery-card" data-category="ceremony">
+          <img src="assets/images/mehendi_couple.jpg" alt="Mehendi Ceremony">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">Henna Dreams</div>
+            <div class="gallery-overlay-caption">Mehendi Carnival Festivities</div>
+          </div>
+        </div>
+
+        <!-- Card 6: Sangeet -->
+        <div class="gallery-card" data-category="ceremony">
+          <img src="assets/images/sangeet_couple.jpg" alt="Sangeet Dance Night">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">Rhythm & Spotlights</div>
+            <div class="gallery-overlay-caption">Sangeet Dance Night Extravaganza</div>
+          </div>
+        </div>
+
+        <!-- Card 7: Wedding Mandap -->
+        <div class="gallery-card" data-category="ceremony">
+          <img src="assets/images/wedding_couple.jpg" alt="Royal Wedding Mandap">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">The Royal Vows</div>
+            <div class="gallery-overlay-caption">Under the Sacred Floral Mandap</div>
+          </div>
+        </div>
+
+        <!-- Card 8: Reception -->
+        <div class="gallery-card" data-category="ceremony">
+          <img src="assets/images/reception_couple.jpg" alt="Grand Reception Gala">
+          <div class="gallery-overlay">
+            <span class="gallery-zoom-icon"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+            <div class="gallery-overlay-title">An Evening of Elegance</div>
+            <div class="gallery-overlay-caption">Grand Black Tie Wedding Reception</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true">
+    <div class="lightbox-content">
+      <button id="lightbox-close" class="lightbox-close-btn" aria-label="Close Lightbox">&times;</button>
+      <button id="lightbox-prev" class="lightbox-nav-btn lightbox-prev" aria-label="Previous Photo"><i class="fa-solid fa-chevron-left"></i></button>
+      <img id="lightbox-img" class="lightbox-img" src="" alt="">
+      <button id="lightbox-next" class="lightbox-nav-btn lightbox-next" aria-label="Next Photo"><i class="fa-solid fa-chevron-right"></i></button>
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       6. WEDDING VENUE & GOOGLE MAPS
+       =================================================== -->
+  <section id="venue" class="section venue-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Destination of Dreams</span>
+        <h2 class="section-title">The Wedding Venue</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Perched on the tranquil banks of Lake Pichola, The Oberoi Udaivilas captures all the romance and splendor of royal Rajasthan.
+        </p>
+      </div>
+
+      <div class="venue-grid">
+        <!-- Venue Card -->
+        <div class="venue-info-card glass-card">
+          <div>
+            <h3 class="venue-palace-title">The Oberoi Udaivilas</h3>
+            <span class="venue-tagline">Haridas Ji Ki Magri, Lake Pichola, Udaipur, Rajasthan</span>
+
+            <div class="venue-features-list">
+              <div class="venue-feature-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <strong>Address:</strong>
+                  <p>Badi-Gorela Mulla Talai, Udaipur, Rajasthan 313001, India</p>
+                </div>
+              </div>
+              <div class="venue-feature-item">
+                <i class="fa-solid fa-plane-arrival"></i>
+                <div>
+                  <strong>Distance From Airport:</strong>
+                  <p>Maharana Pratap Airport (UDR) — Approx. 35 mins (27 km)</p>
+                </div>
+              </div>
+              <div class="venue-feature-item">
+                <i class="fa-solid fa-car-side"></i>
+                <div>
+                  <strong>Valet & Parking:</strong>
+                  <p>Complimentary 24/7 valet parking provided at the main palace gate.</p>
+                </div>
+              </div>
+              <div class="venue-feature-item">
+                <i class="fa-solid fa-ship"></i>
+                <div>
+                  <strong>Shikara Boat Transfers:</strong>
+                  <p>Scenic private boat arrival available for hotel guests across the lake.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="venue-actions">
+            <a href="https://maps.google.com/?q=The+Oberoi+Udaivilas+Udaipur" target="_blank" rel="noopener" class="btn btn-primary">
+              <i class="fa-solid fa-diamond-turn-right"></i> Get Driving Directions
+            </a>
+            <button class="btn btn-secondary" onclick="navigator.clipboard.writeText('The Oberoi Udaivilas, Badi-Gorela Mulla Talai, Udaipur, Rajasthan 313001'); showWeddingToast('Venue address copied to clipboard!');">
+              <i class="fa-regular fa-copy"></i> Copy Address
+            </button>
+          </div>
+        </div>
+
+        <!-- Embedded Google Map -->
+        <div class="venue-map-card">
+          <iframe 
+            class="venue-map-iframe"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3627.886364024419!2d73.66699297607736!3d24.58882575607065!2m3!1f0!2f0!3f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e5628b05615d%3A0xe54e3d30e527f54c!2sThe%20Oberoi%20Udaivilas%2C%20Udaipur!5e0!3m2!1sen!2sin!4v1710400000000!5m2!1sen!2sin"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Google Maps Location of The Oberoi Udaivilas">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. DRESS CODE & PALETTE GUIDE
+       =================================================== -->
+  <section id="dress-code" class="section dress-code-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">What To Wear</span>
+        <h2 class="section-title">Dress Code Guide</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          To help you pack and look your absolute best, here is the suggested aesthetic and color palette for each celebration!
+        </p>
+      </div>
+
+      <div class="dress-code-grid">
+        <!-- Haldi -->
+        <div class="dress-code-card glass-card">
+          <div class="dress-code-icon" style="background: #FFF9C4; color: #F57F17;">
+            <i class="fa-solid fa-sun"></i>
+          </div>
+          <h3 class="dress-code-title">Haldi</h3>
+          <p class="dress-code-desc">Yellow kurtas, sunny lehengas & lightweight florals.</p>
+          <div class="swatch-group">
+            <span class="swatch" style="background-color: #FFD54F;" title="Bright Gold"></span>
+            <span class="swatch" style="background-color: #FFA000;" title="Marigold"></span>
+            <span class="swatch" style="background-color: #FFF59D;" title="Lemon Pastels"></span>
+          </div>
+        </div>
+
+        <!-- Mehendi -->
+        <div class="dress-code-card glass-card">
+          <div class="dress-code-icon" style="background: #E8F5E9; color: #2E7D32;">
+            <i class="fa-solid fa-leaf"></i>
+          </div>
+          <h3 class="dress-code-title">Mehendi</h3>
+          <p class="dress-code-desc">Sage green, mint ethnic wear, shararas & bandhani.</p>
+          <div class="swatch-group">
+            <span class="swatch" style="background-color: #2E7D32;" title="Emerald"></span>
+            <span class="swatch" style="background-color: #81C784;" title="Sage Mint"></span>
+            <span class="swatch" style="background-color: #C8E6C9;" title="Pastel Green"></span>
+          </div>
+        </div>
+
+        <!-- Sangeet -->
+        <div class="dress-code-card glass-card">
+          <div class="dress-code-icon" style="background: #EDE7F6; color: #512DA8;">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h3 class="dress-code-title">Sangeet</h3>
+          <p class="dress-code-desc">Indo-Western gowns, metallic sequins, sherwanis & tux.</p>
+          <div class="swatch-group">
+            <span class="swatch" style="background-color: #1A237E;" title="Midnight Navy"></span>
+            <span class="swatch" style="background-color: #D4AF37;" title="Metallic Gold"></span>
+            <span class="swatch" style="background-color: #7B1FA2;" title="Wine Purple"></span>
+          </div>
+        </div>
+
+        <!-- Wedding -->
+        <div class="dress-code-card glass-card">
+          <div class="dress-code-icon" style="background: #FFEBEE; color: #C62828;">
+            <i class="fa-solid fa-gem"></i>
+          </div>
+          <h3 class="dress-code-title">Wedding</h3>
+          <p class="dress-code-desc">Regal traditional red, blush pink, ivory & royal silk.</p>
+          <div class="swatch-group">
+            <span class="swatch" style="background-color: #B71C1C;" title="Crimson Red"></span>
+            <span class="swatch" style="background-color: #D4AF37;" title="Zari Gold"></span>
+            <span class="swatch" style="background-color: #FFF8E1;" title="Ivory Cream"></span>
+          </div>
+        </div>
+
+        <!-- Reception -->
+        <div class="dress-code-card glass-card">
+          <div class="dress-code-icon" style="background: #ECEFF1; color: #37474F;">
+            <i class="fa-solid fa-champagne-glasses"></i>
+          </div>
+          <h3 class="dress-code-title">Reception</h3>
+          <p class="dress-code-desc">Black tie tuxedos, sleek suits & cocktail evening gowns.</p>
+          <div class="swatch-group">
+            <span class="swatch" style="background-color: #212121;" title="Midnight Black"></span>
+            <span class="swatch" style="background-color: #F8BBD0;" title="Rose Champagne"></span>
+            <span class="swatch" style="background-color: #ECEFF1;" title="Silver Platinum"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. TRAVEL & ACCOMMODATION
+       =================================================== -->
+  <section id="travel" class="section travel-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Seamless Arrival</span>
+        <h2 class="section-title">Travel & Stay</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          We want your journey to Udaipur to be completely effortless. Special rates and hospitality shuttles are arranged for all our guests.
+        </p>
+      </div>
+
+      <div class="travel-grid">
+        <!-- Card 1: Flights & Trains -->
+        <div class="travel-card glass-card">
+          <div class="travel-card-icon"><i class="fa-solid fa-plane-departure"></i></div>
+          <h3 class="travel-card-title">Getting to Udaipur</h3>
+          <p class="travel-card-text">
+            <strong>Maharana Pratap Airport (UDR):</strong> Regular flights connect from Delhi, Mumbai, Bengaluru, and Jaipur. Udaipur City Railway Station is only 20 mins from the palace.
+          </p>
+          <span class="travel-promo-code">Shuttle Service Arranged</span>
+        </div>
+
+        <!-- Card 2: Partner Luxury Hotels -->
+        <div class="travel-card glass-card">
+          <div class="travel-card-icon"><i class="fa-solid fa-hotel"></i></div>
+          <h3 class="travel-card-title">Partner Accommodations</h3>
+          <p class="travel-card-text">
+            Rooms have been blocked at <em>The Oberoi Udaivilas</em> and adjacent <em>Trident Udaipur</em>. Mention our wedding code during your booking for exclusive guest rates.
+          </p>
+          <span class="travel-promo-code">Promo Code: #VISHIMA2026</span>
+        </div>
+
+        <!-- Card 3: Guest Concierge -->
+        <div class="travel-card glass-card">
+          <div class="travel-card-icon"><i class="fa-solid fa-headset"></i></div>
+          <h3 class="travel-card-title">Hospitality Concierge</h3>
+          <p class="travel-card-text">
+            Need help with airport pickup transfers, saree draping artists, or local sightseeing trips around City Palace? Our wedding coordination desk is at your service 24/7.
+          </p>
+          <a href="https://wa.me/919876543210?text=Hi%20Concierge,%20I%20need%20assistance%20for%20Vijay%20and%20Rashima's%20wedding" target="_blank" rel="noopener" class="btn btn-outline-gold" style="padding: 6px 18px; font-size: 0.85rem;">
+            <i class="fa-brands fa-whatsapp"></i> Chat with Concierge
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. MEET THE FAMILY
+       =================================================== -->
+  <section id="family" class="section family-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">The Pillars of Love</span>
+        <h2 class="section-title">Meet The Family</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Behind every beautiful wedding are the parents, siblings, and loved ones who make life so extraordinary.
+        </p>
+      </div>
+
+      <!-- Family Tabs -->
+      <div class="family-tabs">
+        <button class="family-tab-btn active" data-family="groom-family">
+          <i class="fa-solid fa-user-tie"></i> Team Groom (Vijay's Side)
+        </button>
+        <button class="family-tab-btn" data-family="bride-family">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Team Bride (Rashima's Side)
+        </button>
+      </div>
+
+      <!-- Team Groom -->
+      <div class="family-group active" id="groom-family">
+        <!-- Parent 1 -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-user-tie"></i></div>
+          </div>
+          <h3 class="family-name">Rajesh & Sunita Kapur</h3>
+          <div class="family-relation">Parents of the Groom</div>
+          <p class="family-quote">"Watching our son Vijay find his soulmate in Rashima fills our hearts with immense joy and blessings."</p>
+        </div>
+
+        <!-- Brother / Best Man -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-crown"></i></div>
+          </div>
+          <h3 class="family-name">Kabir Kapur</h3>
+          <div class="family-relation">Brother & Best Man</div>
+          <p class="family-quote">"Always his biggest fan, wingman, and loudest cheerleader on the Sangeet dance floor!"</p>
+        </div>
+
+        <!-- Sister -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-heart"></i></div>
+          </div>
+          <h3 class="family-name">Pooja Kapur Mehta</h3>
+          <div class="family-relation">Sister of Groom</div>
+          <p class="family-quote">"So thrilled to finally welcome Rashima as our sister! Our family is truly complete."</p>
+        </div>
+
+        <!-- Grandparents -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-hands-praying"></i></div>
+          </div>
+          <h3 class="family-name">Sh. Om Prakash Kapur</h3>
+          <div class="family-relation">Grandfather (Dadaji)</div>
+          <p class="family-quote">"May the almighty always illuminate their path with harmony, good health, and mutual respect."</p>
+        </div>
+      </div>
+
+      <!-- Team Bride -->
+      <div class="family-group" id="bride-family">
+        <!-- Parents -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-hands-holding-child"></i></div>
+          </div>
+          <h3 class="family-name">Devendra & Meenakshi Sharma</h3>
+          <div class="family-relation">Parents of the Bride</div>
+          <p class="family-quote">"Our little princess Rashima has found her real-life prince charming in Vijay. A match made in heaven."</p>
+        </div>
+
+        <!-- Sister / Maid of Honor -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-star"></i></div>
+          </div>
+          <h3 class="family-name">Isha Sharma</h3>
+          <div class="family-relation">Sister & Maid of Honor</div>
+          <p class="family-quote">"Bride's secret keeper, official lehenga fluffer, and chief Joota Chupai planner!"</p>
+        </div>
+
+        <!-- Brother -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-shield-heart"></i></div>
+          </div>
+          <h3 class="family-name">Aditya Sharma</h3>
+          <div class="family-relation">Brother of Bride</div>
+          <p class="family-quote">"Vijay jiju, you're gaining the sweetest sister, but don't forget I'll always be her bodyguard!"</p>
+        </div>
+
+        <!-- Dadi -->
+        <div class="family-card glass-card">
+          <div class="family-avatar-wrap">
+            <div class="family-avatar-inner"><i class="fa-solid fa-dove"></i></div>
+          </div>
+          <h3 class="family-name">Smt. Kamla Devi Sharma</h3>
+          <div class="family-relation">Grandmother (Dadi)</div>
+          <p class="family-quote">"God bless our children with lifelong laughter, abundance, and eternal love. Sada suhagan raho."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. INTERACTIVE RSVP FORM
+       =================================================== -->
+  <section id="rsvp" class="section rsvp-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Be Our Guest</span>
+        <h2 class="section-title">RSVP & Reservations</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Your presence means the world to us! Please let us know if you can make it so we can prepare a royal welcome for you.
+        </p>
+      </div>
+
+      <div class="rsvp-box glass-card">
+        <p class="rsvp-intro-text">
+          Please respond by <strong>November 15, 2026</strong>. You can also directly confirm with our WhatsApp hospitality team!
+        </p>
+
+        <form id="wedding-rsvp-form">
+          <div class="rsvp-form-grid">
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="guest-name" class="form-label">
+                <i class="fa-regular fa-user"></i> Full Name *
+              </label>
+              <input type="text" id="guest-name" class="form-input" placeholder="e.g. Ananya & Rohit Verma" required>
+            </div>
+
+            <!-- Phone / WhatsApp -->
+            <div class="form-group">
+              <label for="guest-phone" class="form-label">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp / Phone Number *
+              </label>
+              <input type="tel" id="guest-phone" class="form-input" placeholder="+91 98765 43210" required>
+            </div>
+
+            <!-- Email (Optional) -->
+            <div class="form-group">
+              <label for="guest-email" class="form-label">
+                <i class="fa-regular fa-envelope"></i> Email Address
+              </label>
+              <input type="email" id="guest-email" class="form-input" placeholder="youremail@example.com">
+            </div>
+
+            <!-- Number of Guests -->
+            <div class="form-group">
+              <label for="guest-count" class="form-label">
+                <i class="fa-solid fa-users"></i> Total Number of Guests *
+              </label>
+              <select id="guest-count" class="form-select">
+                <option value="1 Guest">1 Guest</option>
+                <option value="2 Guests" selected>2 Guests</option>
+                <option value="3 Guests">3 Guests</option>
+                <option value="4 Guests">4 Guests</option>
+                <option value="5+ Guests">Family (5+ Guests)</option>
+              </select>
+            </div>
+
+            <!-- Attendance Radio Cards (Full Width) -->
+            <div class="form-group full-width">
+              <label class="form-label">
+                <i class="fa-solid fa-circle-check"></i> Will You Be Joining Us? *
+              </label>
+              <div class="attendance-radio-group">
+                <label class="attendance-radio-card active">
+                  <input type="radio" name="attendance" value="attending" checked>
+                  <i class="fa-solid fa-face-smile-beam" style="color: #2E7D32; font-size: 1.2rem; margin-right: 6px;"></i>
+                  <span>Joyfully Accepts With Pleasure!</span>
+                </label>
+                <label class="attendance-radio-card">
+                  <input type="radio" name="attendance" value="declining">
+                  <i class="fa-solid fa-heart-crack" style="color: #C62828; font-size: 1.2rem; margin-right: 6px;"></i>
+                  <span>Regretfully Declines With Love</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Functions Attending (Full Width) -->
+            <div class="form-group full-width" id="functions-selection-group">
+              <label class="form-label">
+                <i class="fa-regular fa-calendar-days"></i> Which Functions Will You Attend?
+              </label>
+              <div class="checkbox-group-wrapper">
+                <label class="checkbox-badge">
+                  <input type="checkbox" name="events" value="Haldi" checked>
+                  <span>Haldi (Dec 12 AM)</span>
+                </label>
+                <label class="checkbox-badge">
+                  <input type="checkbox" name="events" value="Mehendi" checked>
+                  <span>Mehendi (Dec 12 PM)</span>
+                </label>
+                <label class="checkbox-badge">
+                  <input type="checkbox" name="events" value="Sangeet" checked>
+                  <span>Sangeet (Dec 13 PM)</span>
+                </label>
+                <label class="checkbox-badge">
+                  <input type="checkbox" name="events" value="Wedding" checked>
+                  <span>Wedding (Dec 14 AM)</span>
+                </label>
+                <label class="checkbox-badge">
+                  <input type="checkbox" name="events" value="Reception" checked>
+                  <span>Reception (Dec 14 PM)</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Meal Preferences -->
+            <div class="form-group full-width">
+              <label for="meal-preference" class="form-label">
+                <i class="fa-solid fa-utensils"></i> Meal Preference *
+              </label>
+              <select id="meal-preference" class="form-select">
+                <option value="Pure Vegetarian (Standard)">Pure Vegetarian (Standard)</option>
+                <option value="Jain Vegetarian (No Onion / Garlic / Root Veg)">Jain Vegetarian (No Onion / Garlic)</option>
+                <option value="Non-Vegetarian">Non-Vegetarian</option>
+                <option value="Vegan / Special Dietary Needs">Vegan / Gluten Free</option>
+              </select>
+            </div>
+
+            <!-- Personalized Message -->
+            <div class="form-group full-width">
+              <label for="guest-message" class="form-label">
+                <i class="fa-regular fa-heart"></i> Warm Wishes & Blessings for Vijay & Rashima
+              </label>
+              <textarea id="guest-message" class="form-textarea" rows="3" placeholder="Leave a sweet blessing note or song request for the DJ!"></textarea>
+            </div>
+          </div>
+
+          <div class="rsvp-submit-container">
+            <button type="submit" class="btn btn-primary" style="padding: 16px 48px; font-size: 1.05rem;">
+              <i class="fa-solid fa-paper-plane"></i> Confirm My RSVP
+            </button>
+            <p class="rsvp-note">
+              🔒 Your response is safely saved and can also be forwarded directly to our wedding desk on WhatsApp.
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. WEDDING HASHTAG BANNER
+       =================================================== -->
+  <section class="section" style="padding-bottom: 20px;">
+    <div class="container">
+      <div class="hashtag-banner glass-card">
+        <div class="hashtag-sub">Capture & Share Every Smile</div>
+        <div class="hashtag-main">#ViShimaForever</div>
+        <p style="color: var(--text-secondary); max-width: 580px; margin: 0 auto 24px;">
+          Tag your selfies, reels, and candid laughter on Instagram & Facebook using our official hashtags so we can relive every moment through your eyes!
+        </p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+          <button class="hashtag-copy-btn" onclick="copyHashtag('#ViShimaForever')">
+            <i class="fa-regular fa-copy"></i> Copy #ViShimaForever
+          </button>
+          <button class="hashtag-copy-btn" onclick="copyHashtag('#RashimaGotVi')">
+            <i class="fa-regular fa-copy"></i> Copy #RashimaGotVi
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. INTERACTIVE GUESTBOOK
+       =================================================== -->
+  <section id="guestbook" class="section guestbook-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Blessings & Love</span>
+        <h2 class="section-title">Digital Guestbook</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Leave your loving words, nostalgic memories, or congratulations for Vijay & Rashima. Your blessings will appear on our live love wall!
+        </p>
+      </div>
+
+      <div class="guestbook-grid">
+        <!-- Submission Form -->
+        <div class="guestbook-form-card glass-card">
+          <h3 style="font-size: 1.4rem; margin-bottom: 16px;">Write a Blessing</h3>
+          <form id="guestbook-form">
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label for="gb-name" class="form-label">Your Name *</label>
+              <input type="text" id="gb-name" class="form-input" placeholder="e.g. Vikram & Priya" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label for="gb-relation" class="form-label">Your Relation / Side</label>
+              <input type="text" id="gb-relation" class="form-input" placeholder="e.g. Groom's College Squad, Bride's Aunt">
+            </div>
+            <div class="form-group" style="margin-bottom: 14px;">
+              <label class="form-label">Choose an Emoji Reaction</label>
+              <div class="emoji-selector">
+                <button type="button" class="emoji-btn active" data-emoji="❤️">❤️</button>
+                <button type="button" class="emoji-btn" data-emoji="🥂">🥂</button>
+                <button type="button" class="emoji-btn" data-emoji="🌸">🌸</button>
+                <button type="button" class="emoji-btn" data-emoji="✨">✨</button>
+                <button type="button" class="emoji-btn" data-emoji="🧿">🧿</button>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label for="gb-message" class="form-label">Your Message *</label>
+              <textarea id="gb-message" class="form-textarea" rows="4" placeholder="Wishing you both a lifetime of happiness, laughter, and endless love..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <i class="fa-solid fa-envelope-circle-check"></i> Post My Blessing
+            </button>
+          </form>
+        </div>
+
+        <!-- Live Wishes Wall -->
+        <div class="guestbook-wall" id="guestbook-wall">
+          <!-- Dynamically populated by js/guestbook.js -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       13. FAQS ACCORDION
+       =================================================== -->
+  <section id="faqs" class="section faqs-section">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-subtitle">Good To Know</span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="section-title-motif">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <p class="section-desc">
+          Got questions? Here are quick answers to ensure your royal wedding trip is completely relaxing and hassle-free.
+        </p>
+      </div>
+
+      <div class="faqs-container">
+        <!-- FAQ 1 -->
+        <div class="faq-item glass-card active">
+          <button class="faq-header">
+            <span>What is the dress code for each ceremony?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-body">
+            <p class="faq-text">
+              We have outlined the dress code and color palette inspirations in our <a href="#dress-code" style="color: var(--gold-dark); font-weight: 600;">Dress Code Section</a>. In short: Haldi is sunny yellow, Mehendi is lush greens & bohemian, Sangeet is glam Indo-Western with sequins, the Wedding is royal crimson red & ivory, and Reception is black tie formal.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item glass-card">
+          <button class="faq-header">
+            <span>Are children invited to the celebrations?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-body">
+            <p class="faq-text">
+              Absolutely! Children are very much a cherished part of our family celebration. We also have a supervised kid-friendly playroom and babysitting assistance arranged at The Oberoi Udaivilas.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item glass-card">
+          <button class="faq-header">
+            <span>What is the gift etiquette?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-body">
+            <p class="faq-text">
+              Your presence, loving smiles, and heartfelt blessings are truly our greatest gift! If you wish to honor us, we kindly request no boxed gifts; your heartfelt wishes on our guestbook and presence by our side mean everything to us.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item glass-card">
+          <button class="faq-header">
+            <span>How is the weather in Udaipur in mid-December?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-body">
+            <p class="faq-text">
+              December in Udaipur is pleasant and sunny during the daytime (around 22°C–25°C), making outdoor lakeside functions delightful. Evenings can be crisp and cool (10°C–14°C), so we recommend carrying a warm pashmina shawl, blazer, or light jacket for the Sangeet and Reception night.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item glass-card">
+          <button class="faq-header">
+            <span>Will airport transfers be provided?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-body">
+            <p class="faq-text">
+              Yes! Our hospitality desk is organizing private AC coaches and luxury cars from Maharana Pratap Airport (UDR) and Udaipur City Railway Station directly to partner hotels. Please share your flight/train itinerary with our concierge in advance.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 6 -->
+        <div class="faq-item glass-card">
+          <button class="faq-header">
+            <span>Are special dietary requirements catered for?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-body">
+            <p class="faq-text">
+              Yes, our master chefs will prepare dedicated counters for Pure Vegetarian, Jain (no root vegetables, onion, or garlic), Vegan, and Non-Vegetarian delicacies. Please indicate your dietary requirements on the RSVP form.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. THANK YOU & ROMANTIC FOOTER
+       =================================================== -->
+  <section class="thank-you-section">
+    <div class="container">
+      <div class="thank-you-monogram">Vijay & Rashima</div>
+      <h2 class="thank-you-title">Thank You From The Bottom of Our Hearts</h2>
+      <p class="thank-you-text">
+        "Thank you for being an indispensable part of our lives, our journeys, and our story. We cannot wait to raise a toast, dance under the stars, and make memories of a lifetime together in Udaipur."
+      </p>
+      <div style="font-family: var(--font-script); font-size: 2.4rem; color: var(--blush-pink-deep); margin-bottom: 24px;">
+        With Love, Vijay & Rashima
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-social-links">
+        <a href="#home" class="footer-social-link" title="Back to Top"><i class="fa-solid fa-arrow-up"></i></a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="footer-social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="footer-social-link" title="WhatsApp Hospitality"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+      <p>
+        #ViShimaForever • Celebrating Love, Family & Togetherness • December 14, 2026
+      </p>
+      <p style="margin-top: 6px; font-size: 0.8rem; opacity: 0.75;">
+        Designed with boundless love for Vijay & Rashima. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Floating Scroll To Top Button -->
+  <button id="scroll-top-btn" class="scroll-top-btn" aria-label="Scroll to Top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- JavaScript Modules -->
+  <script src="js/config.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/scratch-card.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/rsvp.js"></script>
+  <script src="js/guestbook.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

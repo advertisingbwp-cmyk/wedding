@@ -1,0 +1,35 @@
+/* ===================================================
+   MUSLIM WEDDING THEME - ISLAMIC GEOMETRIC & EMERALD GOLD
+   =================================================== */
+
+.theme-muslim {
+  --theme-primary: #D4AF37;
+  --theme-secondary: #004D40;
+  --theme-emerald: #0A5C4A;
+  --theme-ivory: #FDFBF7;
+  --theme-bg-gradient: radial-gradient(at 0% 0%, rgba(232, 245, 233, 0.6) 0px, transparent 50%),
+                       radial-gradient(at 100% 0%, rgba(255, 248, 225, 0.5) 0px, transparent 50%),
+                       radial-gradient(at 50% 100%, rgba(245, 245, 245, 0.8) 0px, transparent 50%);
+  --theme-card-border: rgba(10, 92, 74, 0.3);
+}
+
+.theme-muslim .event-hero {
+  background: linear-gradient(180deg, #F4FAF7 0%, #FFFDF5 60%, #EBF5F0 100%);
+  position: relative;
+}
+
+/* Islamic Geometric Border Motif */
+.theme-muslim .motif-divider::before,
+.theme-muslim .motif-divider::after {
+  content: '☪️';
+  margin: 0 10px;
+}
+
+.theme-muslim .arabic-bismillah {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 2.2rem;
+  color: var(--theme-emerald);
+  text-align: center;
+  margin-bottom: 12px;
+  direction: rtl;
+}

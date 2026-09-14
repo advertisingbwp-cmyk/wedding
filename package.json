@@ -1,0 +1,16 @@
+{
+  "name": "event-builder-platform",
+  "version": "1.0.0",
+  "description": "Premium, secure, multi-tenant event website builder platform for Indian Weddings, Muslim Weddings, and Birthday Celebrations",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "seed": "node server/database/seed.js",
+    "test": "node tests/firestore-rules.test.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

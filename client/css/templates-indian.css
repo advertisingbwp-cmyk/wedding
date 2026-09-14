@@ -1,0 +1,22 @@
+/* ===================================================
+   INDIAN WEDDING THEME - LUXURY PASTEL & ROYAL GOLD
+   =================================================== */
+
+.theme-indian {
+  --theme-primary: #D4AF37;
+  --theme-secondary: #F78DA7;
+  --theme-bg-gradient: radial-gradient(at 0% 0%, rgba(255, 232, 238, 0.7) 0px, transparent 50%),
+                       radial-gradient(at 100% 0%, rgba(240, 230, 255, 0.6) 0px, transparent 50%),
+                       radial-gradient(at 50% 100%, rgba(255, 245, 247, 0.8) 0px, transparent 50%);
+  --theme-card-border: rgba(212, 175, 55, 0.3);
+}
+
+.theme-indian .event-hero {
+  background: linear-gradient(180deg, #FFF0F5 0%, #FFF5EB 60%, #F5EDFF 100%);
+}
+
+.theme-indian .motif-divider::before,
+.theme-indian .motif-divider::after {
+  content: '🌸';
+  margin: 0 10px;
+}
