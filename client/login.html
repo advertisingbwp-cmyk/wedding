@@ -185,10 +185,17 @@
   <script src="js/api.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+    import { 
+      getAuth, 
+      GoogleAuthProvider, 
+      signInWithPopup, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword, 
+      updateProfile 
+    } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
 
-    // Your web app's Firebase configuration
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBgFCtxtFswlCUdmkKraJWo6TbTGrKC7Ac",
       authDomain: "wedding-28db4.firebaseapp.com",
@@ -199,15 +206,51 @@
       measurementId: "G-DW6RSKTWKC"
     };
 
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    try {
-      getAnalytics(app);
-    } catch (e) {}
+    try { getAnalytics(app); } catch (e) {}
 
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
 
+    // Reusable post-authentication onboarding workflow
+    let isProcessingClone = false;
+    async function onAuthSuccess(fbUser, idToken) {
+      API.setToken(idToken);
+      API.showToast('Your account is ready. Verifying profile…');
+      
+      try {
+        await API.firebaseLogin(idToken);
+      } catch (err) {
+        console.warn('Profile sync notice:', err.message);
+      }
+
+      // Check if visitor selected a template before signing up
+      const pendingTemplate = sessionStorage.getItem('pendingTemplateType');
+      if (pendingTemplate && !isProcessingClone) {
+        isProcessingClone = true;
+        API.showToast('Your account is ready. Creating your template…');
+        try {
+          const res = await API.cloneTemplate(pendingTemplate);
+          sessionStorage.removeItem('pendingTemplateType');
+          API.showToast(res.message || 'Your template is ready to customize.');
+          setTimeout(() => {
+            window.location.href = `/editor?id=${res.eventId}`;
+          }, 400);
+          return;
+        } catch (cloneErr) {
+          console.error('Template cloning error:', cloneErr);
+          sessionStorage.removeItem('pendingTemplateType');
+          API.showToast('We could not create your event. Please try again.', 'fa-triangle-exclamation');
+        }
+      }
+
+      API.showToast(`Welcome, ${fbUser.displayName || fbUser.email}!`);
+      setTimeout(() => {
+        window.location.href = '/dashboard';
+      }, 400);
+    }
+
+    // Google Sign-In
     window.handleGoogleSignIn = async function() {
       const btn = document.getElementById('google-login-btn');
       const originalHtml = btn.innerHTML;
@@ -219,10 +262,7 @@
         const fbUser = result.user;
         const idToken = await fbUser.getIdToken();
 
-        // Exchange with backend session
-        await API.firebaseLogin(fbUser.email, fbUser.displayName, fbUser.uid, idToken);
-        API.showToast(`Welcome, ${fbUser.displayName || fbUser.email}!`);
-        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
+        await onAuthSuccess(fbUser, idToken);
       } catch (err) {
         console.error('Firebase Auth Error:', err);
         if (err.code !== 'auth/popup-closed-by-user') {
@@ -232,6 +272,61 @@
         btn.innerHTML = originalHtml;
       }
     };
+
+    // Email/Password Sign-In
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalHtml = submitBtn.innerHTML;
+      const email = document.getElementById('login-email').value;
+      const pass = document.getElementById('login-password').value;
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Signing In...';
+
+        const userCredential = await signInWithEmailAndPassword(auth, email, pass);
+        const fbUser = userCredential.user;
+        const idToken = await fbUser.getIdToken();
+
+        await onAuthSuccess(fbUser, idToken);
+      } catch (err) {
+        console.error('Sign-in error:', err);
+        alert(err.message || 'Invalid email or password. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }
+    });
+
+    // Email/Password Register
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalHtml = submitBtn.innerHTML;
+      const name = document.getElementById('reg-name').value;
+      const email = document.getElementById('reg-email').value;
+      const pass = document.getElementById('reg-password').value;
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...';
+
+        const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+        const fbUser = userCredential.user;
+
+        if (name) {
+          await updateProfile(fbUser, { displayName: name.trim() }).catch(() => {});
+        }
+
+        const idToken = await fbUser.getIdToken();
+        await onAuthSuccess(fbUser, idToken);
+      } catch (err) {
+        console.error('Registration error:', err);
+        alert(err.message || 'Could not create account. Please verify your details.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHtml;
+      }
+    });
   </script>
   <script>
     function switchTab(tab) {
@@ -253,39 +348,15 @@
       }
     }
 
-    // Check URL parameters for mode=signup
-    if (new URLSearchParams(window.location.search).get('mode') === 'signup') {
+    // Check URL parameters for mode=signup or template hints
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('mode') === 'signup') {
       switchTab('register');
     }
-
-    // Handle Login
-    document.getElementById('login-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const pass = document.getElementById('login-password').value;
-      try {
-        await API.login(email, pass);
-        API.showToast('Logged in successfully!');
-        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
-      } catch (err) {
-        alert(err.message);
-      }
-    });
-
-    // Handle Register
-    document.getElementById('register-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const name = document.getElementById('reg-name').value;
-      const email = document.getElementById('reg-email').value;
-      const pass = document.getElementById('reg-password').value;
-      try {
-        await API.register(email, pass, name);
-        API.showToast('Account created successfully!');
-        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
-      } catch (err) {
-        alert(err.message);
-      }
-    });
+    const templateParam = urlParams.get('template');
+    if (templateParam) {
+      sessionStorage.setItem('pendingTemplateType', templateParam);
+    }
   </script>
 </body>
 </html>

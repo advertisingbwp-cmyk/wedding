@@ -251,11 +251,11 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <button type="button" onclick="openPreviewModal('vijay-rashima-wedding', 'Vijay & Rashima Wedding', 'indian_wedding', 'Indian Wedding')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Interactive Preview">
-                <i class="fa-solid fa-eye"></i> Preview
+              <button type="button" onclick="openPreviewModal('vijay-rashima-wedding', 'Vijay & Rashima Wedding', 'indian_wedding', 'Indian Wedding')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Preview Template">
+                <i class="fa-solid fa-eye"></i> Preview Template
               </button>
-              <button onclick="launchTemplate('indian_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-                <i class="fa-solid fa-clone"></i> Clone Template
+              <button type="button" onclick="launchTemplate('indian_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
               </button>
             </div>
           </div>
@@ -273,11 +273,11 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <button type="button" onclick="openPreviewModal('zain-ayla-nikah', 'Zain & Ayla Nikah', 'muslim_wedding', 'Muslim Wedding')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Interactive Preview">
-                <i class="fa-solid fa-eye"></i> Preview
+              <button type="button" onclick="openPreviewModal('zain-ayla-nikah', 'Zain & Ayla Nikah', 'muslim_wedding', 'Muslim Wedding')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Preview Template">
+                <i class="fa-solid fa-eye"></i> Preview Template
               </button>
-              <button onclick="launchTemplate('muslim_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-                <i class="fa-solid fa-clone"></i> Clone Template
+              <button type="button" onclick="launchTemplate('muslim_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
               </button>
             </div>
           </div>
@@ -295,11 +295,11 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <button type="button" onclick="openPreviewModal('arias-sweet-16', 'Aria\'s Sweet 16 Bash', 'birthday', 'Birthday Celebration')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Interactive Preview">
-                <i class="fa-solid fa-eye"></i> Preview
+              <button type="button" onclick="openPreviewModal('arias-sweet-16', 'Aria\'s Sweet 16 Bash', 'birthday', 'Birthday Celebration')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Preview Template">
+                <i class="fa-solid fa-eye"></i> Preview Template
               </button>
-              <button onclick="launchTemplate('birthday', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-                <i class="fa-solid fa-clone"></i> Clone Template
+              <button type="button" onclick="launchTemplate('birthday', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
               </button>
             </div>
           </div>
@@ -865,17 +865,17 @@
       if (btn) {
         originalHtml = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cloning...';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Preparing...';
       }
       try {
-        API.showToast('Cloning authentic template into your account...', 'fa-wand-magic-sparkles');
+        API.showToast('Your account is ready. Creating your template…', 'fa-wand-magic-sparkles');
         const res = await API.cloneTemplate(type);
-        API.showToast('Template cloned successfully! Opening Live Studio...', 'fa-circle-check');
+        API.showToast(res.message || 'Your template is ready. Add your names, date, venue, photos, and functions.', 'fa-circle-check');
         setTimeout(() => {
           window.location.href = `/editor?id=${res.eventId}`;
         }, 500);
       } catch (err) {
-        alert('Failed to clone template: ' + err.message);
+        API.showToast(err.message || 'We could not create your event. Please try again.', 'fa-triangle-exclamation');
         if (btn) {
           btn.disabled = false;
           btn.innerHTML = originalHtml;

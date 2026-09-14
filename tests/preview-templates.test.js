@@ -1,3 +1,6 @@
+process.env.NODE_ENV = 'test';
+process.env.FIREBASE_ADMIN_MOCK = 'true';
+
 const http = require('http');
 const app = require('../server/app');
 

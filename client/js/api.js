@@ -89,13 +89,15 @@ const API = {
     return data;
   },
 
-  async firebaseLogin(email, full_name, uid, idToken) {
+  async firebaseLogin(idToken) {
+    if (idToken) {
+      this.setToken(idToken);
+    }
     const data = await this.request('/api/auth/firebase-login', {
       method: 'POST',
-      body: JSON.stringify({ email, full_name, uid, idToken })
+      body: JSON.stringify({ idToken })
     });
-    if (data.token) {
-      this.setToken(data.token);
+    if (data.user) {
       this.setUser(data.user);
     }
     return data;
@@ -108,6 +110,7 @@ const API = {
   logout() {
     this.clearToken();
     this.clearUser();
+    sessionStorage.removeItem('pendingTemplateType');
     this.request('/api/auth/logout', { method: 'POST' }).catch(() => {});
     window.location.href = '/login';
   },
@@ -125,20 +128,24 @@ const API = {
   },
 
   async createFromTemplate(templateType) {
-    return this.request('/api/events/from-template', {
-      method: 'POST',
-      body: JSON.stringify({ template_type: templateType })
-    });
+    return this.cloneTemplate(templateType);
   },
 
-  async cloneTemplate(templateTypeOrSlug) {
-    const payload = (typeof templateTypeOrSlug === 'string' && templateTypeOrSlug.includes('-'))
-      ? { template_slug: templateTypeOrSlug }
-      : { template_type: templateTypeOrSlug };
-    return this.request('/api/events/clone-template', {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
+  async cloneTemplate(templateId) {
+    try {
+      return await this.request(`/api/templates/${encodeURIComponent(templateId)}/clone`, {
+        method: 'POST'
+      });
+    } catch (e) {
+      // Fallback to events clone route
+      const payload = (typeof templateId === 'string' && templateId.includes('-'))
+        ? { template_slug: templateId }
+        : { template_type: templateId };
+      return this.request('/api/events/clone-template', {
+        method: 'POST',
+        body: JSON.stringify(payload)
+      });
+    }
   },
 
   // Member Management (RBAC)

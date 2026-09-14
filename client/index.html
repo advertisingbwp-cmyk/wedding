@@ -207,11 +207,11 @@
           </p>
         </div>
         <div style="display: flex; gap: 8px; margin-top: 14px;">
-          <button type="button" onclick="openPreviewModal('vijay-rashima-wedding', 'Vijay & Rashima Wedding', 'indian_wedding', 'Indian Wedding')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Interactive Preview">
-            <i class="fa-solid fa-eye"></i> Preview
+          <button type="button" onclick="openPreviewModal('vijay-rashima-wedding', 'Vijay & Rashima Wedding', 'indian_wedding', 'Indian Wedding')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Preview Template">
+            <i class="fa-solid fa-eye"></i> Preview Template
           </button>
-          <button onclick="tryTemplate('indian_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Try This Template
+          <button type="button" onclick="useTemplate('indian_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
           </button>
         </div>
       </div>
@@ -227,11 +227,11 @@
           </p>
         </div>
         <div style="display: flex; gap: 8px; margin-top: 14px;">
-          <button type="button" onclick="openPreviewModal('zain-ayla-nikah', 'Zain & Ayla Nikah', 'muslim_wedding', 'Muslim Wedding')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Interactive Preview">
-            <i class="fa-solid fa-eye"></i> Preview
+          <button type="button" onclick="openPreviewModal('zain-ayla-nikah', 'Zain & Ayla Nikah', 'muslim_wedding', 'Muslim Wedding')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Preview Template">
+            <i class="fa-solid fa-eye"></i> Preview Template
           </button>
-          <button onclick="tryTemplate('muslim_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Try This Template
+          <button type="button" onclick="useTemplate('muslim_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
           </button>
         </div>
       </div>
@@ -247,11 +247,11 @@
           </p>
         </div>
         <div style="display: flex; gap: 8px; margin-top: 14px;">
-          <button type="button" onclick="openPreviewModal('arias-sweet-16', 'Aria\'s Sweet 16 Bash', 'birthday', 'Birthday Celebration')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Interactive Preview">
-            <i class="fa-solid fa-eye"></i> Preview
+          <button type="button" onclick="openPreviewModal('arias-sweet-16', 'Aria\'s Sweet 16 Bash', 'birthday', 'Birthday Celebration')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Preview Template">
+            <i class="fa-solid fa-eye"></i> Preview Template
           </button>
-          <button onclick="tryTemplate('birthday')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Try This Template
+          <button type="button" onclick="useTemplate('birthday')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
           </button>
         </div>
       </div>
@@ -429,7 +429,7 @@
     function handlePreviewClone() {
       closePreviewModal();
       if (currentPreviewType) {
-        tryTemplate(currentPreviewType);
+        useTemplate(currentPreviewType);
       }
     }
 
@@ -440,23 +440,27 @@
       }
     });
 
-    async function tryTemplate(type) {
+    async function useTemplate(type) {
       const token = API.getToken();
       if (!token) {
-        window.location.href = `/login?mode=signup&template=${type}`;
+        sessionStorage.setItem('pendingTemplateType', type);
+        window.location.href = `/login?mode=signup&template=${encodeURIComponent(type)}`;
       } else {
         try {
-          API.showToast('Cloning template into your account...');
+          API.showToast('Your account is ready. Creating your template…');
           const res = await API.cloneTemplate(type);
-          API.showToast('Template cloned! Redirecting to studio...');
+          sessionStorage.removeItem('pendingTemplateType');
+          API.showToast(res.message || 'Your template is ready to customize.');
           setTimeout(() => {
             window.location.href = `/editor?id=${res.eventId}`;
-          }, 500);
+          }, 400);
         } catch (err) {
-          window.location.href = `/dashboard?tryTemplate=${type}`;
+          sessionStorage.setItem('pendingTemplateType', type);
+          window.location.href = `/login?mode=signup&template=${encodeURIComponent(type)}`;
         }
       }
     }
+    const tryTemplate = useTemplate;
   </script>
 </body>
 </html>

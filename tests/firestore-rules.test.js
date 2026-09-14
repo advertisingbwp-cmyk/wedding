@@ -105,6 +105,16 @@ class FirestoreRulesSimulator {
     // allow create: if false;
     return false;
   }
+
+  canReadTemplate(auth, templateData) {
+    // allow read: if resource.data.isPublic == true;
+    return Boolean(templateData && templateData.isPublic === true);
+  }
+
+  canWriteTemplate(auth) {
+    // allow write: if false;
+    return false;
+  }
 }
 
 function runSecurityTests() {
@@ -186,6 +196,17 @@ function runSecurityTests() {
   assert.strictEqual(sim.canDirectClientCreateRSVP(unauthenticated, 'event_public_1'), false, 'Direct client writes blocked on RSVPs');
   assert.strictEqual(sim.canDirectClientCreateGuestbook(unauthenticated, 'event_public_1'), false, 'Direct client writes blocked on Guestbook');
   console.log('  ✅ Passed: Private data, RSVPs, and direct write prohibitions verified.');
+
+  // Test 6: Public Read-Only Templates (/templates/{templateId})
+  console.log('\nTest 6: Public Read-Only Templates (/templates/{templateId})');
+  const publicTemplate = { id: 'indian_wedding', isPublic: true, isTemplate: true };
+  const privateTemplate = { id: 'draft_template', isPublic: false, isTemplate: true };
+
+  assert.strictEqual(sim.canReadTemplate(unauthenticated, publicTemplate), true, 'Public visitors CAN read public template');
+  assert.strictEqual(sim.canReadTemplate(unauthenticated, privateTemplate), false, 'Public visitors CANNOT read non-public template');
+  assert.strictEqual(sim.canWriteTemplate(userA), false, 'Direct client write forbidden on templates (Server-only)');
+  assert.strictEqual(sim.canWriteTemplate(unauthenticated), false, 'Unauthenticated write forbidden on templates');
+  console.log('  ✅ Passed: Templates are read-only for public if isPublic == true; client writes prohibited.');
 
   console.log('\n🎉 ALL FIRESTORE SECURITY RULES SIMULATION TESTS PASSED SUCCESSFULLY!\n');
 }

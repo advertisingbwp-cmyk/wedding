@@ -14,6 +14,7 @@ const guestbookRoutes = require('./routes/guestbook');
 const sharingRoutes = require('./routes/sharing');
 const apiKeysRoutes = require('./routes/apiKeys');
 const publicEventRoutes = require('./routes/publicEvent');
+const templateRoutes = require('./routes/templates');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // API Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/templates', templateRoutes);
 app.use('/api/events', eventRoutes);
 app.use('/api/events', rsvpRoutes);
 app.use('/api/events', guestbookRoutes);

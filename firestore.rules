@@ -45,22 +45,45 @@ service cloud.firestore {
       allow read, create, update, delete: if signedIn() && request.auth.uid == uid;
     }
 
+    // --- Public Read-Only Templates ---
+    // Stored separately in templates/{templateId}, not as normal user events
+    // Public visitors can read only templates where isPublic == true; direct client writes forbidden
+    match /templates/{templateId} {
+      allow read: if resource.data.isPublic == true;
+      allow write: if false;
+    }
+
     // --- Event Websites ---
     match /events/{eventId} {
-      // Owner creates their own event; cannot assign someone else as ownerId
-      allow create: if signedIn() && request.resource.data.ownerId == request.auth.uid;
+      // Owner creates their own event; cannot assign someone else as ownerId; isTemplate must be false
+      allow create: if signedIn() 
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.isTemplate == false;
 
       // Public visitors can only view published events (visibility == "public");
       // Private events are only viewable by owner or invited members (editors & viewers).
       allow read: if resource.data.visibility == "public" || canViewPrivate(eventId);
 
-      // Editors can update content, but CANNOT alter ownerId or toggle visibility. Only owners can toggle visibility or manage event settings.
+      // Editors can update content/design, but CANNOT alter ownerId or toggle visibility.
+      // Only owners can toggle visibility or delete.
       allow update: if canEdit(eventId) 
         && request.resource.data.ownerId == resource.data.ownerId
         && (isOwner(eventId) || request.resource.data.visibility == resource.data.visibility);
 
       // Only the primary owner can delete the event
       allow delete: if isOwner(eventId);
+
+      // --- Sections Subcollection ---
+      match /sections/{sectionId} {
+        allow read: if event(eventId).data.visibility == "public" || canViewPrivate(eventId);
+        allow create, update, delete: if canEdit(eventId);
+      }
+
+      // --- Functions Subcollection ---
+      match /functions/{functionId} {
+        allow read: if event(eventId).data.visibility == "public" || canViewPrivate(eventId);
+        allow create, update, delete: if canEdit(eventId);
+      }
 
       // --- Members Subcollection (Granular RBAC) ---
       // Only the primary owner can invite, promote, demote, or remove members
@@ -70,7 +93,7 @@ service cloud.firestore {
       }
 
       // --- RSVP Subcollection ---
-      // Submissions are strictly channeled through verified backend API / Cloud Functions (sanitized, rate-limited, anti-spam)
+      // Submissions are strictly channeled through verified backend API (sanitized, rate-limited, anti-spam)
       // Direct client writes are forbidden.
       // Editors and owners can read RSVP summaries; updates and deletes are owner-only.
       match /rsvps/{rsvpId} {
@@ -81,6 +104,7 @@ service cloud.firestore {
 
       // --- Private Settings & Sensitive Attendee Data Subcollection ---
       // Full phone numbers, dietary allergies, meal choices, vendor contracts: strictly owner-only.
+      // Denies all unauthenticated and public access.
       match /private/{docId} {
         allow read, write: if isOwner(eventId);
       }
@@ -88,7 +112,7 @@ service cloud.firestore {
       // --- Digital Guestbook Subcollection ---
       // Direct client writes are forbidden; guestbook messages are processed and moderated via backend API.
       match /guestbook/{messageId} {
-        allow read: if resource.data.visibility == "public" || canViewPrivate(eventId);
+        allow read: if event(eventId).data.visibility == "public" || canViewPrivate(eventId);
         allow update, delete: if canEdit(eventId);
         allow create: if false;
       }
