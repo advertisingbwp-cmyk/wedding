@@ -1,0 +1,613 @@
+/* ==========================================================================
+   RIWAAYAT VENUE — 18 GENUINELY DISTINCT TEMPLATE LAYOUT ARCHITECTURES
+   Each canonical template has a unique DOM layout structure, distinctive hero
+   arrangement, customized itinerary format, and template-specific signature section.
+   ========================================================================== */
+
+/* 1. ROYAL MANDAP (Heritage Palace Majestic) */
+.template-royal-mandap .regal-arch-hero {
+  background: radial-gradient(circle at center, #FFF8E7 0%, #F5E6CC 60%, #EBD5B3 100%);
+  border-bottom: 4px double #D4AF37;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.template-royal-mandap .arch-pillars-frame {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 3px solid #D4AF37;
+  padding: 48px;
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(184, 134, 11, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.template-royal-mandap .sanskrit-shloka-header {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  color: #8B0000;
+  text-align: center;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.template-royal-mandap .vedic-sacred-fire-wrap {
+  padding: 80px 24px;
+  background: #FFFBF0;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+}
+.template-royal-mandap .seven-vows-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+  margin: 32px auto 0;
+}
+.template-royal-mandap .sacred-vow-card {
+  background: #FFFFFF;
+  border: 1px solid #E8D8A6;
+  border-left: 5px solid #8B0000;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.template-royal-mandap .royal-courtyard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.template-royal-mandap .royal-decree-card {
+  background: #FFFFFF;
+  border: 2px solid #D4AF37;
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+}
+.template-royal-mandap .wax-seal-stamp {
+  width: 44px;
+  height: 44px;
+  background: #8B0000;
+  color: #FFD700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  position: absolute;
+  top: -16px;
+  right: 24px;
+  box-shadow: 0 4px 10px rgba(139, 0, 0, 0.4);
+}
+
+/* 2. MARIGOLD BLOOM (Festive Sunlight & Phoolon Ki Holi) */
+.template-marigold-bloom .marigold-sunshine-hero {
+  background: linear-gradient(135deg, #FFF9C4 0%, #FFF176 40%, #FFE082 100%);
+  padding: 70px 24px;
+  border-bottom: 6px solid #F57F17;
+}
+.template-marigold-bloom .garland-drape-bar {
+  display: flex;
+  justify-content: space-around;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  filter: drop-shadow(0 4px 6px rgba(245, 127, 23, 0.3));
+}
+.template-marigold-bloom .marigold-hero-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.template-marigold-bloom .marigold-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.template-marigold-bloom .petal-timeline-step {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  background: #FFFFFF;
+  border: 2px solid #FFD54F;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(255, 193, 7, 0.15);
+}
+.template-marigold-bloom .phoolon-holi-section {
+  background: #FFFDE7;
+  padding: 60px 24px;
+  text-align: center;
+}
+.template-marigold-bloom #holi-petal-canvas {
+  width: 100%;
+  max-width: 800px;
+  height: 200px;
+  background: #FFF9C4;
+  border-radius: 16px;
+  border: 2px dashed #F57F17;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+/* 3. MEHENDI GARDEN (Bohemian Botanical Glasshouse) */
+.template-mehendi-garden .glasshouse-botanical-hero {
+  background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 60%, #E8F5E9 100%);
+  padding: 80px 24px;
+  border-bottom: 3px solid #2E7D32;
+}
+.template-mehendi-garden .conservatory-split-box {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 36px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  padding: 40px;
+  border: 2px solid #A5D6A7;
+  box-shadow: 0 12px 32px rgba(46, 125, 50, 0.12);
+}
+.template-mehendi-garden .henna-lounge-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 24px;
+  padding: 16px 8px;
+  scroll-snap-type: x mandatory;
+}
+.template-mehendi-garden .henna-lounge-card {
+  min-width: 320px;
+  scroll-snap-align: start;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 2px solid #C8E6C9;
+  padding: 24px;
+}
+.template-mehendi-garden .henna-motifs-guide {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 30px auto 0;
+}
+.template-mehendi-garden .motif-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  border: 1px solid #C8E6C9;
+}
+
+/* 4. SANGEET AFTERGLOW (Midnight Glamour & Neon Stage) */
+.template-sangeet-afterglow {
+  background: #0B0A14 !important;
+  color: #EAE6FE !important;
+}
+.template-sangeet-afterglow .midnight-stage-hero {
+  background: radial-gradient(circle at top center, #261642 0%, #0D081E 60%, #06030F 100%);
+  padding: 90px 24px;
+  text-align: center;
+  border-bottom: 2px solid #8A2BE2;
+}
+.template-sangeet-afterglow .soundwave-bars {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px;
+  height: 40px;
+  margin: 24px auto;
+}
+.template-sangeet-afterglow .soundwave-bar {
+  width: 5px;
+  background: #FF007F;
+  border-radius: 3px;
+}
+.template-sangeet-afterglow .festival-lineup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.template-sangeet-afterglow .festival-stage-card {
+  background: #17122A;
+  border: 1px solid #4A3475;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* 5. PALACE ROMANCE (Lakeside Fort & Rajputana Courtyard) */
+.template-palace-romance .lakeside-panoramic-hero {
+  background: linear-gradient(180deg, #FDE8E9 0%, #F6D6D8 50%, #EBD5D8 100%);
+  padding: 80px 24px;
+  border-bottom: 3px solid #C48B9F;
+}
+.template-palace-romance .two-family-heraldry-wrap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  max-width: 900px;
+  margin: 40px auto;
+}
+.template-palace-romance .heritage-crest-box {
+  background: #FFFFFF;
+  border: 2px solid #D4AF37;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+/* 6. SOUTH HERITAGE (Traditional Temple Dravidian Heritage) */
+.template-south-heritage .temple-gopuram-hero {
+  background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 50%, #FFCC80 100%);
+  padding: 80px 24px;
+  border-bottom: 4px solid #E65100;
+}
+.template-south-heritage .gopuram-pinnacle-bar {
+  text-align: center;
+  color: #BF360C;
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+.template-south-heritage .elai-sappadu-wrap {
+  background: #2E7D32;
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 1000px;
+  margin: 40px auto;
+}
+.template-south-heritage .banana-leaf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+.template-south-heritage .leaf-dish-pill {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* 7. BLUSH VOWS (Modern Editorial Romance & Pastel Minimalism) */
+.template-blush-vows .vogue-editorial-hero {
+  background: #FFF5F7;
+  padding: 90px 24px 60px;
+  border-bottom: 1px solid #F8BBD0;
+}
+.template-blush-vows .magazine-masthead {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #4A154B;
+  border-bottom: 2px solid #4A154B;
+  padding-bottom: 16px;
+  margin-bottom: 36px;
+}
+.template-blush-vows .swiss-grid-itinerary {
+  max-width: 900px;
+  margin: 0 auto;
+  border-top: 1px solid #E0E0E0;
+}
+.template-blush-vows .swiss-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 140px;
+  padding: 24px 12px;
+  border-bottom: 1px solid #E0E0E0;
+  align-items: baseline;
+}
+
+/* 8. MINIMAL IVORY (Contemporary Architectural Serenity) */
+.template-minimal-ivory .architectural-minimal-hero {
+  background: #FAFAFA;
+  padding: 100px 24px;
+  border-bottom: 1px solid #212121;
+}
+.template-minimal-ivory .hairline-grid-box {
+  max-width: 1040px;
+  margin: 0 auto;
+  border: 1px solid #212121;
+  padding: 60px;
+  background: #FFFFFF;
+}
+.template-minimal-ivory .minimal-stepper-agenda {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.template-minimal-ivory .agenda-step-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid #EEEEEE;
+}
+.template-minimal-ivory .agenda-step-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #212121;
+}
+
+/* 9. NOOR NIKAH (Sacred Ivory & Arabesque Grace) */
+.template-noor-nikah .arabesque-arch-hero {
+  background: radial-gradient(circle at center, #F4FBF7 0%, #E8F5E9 60%, #D7EBDD 100%);
+  padding: 90px 24px;
+  border-bottom: 4px solid #004D40;
+}
+.template-noor-nikah .surah-ar-rum-section {
+  background: #F0F7F4;
+  border-left: 6px solid #004D40;
+  border-right: 6px solid #004D40;
+  padding: 36px;
+  max-width: 900px;
+  margin: 40px auto;
+  text-align: center;
+  border-radius: 12px;
+}
+.template-noor-nikah .islamic-dome-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.template-noor-nikah .dome-header-card {
+  background: #FFFFFF;
+  border-radius: 40px 40px 12px 12px;
+  border: 2px solid #A7D7C5;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+/* 10. EMERALD QASR (Moroccan Lanterns & Emerald Velvet) */
+.template-emerald-qasr {
+  background: #022B24 !important;
+  color: #E2F1ED !important;
+}
+.template-emerald-qasr .emerald-qasr-hero {
+  background: radial-gradient(circle at top, #0A4D40 0%, #022620 60%, #011814 100%);
+  padding: 90px 24px;
+  text-align: center;
+  border-bottom: 2px solid #D4AF37;
+}
+.template-emerald-qasr .hanging-lantern-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 2.2rem;
+  color: #FFD700;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.6));
+}
+.template-emerald-qasr .majlis-lounge-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.template-emerald-qasr .majlis-floor-card {
+  background: #04382F;
+  border: 1px solid #D4AF37;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* 11. IVORY DUA (Modest Elegance & Floral Quranic Blessing) */
+.template-ivory-dua .ivory-dua-hero {
+  background: #FBF9F5;
+  padding: 80px 24px;
+  border-bottom: 2px solid #D7C4A5;
+}
+.template-ivory-dua .olive-wreath-frame {
+  max-width: 960px;
+  margin: 0 auto;
+  border: 2px dashed #CBB594;
+  border-radius: 20px;
+  padding: 48px;
+  background: #FFFFFF;
+  text-align: center;
+}
+.template-ivory-dua .spiritual-prayer-timeline {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.template-ivory-dua .prayer-time-card {
+  background: #FFFFFF;
+  border: 1px solid #EAE0D0;
+  border-radius: 12px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 20px;
+}
+
+/* 12. ZAFRAAN EVENING (Amber Saffron & Mughal Courtyard) */
+.template-zafraan-evening .mughal-jharokha-hero {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 40%, #FFB74D 100%);
+  padding: 80px 24px;
+  border-bottom: 4px solid #E65100;
+}
+.template-zafraan-evening .jharokha-arch-box {
+  max-width: 1040px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px solid #D4AF37;
+  border-radius: 36px 36px 12px 12px;
+  padding: 44px;
+  box-shadow: 0 16px 36px rgba(230, 81, 0, 0.15);
+}
+.template-zafraan-evening .folk-songbook-wrap {
+  background: #FFF8E1;
+  border: 2px solid #FFCA28;
+  border-radius: 16px;
+  padding: 36px;
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+/* 13. RESHAM ROYALE (Regal Jamawar & Deep Crimson Silk) */
+.template-resham-royale {
+  background: #3B0910 !important;
+  color: #F8E8EB !important;
+}
+.template-resham-royale .resham-royale-hero {
+  background: radial-gradient(circle at top, #5C0E1A 0%, #3B0910 60%, #200408 100%);
+  padding: 90px 24px;
+  text-align: center;
+  border-bottom: 3px double #D4AF37;
+}
+.template-resham-royale .imperial-baraat-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.template-resham-royale .procession-stage-card {
+  background: #4E0C16;
+  border: 1px solid #D4AF37;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* 14. MIDNIGHT WALIMA (Black-Tie Sapphire & Modern Celestial) */
+.template-midnight-walima {
+  background: #081120 !important;
+  color: #E2EBF5 !important;
+}
+.template-midnight-walima .midnight-walima-hero {
+  background: radial-gradient(circle at center, #0F2342 0%, #081223 60%, #03070E 100%);
+  padding: 90px 24px;
+  text-align: center;
+  border-bottom: 2px solid #4169E1;
+}
+.template-midnight-walima .blacktie-banquet-schedule {
+  max-width: 900px;
+  margin: 0 auto;
+  border-left: 2px solid #4169E1;
+  padding-left: 28px;
+}
+.template-midnight-walima .course-timing-card {
+  background: #0F223D;
+  border: 1px solid #234370;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* 15. PASTEL PARTY (Sweet 16 & Golden Birthday Chic) */
+.template-pastel-party .pastel-party-hero {
+  background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 50%, #F48FB1 100%);
+  padding: 80px 24px;
+  border-bottom: 4px solid #E91E63;
+}
+.template-pastel-party .floating-balloons-header {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.template-pastel-party .sweet16-party-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.template-pastel-party .vip-party-card {
+  background: #FFFFFF;
+  border-radius: 24px;
+  border: 2px solid #F8BBD0;
+  padding: 24px;
+  box-shadow: 0 10px 24px rgba(233, 30, 99, 0.12);
+}
+
+/* 16. LITTLE STAR (Whimsical 1st Birthday & Celestial Keepsake) */
+.template-little-star .little-star-hero {
+  background: linear-gradient(180deg, #FFFDF0 0%, #FFF8E1 50%, #FFECB3 100%);
+  padding: 80px 24px;
+  border-bottom: 4px dashed #FFA000;
+}
+.template-little-star .twelve-months-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  max-width: 1100px;
+  margin: 30px auto 0;
+}
+.template-little-star .month-milestone-card {
+  background: #FFFFFF;
+  border: 2px solid #FFE082;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 160, 0, 0.1);
+}
+
+/* 17. ELEGANT SOIRÉE (Silver 25th / Golden 50th Jubilee Gala) */
+.template-elegant-soiree .art-deco-soiree-hero {
+  background: linear-gradient(135deg, #1C1917 0%, #292524 50%, #44403C 100%);
+  color: #FEF3C7;
+  padding: 90px 24px;
+  border-bottom: 3px solid #D4AF37;
+  text-align: center;
+}
+.template-elegant-soiree .decade-retrospective-timeline {
+  max-width: 920px;
+  margin: 0 auto;
+  border-left: 3px solid #D4AF37;
+  padding-left: 30px;
+}
+.template-elegant-soiree .retrospective-decade-card {
+  background: #FFFFFF;
+  border: 1px solid #E7E5E4;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+}
+
+/* 18. NEON CELEBRATION (Cyberpunk Neon & Glow Dance Bash) */
+.template-neon-celebration {
+  background: #05050A !important;
+  color: #00FFFF !important;
+}
+.template-neon-celebration .cyberpunk-neon-hero {
+  background: radial-gradient(circle at center, #0E0720 0%, #070312 60%, #020108 100%);
+  padding: 90px 24px;
+  text-align: center;
+  border-bottom: 3px solid #00FFFF;
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.4);
+}
+.template-neon-celebration .neon-stage-timetable {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+.template-neon-celebration .neon-set-card {
+  background: #0B061A;
+  border: 2px solid #FF007F;
+  border-radius: 16px;
+  padding: 24px;
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(255, 0, 127, 0.3);
+}

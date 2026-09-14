@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/app.js",
     "seed": "node server/database/seed.js",
-    "test": "node tests/firestore-rules.test.js && node tests/security-rbac.test.js && node tests/preview-templates.test.js && node tests/firebase-auth-cloning.test.js && node tests/image-validation.test.js"
+    "test": "node tests/firestore-rules.test.js && node tests/security-rbac.test.js && node tests/preview-templates.test.js && node tests/firebase-auth-cloning.test.js && node tests/image-validation.test.js && node tests/template-layouts.test.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

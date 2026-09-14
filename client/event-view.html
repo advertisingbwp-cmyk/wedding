@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="/css/templates-indian.css">
   <link rel="stylesheet" href="/css/templates-muslim.css">
   <link rel="stylesheet" href="/css/templates-bday.css">
+  <link rel="stylesheet" href="/css/templates-layouts.css">
 
   <style>
     /* Full Event Experience Styling */
@@ -306,6 +307,7 @@
     </div>
   </div>
 
+  <script src="/js/template-renderers.js"></script>
   <script src="/js/api.js"></script>
   <script>
     const pathParts = window.location.pathname.split('/');
@@ -334,14 +336,11 @@
         sectionsList = res.sections || [];
         functionsList = res.functions || [];
 
-        // Apply theme class to body
-        if (eventData.event_type === 'muslim_wedding') {
-          document.body.className = 'theme-muslim';
-        } else if (eventData.event_type === 'birthday') {
-          document.body.className = 'theme-birthday';
-        } else {
-          document.body.className = 'theme-indian';
-        }
+        // Apply theme and template classes to body
+        const tplKey = (window.TemplateRenderers && window.TemplateRenderers.resolveTemplateKey)
+          ? window.TemplateRenderers.resolveTemplateKey(eventData)
+          : 'royal_mandap';
+        document.body.className = `theme-${eventData.event_type || 'indian'} template-${tplKey.replace(/_/g, '-')}`;
 
         // Set Page Title
         document.getElementById('page-title').textContent = `${eventData.primary_names} — ${eventData.title}`;
@@ -390,6 +389,12 @@
       const container = document.getElementById('dynamic-sections');
       container.innerHTML = '';
 
+      const tplKey = (window.TemplateRenderers && window.TemplateRenderers.resolveTemplateKey)
+        ? window.TemplateRenderers.resolveTemplateKey(eventData)
+        : 'royal_mandap';
+      const customRenderer = (window.TemplateRenderers && window.TemplateRenderers.TEMPLATE_RENDERERS && window.TemplateRenderers.TEMPLATE_RENDERERS[tplKey]) || null;
+      let signatureRendered = false;
+
       // Render Each Enabled Section
       sectionsList.forEach((sec) => {
         let contentObj = {};
@@ -398,13 +403,25 @@
         } catch {}
 
         if (sec.section_key === 'hero') {
-          container.innerHTML += renderHeroSection(contentObj);
+          if (customRenderer && customRenderer.renderHero) {
+            container.innerHTML += customRenderer.renderHero(contentObj, eventData);
+          } else {
+            container.innerHTML += renderHeroSection(contentObj);
+          }
         } else if (sec.section_key === 'reveal') {
           container.innerHTML += renderRevealSection(contentObj);
         } else if (sec.section_key === 'story') {
           container.innerHTML += renderStorySection(contentObj);
         } else if (sec.section_key === 'events') {
-          container.innerHTML += renderFunctionsSection();
+          if (customRenderer && customRenderer.renderFunctions) {
+            container.innerHTML += customRenderer.renderFunctions(functionsList, eventData);
+          } else {
+            container.innerHTML += renderFunctionsSection();
+          }
+          if (customRenderer && customRenderer.renderSignatureSection && !signatureRendered) {
+            container.innerHTML += customRenderer.renderSignatureSection(eventData);
+            signatureRendered = true;
+          }
         } else if (sec.section_key === 'gallery') {
           container.innerHTML += renderGallerySection(contentObj);
         } else if (sec.section_key === 'venue') {
@@ -427,6 +444,11 @@
           container.innerHTML += renderThankYouSection();
         }
       });
+
+      // Fallback signature section if not inserted after events
+      if (customRenderer && customRenderer.renderSignatureSection && !signatureRendered) {
+        container.innerHTML += customRenderer.renderSignatureSection(eventData);
+      }
 
       initCountdownTimer();
       initScratchCanvas();
