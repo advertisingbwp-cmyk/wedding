@@ -215,7 +215,7 @@
         return `
           <div class="template-card reveal-on-scroll is-revealed">
             <div class="template-card-image-wrap">
-              <img src="${t.hero_image_url || 'assets/images/hero_couple_real.jpg'}" alt="${t.title}" loading="lazy">
+              <img src="${t.thumbnail_url || t.hero_image_url || '/assets/templates/royal-mandap/thumbnail.webp'}" alt="${t.title}" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
               <span class="template-card-badge ${badgeClass}">${badgeLabel}</span>
             </div>
             <div class="template-card-body">

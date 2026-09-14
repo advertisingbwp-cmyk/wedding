@@ -694,9 +694,22 @@ a {
 .template-card-image-wrap {
   position: relative;
   width: 100%;
-  padding-top: 62.5%; /* 16:10 aspect */
+  aspect-ratio: 3 / 4;
+  padding-top: 133.33%; /* 3:4 portrait card ratio */
   overflow: hidden;
-  background: #F5EBE1;
+  background: linear-gradient(135deg, #F5EBE1 0%, #EAE0D5 100%);
+}
+
+.template-card-image-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(24, 17, 22, 0.7) 0%, rgba(24, 17, 22, 0.15) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .template-card-image-wrap img {
@@ -707,6 +720,31 @@ a {
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.template-card-image-wrap.fallback-active {
+  background: linear-gradient(135deg, #2D0F1E 0%, #4A1935 50%, #D4AF37 100%) !important;
+}
+
+.template-card-image-wrap.fallback-active img {
+  display: none !important;
+}
+
+.template-card-image-wrap.fallback-active::before {
+  content: 'Riwaayat Venue';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-gold);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .template-card:hover .template-card-image-wrap img {
@@ -726,6 +764,7 @@ a {
   letter-spacing: 0.5px;
   padding: 4px 10px;
   border-radius: var(--radius-full);
+  z-index: 3;
 }
 
 .template-card-badge.badge-indian {

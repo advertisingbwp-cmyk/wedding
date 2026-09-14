@@ -875,22 +875,27 @@ const FirestoreStore = {
       templates = templates.filter(t => (t.styleTags || []).some(s => s.toLowerCase() === normalizedStyle || s.toLowerCase().includes(normalizedStyle)));
     }
 
-    return templates.map(t => ({
-      id: t.id,
-      slug: t.slug,
-      templateId: t.templateId,
-      eventType: t.eventType,
-      title: t.title,
-      headline: t.headline,
-      primary_names: t.primary_names,
-      event_date: t.event_date,
-      venue_name: t.venue_name,
-      hero_image_url: t.hero_image_url,
-      styleTags: t.styleTags || [],
-      description: t.description,
-      isPublic: true,
-      isTemplate: true
-    }));
+    return templates.map(t => {
+      const slugHyphen = (t.templateId || t.id).replace(/_/g, '-');
+      return {
+        id: t.id,
+        slug: t.slug,
+        templateId: t.templateId,
+        eventType: t.eventType,
+        title: t.title,
+        headline: t.headline,
+        primary_names: t.primary_names,
+        event_date: t.event_date,
+        venue_name: t.venue_name,
+        thumbnail_url: `/assets/templates/${slugHyphen}/thumbnail.webp`,
+        hero_image_url: `/assets/templates/${slugHyphen}/hero.webp`,
+        gallery_url: `/assets/templates/${slugHyphen}/gallery-01.webp`,
+        styleTags: t.styleTags || [],
+        description: t.description,
+        isPublic: true,
+        isTemplate: true
+      };
+    });
   },
 
   // Seed / ensure templates exist in Firestore templates/{templateId}

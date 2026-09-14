@@ -248,108 +248,451 @@
     </div>
   </header>
 
-  <!-- Featured 3 Event Categories Showcase -->
-  <section style="padding: 80px 24px; max-width: 1240px; margin: 0 auto;">
-    <div style="text-align: center; margin-bottom: 48px;">
-      <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Tailored Experiences</span>
-      <h2 style="font-family: var(--font-display); font-size: 2.5rem; color: var(--color-plum); margin-top: 6px;">Three Bespoke Celebration Traditions</h2>
-      <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 650px; margin: 10px auto 0;">
-        Every culture and milestone has a distinct rhythm. Riwaayat Venue provides custom ceremony itineraries, authentic color palettes, and cultural ceremony cards.
+  <!-- 18 Canonical Curated Templates Showcase -->
+  <section id="templates" style="padding: 80px 24px; max-width: 1280px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 36px;">
+      <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Bespoke Aesthetics</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.5rem; color: var(--color-plum); margin-top: 6px;">18 Canonical Luxury Templates</h2>
+      <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 700px; margin: 10px auto 0;">
+        Explore our complete catalog of authentic celebration websites with culturally tailored itineraries, photorealistic imagery, and digital date reveals.
       </p>
     </div>
 
-    <div class="grid-3col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
-      <!-- 1. Indian Wedding -->
-      <div class="category-card">
-        <div style="position: relative; height: 260px; overflow: hidden;">
-          <img src="assets/images/hero_couple_real.jpg" alt="Indian Wedding Couple" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
-          <span style="position: absolute; top: 16px; left: 16px; background: rgba(45,15,30,0.85); color: var(--color-ivory); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px;">8 Curated Themes</span>
+    <!-- Live Filter Pills Bar -->
+    <div class="filter-pills-bar" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px;">
+      <button class="filter-pill-btn active" onclick="filterHomeTemplates('all', this)">All Designs (18)</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('indian_wedding', this)"><i class="fa-solid fa-om"></i> Indian Wedding (8)</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('muslim_wedding', this)"><i class="fa-solid fa-moon"></i> Muslim Wedding (6)</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('birthday', this)"><i class="fa-solid fa-cake-candles"></i> Birthday (4)</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('Royal', this)">Royal</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('Floral', this)">Floral</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('Minimal', this)">Minimal</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('Dark Luxury', this)">Dark Luxury</button>
+      <button class="filter-pill-btn" onclick="filterHomeTemplates('Pastel', this)">Pastel</button>
+    </div>
+
+    <!-- 18 Template Cards Grid -->
+    <div id="home-templates-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 28px;">
+      
+      <!-- 1. Royal Mandap -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Royal,Traditional,Luxury">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/royal-mandap/thumbnail.webp" alt="Royal Mandap: photorealistic Indian bride and groom in an opulent palace mandap with red lehenga, ivory sherwani, and gold chandelier lighting" loading="eager" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
         </div>
-        <div style="padding: 24px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
-          <div>
-            <h3 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--color-plum); margin-bottom: 8px;">Indian Weddings</h3>
-            <p style="font-size: 0.92rem; color: #62564F; line-height: 1.6; margin-bottom: 16px;">
-              Pre-configured for Haldi, Mehendi, Sangeet, Sacred Mandap, and Reception. Includes marigold accents, gold borders, and separate ceremony RSVPs.
-            </p>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Royal Mandap</span>
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Palace Romance</span>
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Marigold Bloom</span>
-            </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Royal Mandap</h3>
+          <p class="template-card-desc">Grand royal palace setting with sacred Vedic rituals, regal vermillion and antique gold accents, and opulent courtyard ceremonies.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Royal</span><span class="template-tag-pill">Traditional</span><span class="template-tag-pill">Luxury</span>
           </div>
-          <div style="display: flex; gap: 8px;">
-            <button type="button" onclick="openPreviewModal('palace-romance', 'Palace Romance — Indian Wedding', 'palace_romance', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('aditya-radhika-mandap', 'Royal Mandap — Indian Wedding', 'royal_mandap', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('royal_mandap')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Marigold Bloom -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Floral,Pastel,Traditional">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/marigold-bloom/thumbnail.webp" alt="Marigold Bloom: joyful Haldi ceremony with bride and groom in sunshine yellow silk outfits showered with marigold petals" loading="eager" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Marigold Bloom</h3>
+          <p class="template-card-desc">Sun-drenched open courtyard Haldi with fresh marigold floral arches, brass urli bowls, and vibrant daytime celebration.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Floral</span><span class="template-tag-pill">Pastel</span><span class="template-tag-pill">Traditional</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('kabir-tanya-haldi', 'Marigold Bloom — Haldi & Shaadi', 'marigold_bloom', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('marigold_bloom')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Mehendi Garden -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Floral,Modern,Colorful">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/mehendi-garden/thumbnail.webp" alt="Mehendi Garden: elegant bride displaying intricate henna patterns on her hands amidst an emerald green garden canopy lounge" loading="eager" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Mehendi Garden</h3>
+          <p class="template-card-desc">Lush botanical bohemian garden canopy with artisan henna artists, floral swings, and daytime live folk music.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Floral</span><span class="template-tag-pill">Modern</span><span class="template-tag-pill">Colorful</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('sid-ananya-mehendi', 'Mehendi Garden — Indian Wedding', 'mehendi_garden', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('mehendi_garden')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Sangeet Afterglow -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Dark Luxury,Modern,Royal">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/sangeet-afterglow/thumbnail.webp" alt="Sangeet Afterglow: glamorous Indian Sangeet dance floor with bride in shimmering gold lehenga and groom in royal navy bandhgala" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Sangeet Afterglow</h3>
+          <p class="template-card-desc">High-energy Bollywood dance night with gold foil stage bokeh, midnight navy accents, and non-stop music performances.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Dark Luxury</span><span class="template-tag-pill">Modern</span><span class="template-tag-pill">Royal</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('rohan-meera-sangeet', 'Sangeet Afterglow — Dance Celebration', 'sangeet_afterglow', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('sangeet_afterglow')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. Palace Romance -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Royal,Luxury,Romantic">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/palace-romance/thumbnail.webp" alt="Palace Romance: romantic South Asian couple walking hand in hand through a heritage palace arched corridor at golden hour sunset" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Palace Romance</h3>
+          <p class="template-card-desc">Regal Rajputana heritage palace by the lake with pastel peach lehenga, golden hour candlelight, and lakeside banquet.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Royal</span><span class="template-tag-pill">Luxury</span><span class="template-tag-pill">Romantic</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('vijay-rashima-wedding', 'Palace Romance — Heritage Wedding', 'palace_romance', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
               <i class="fa-regular fa-eye"></i> Preview
             </button>
             <button type="button" onclick="useTemplate('palace_romance')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Theme
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
             </button>
           </div>
         </div>
       </div>
 
-      <!-- 2. Muslim Wedding -->
-      <div class="category-card">
-        <div style="position: relative; height: 260px; overflow: hidden;">
-          <img src="assets/images/hero_muslim_real.jpg" alt="Muslim Wedding Couple" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
-          <span style="position: absolute; top: 16px; left: 16px; background: rgba(14,64,48,0.85); color: var(--color-ivory); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px;">6 Curated Themes</span>
+      <!-- 6. South Heritage -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Traditional,Cultural,Royal">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/south-heritage/thumbnail.webp" alt="South Heritage: traditional South Indian wedding ceremony with bride in Kanjeevaram silk saree and groom in sacred temple mandap" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
         </div>
-        <div style="padding: 24px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
-          <div>
-            <h3 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--color-plum); margin-bottom: 8px;">Muslim Weddings</h3>
-            <p style="font-size: 0.92rem; color: #62564F; line-height: 1.6; margin-bottom: 16px;">
-              Designed for Dholki, Mehendi, Sacred Nikah, Dua, and Grand Walima. Features Islamic geometric motifs, emerald velvet, and Quranic blessing quotes.
-            </p>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Noor Nikah</span>
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Emerald Qasr</span>
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Midnight Walima</span>
-            </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">South Heritage</h3>
+          <p class="template-card-desc">Sacred temple wedding with woven Kanjeevaram silks, brass oil lamps, fresh jasmine garlands, and auspicious Nadaswaram hymns.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Traditional</span><span class="template-tag-pill">Cultural</span><span class="template-tag-pill">Royal</span>
           </div>
-          <div style="display: flex; gap: 8px;">
-            <button type="button" onclick="openPreviewModal('noor-nikah', 'Noor Nikah — Muslim Wedding', 'noor_nikah', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('karthik-deepika-kalyanam', 'South Heritage Kalyanam', 'south_heritage', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('south_heritage')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Blush Vows -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Pastel,Floral,Romantic">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/blush-vows/thumbnail.webp" alt="Blush Vows: romantic couple standing under an English rose floral arch in a daylight garden ceremony" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Blush Vows</h3>
+          <p class="template-card-desc">Romantic open-air English rose arches, soft champagne silk draping, champagne flutes, and sunset garden vows.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Pastel</span><span class="template-tag-pill">Floral</span><span class="template-tag-pill">Romantic</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('samir-natasha-vows', 'Blush Vows — Luxury Garden Wedding', 'blush_vows', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('blush_vows')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8. Minimal Ivory -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="indian_wedding" data-tags="Minimal,Modern,Luxury">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/minimal-ivory/thumbnail.webp" alt="Minimal Ivory: refined contemporary wedding setting with ivory florals, marble architecture, and modern tailored elegance" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-indian">Indian Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Minimal Ivory</h3>
+          <p class="template-card-desc">Clean architectural luxury with white orchids, clean lines, warm taupe palettes, and curated contemporary typography.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Minimal</span><span class="template-tag-pill">Modern</span><span class="template-tag-pill">Luxury</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('arjun-rhea-minimal', 'Minimal Ivory — Contemporary Elegance', 'minimal_ivory', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('minimal_ivory')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 9. Noor Nikah -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="muslim_wedding" data-tags="Royal,Traditional,Sacred">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/noor-nikah/thumbnail.webp" alt="Noor Nikah: ivory floral Nikah ceremony with bride and groom signing marriage certificate amidst white roses" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-muslim">Muslim Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Noor Nikah</h3>
+          <p class="template-card-desc">Sacred ivory and champagne Nikah ceremony with Quranic blessings, jasmine archways, and family Dholki celebrations.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Royal</span><span class="template-tag-pill">Traditional</span><span class="template-tag-pill">Sacred</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('zain-ayla-nikah', 'Noor Nikah — Sacred Islamic Wedding', 'noor_nikah', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
               <i class="fa-regular fa-eye"></i> Preview
             </button>
             <button type="button" onclick="useTemplate('noor_nikah')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Theme
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
             </button>
           </div>
         </div>
       </div>
 
-      <!-- 3. Birthday Celebrations -->
-      <div class="category-card">
-        <div style="position: relative; height: 260px; overflow: hidden;">
-          <img src="assets/images/birthday_hero_real.jpg" alt="Birthday Celebration" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
-          <span style="position: absolute; top: 16px; left: 16px; background: rgba(30,41,59,0.85); color: var(--color-ivory); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px;">4 Curated Themes</span>
+      <!-- 10. Emerald Qasr -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="muslim_wedding" data-tags="Dark Luxury,Royal,Islamic">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/emerald-qasr/thumbnail.webp" alt="Emerald Qasr: opulent Muslim wedding reception with bride in emerald green velvet lehenga and groom in forest green bandhgala" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-muslim">Muslim Wedding</span>
         </div>
-        <div style="padding: 24px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
-          <div>
-            <h3 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--color-plum); margin-bottom: 8px;">Milestone Birthdays</h3>
-            <p style="font-size: 0.92rem; color: #62564F; line-height: 1.6; margin-bottom: 16px;">
-              Designed for Sweet 16s, 18th, 21st, 30th, 50th, and 1st birthdays. Featuring red carpet schedule, cake cutting, DJ party, and wish guestbooks.
-            </p>
-            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Pastel Party</span>
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Little Star</span>
-              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Elegant Soirée</span>
-            </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Emerald Qasr</h3>
+          <p class="template-card-desc">Regal Moroccan palace setting with emerald velvet textures, Islamic geometric lattices, glowing brass lanterns, and evening banquet.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Dark Luxury</span><span class="template-tag-pill">Royal</span><span class="template-tag-pill">Islamic</span>
           </div>
-          <div style="display: flex; gap: 8px;">
-            <button type="button" onclick="openPreviewModal('pastel-party', 'Pastel Party — Milestone Birthday', 'pastel_party', 'Birthday')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('bilal-iman-qasr', 'Emerald Qasr — Royal Reception', 'emerald_qasr', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('emerald_qasr')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 11. Ivory Dua -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="muslim_wedding" data-tags="Minimal,Traditional,Spiritual">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/ivory-dua/thumbnail.webp" alt="Ivory Dua: serene Muslim couple in white and gold prayer posture during their sacred Nikah in a luminous courtyard" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-muslim">Muslim Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Ivory Dua</h3>
+          <p class="template-card-desc">Serene morning Nikah bathed in natural white light, pearl accents, modest bridal couture, and intimate family prayer.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Minimal</span><span class="template-tag-pill">Traditional</span><span class="template-tag-pill">Spiritual</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('hamza-maryam-dua', 'Ivory Dua — Serene Nikah', 'ivory_dua', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('ivory_dua')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12. Zafraan Evening -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="muslim_wedding" data-tags="Warm,Festive,Royal">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/zafraan-evening/thumbnail.webp" alt="Zafraan Evening: festive wedding evening with bride in saffron gold gharara and groom in black sherwani under fairy light arches" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-muslim">Muslim Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Zafraan Evening</h3>
+          <p class="template-card-desc">Warm saffron courtyard lit by hundreds of clay candles, live sitar melodies, and rich Awadhi banquet cuisine.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Warm</span><span class="template-tag-pill">Festive</span><span class="template-tag-pill">Royal</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('danish-hira-zafraan', 'Zafraan Evening — Festive Celebration', 'zafraan_evening', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('zafraan_evening')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 13. Resham Royale -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="muslim_wedding" data-tags="Royal,Luxury,Traditional">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/resham-royale/thumbnail.webp" alt="Resham Royale: regal Pakistani wedding reception couple in ruby red and maroon raw silk with intricate zardozi embroidery" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-muslim">Muslim Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Resham Royale</h3>
+          <p class="template-card-desc">Heavy maroon raw silk, authentic resham zardozi threadwork, ornate Mughal arches, and ancestral family celebration.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Royal</span><span class="template-tag-pill">Luxury</span><span class="template-tag-pill">Traditional</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('usman-sanah-resham', 'Resham Royale — Heritage Reception', 'resham_royale', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('resham_royale')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 14. Midnight Walima -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="muslim_wedding" data-tags="Dark Luxury,Modern,Black-Tie">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/midnight-walima/thumbnail.webp" alt="Midnight Walima: sophisticated navy and gold Walima reception ballroom with crystal chandeliers and candlelight ambiance" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-muslim">Muslim Wedding</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Midnight Walima</h3>
+          <p class="template-card-desc">Sophisticated black-tie grand Walima reception with midnight navy decor, floating crystal chandeliers, and gourmet banquet.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Dark Luxury</span><span class="template-tag-pill">Modern</span><span class="template-tag-pill">Black-Tie</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('farhan-aliza-walima', 'Midnight Walima — Black-Tie Reception', 'midnight_walima', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('midnight_walima')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 15. Pastel Party -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="birthday" data-tags="Pastel,Modern,Joyful">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/pastel-party/thumbnail.webp" alt="Pastel Party: lavender birthday cake and balloon arrangement with tiered dessert table and natural soft lighting" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-birthday">Birthday</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Pastel Party</h3>
+          <p class="template-card-desc">Whimsical Sweet 16 & 21st celebration with organic balloon arches, artisanal macaron tiers, and red carpet photo station.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Pastel</span><span class="template-tag-pill">Modern</span><span class="template-tag-pill">Joyful</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('arias-sweet-16', 'Pastel Party — Milestone Celebration', 'pastel_party', 'Birthday')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
               <i class="fa-regular fa-eye"></i> Preview
             </button>
             <button type="button" onclick="useTemplate('pastel_party')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Theme
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
             </button>
           </div>
         </div>
       </div>
+
+      <!-- 16. Little Star -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="birthday" data-tags="Whimsical,Pastel,Family">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/little-star/thumbnail.webp" alt="Little Star: tasteful children milestone birthday setup with golden stars, soft pastel decor, and warm joyful atmosphere" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-birthday">Birthday</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Little Star</h3>
+          <p class="template-card-desc">Tasteful milestone first birthday with celestial golden stars, warm vanilla tones, soft play area, and keepsake milestone story.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Whimsical</span><span class="template-tag-pill">Pastel</span><span class="template-tag-pill">Family</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('liam-first-birthday', 'Little Star — 1st Birthday Celebration', 'little_star', 'Birthday')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('little_star')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 17. Elegant Soirée -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="birthday" data-tags="Luxury,Minimal,Modern">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/elegant-soiree/thumbnail.webp" alt="Elegant Soirée: sophisticated adult birthday dinner celebration with champagne tones, glowing candles, and refined luxury decor" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-birthday">Birthday</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Elegant Soirée</h3>
+          <p class="template-card-desc">Refined 30th, 40th, or 50th golden jubilee dinner with fine champagne toasting, candlelit long tables, and live acoustic music.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Luxury</span><span class="template-tag-pill">Minimal</span><span class="template-tag-pill">Modern</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('maya-golden-jubilee', 'Elegant Soirée — Birthday Dinner', 'elegant_soiree', 'Birthday')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('elegant_soiree')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 18. Neon Celebration -->
+      <div class="template-card reveal-on-scroll is-revealed" data-type="birthday" data-tags="Dark Luxury,Modern">
+        <div class="template-card-image-wrap">
+          <img src="/assets/templates/neon-celebration/thumbnail.webp" alt="Neon Celebration: stylish modern birthday party with vibrant neon lighting, disco atmosphere, and celebratory lounge table" loading="lazy" onerror="this.parentElement.classList.add('fallback-active')">
+          <span class="template-card-badge badge-birthday">Birthday</span>
+        </div>
+        <div class="template-card-body">
+          <h3 class="template-card-title">Neon Celebration</h3>
+          <p class="template-card-desc">Electric nightlife birthday bash with cyberpunk neon art, UV lounge bar, arcade games, and DJ soundstage till midnight.</p>
+          <div class="template-tags-list">
+            <span class="template-tag-pill">Dark Luxury</span><span class="template-tag-pill">Modern</span>
+          </div>
+          <div class="template-card-actions">
+            <button type="button" onclick="openPreviewModal('reyansh-neon-glow-bash', 'Neon Celebration — 18th Glow Bash', 'neon_celebration', 'Birthday')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('neon_celebration')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Template
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div style="text-align: center; margin-top: 36px;">
-      <a href="/templates" class="btn-outline" style="padding: 12px 30px; font-weight: 600;">
-        Browse All 18 Canonical Templates <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+    <div style="text-align: center; margin-top: 48px;">
+      <a href="/templates" class="btn-outline" style="padding: 14px 34px; font-weight: 600; font-size: 1rem;">
+        Explore All Designs in Marketplace <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i>
       </a>
     </div>
   </section>
@@ -733,6 +1076,21 @@
   <script>
     let currentPreviewSlug = '';
     let currentPreviewType = '';
+
+    function filterHomeTemplates(filterKey, btnEl) {
+      document.querySelectorAll('#templates .filter-pill-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      const cards = document.querySelectorAll('#home-templates-grid .template-card');
+      cards.forEach(card => {
+        const type = card.getAttribute('data-type');
+        const tags = card.getAttribute('data-tags') || '';
+        if (filterKey === 'all' || type === filterKey || tags.toLowerCase().includes(filterKey.toLowerCase())) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
 
     function toggleFaq(el) {
       const item = el.parentElement;
