@@ -36,6 +36,29 @@
       top: 0;
       z-index: 1000;
     }
+    .floating-home-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      color: #2F200A;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      transition: all 0.25s ease;
+    }
+    .floating-home-btn:hover {
+      background: #FFFFFF;
+      color: #B8860B;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.25);
+    }
     .hero-full {
       min-height: 90vh;
       display: flex;
@@ -198,8 +221,21 @@
   <canvas id="particles-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1;"></canvas>
   <canvas id="confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999;"></canvas>
 
+  <!-- Floating Home Button -->
+  <div id="floating-home-btn-wrap" style="position: fixed; top: 18px; left: 18px; z-index: 1000;">
+    <a href="/" class="floating-home-btn" title="Back to Home">
+      <i class="fa-solid fa-house"></i> <span>Home</span>
+    </a>
+  </div>
+
   <div id="preview-mode-banner" class="preview-banner" style="display: none;">
-    <i class="fa-solid fa-eye"></i> You are viewing this website in <strong>Live Preview Mode</strong> (Owner Access).
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; padding: 0 12px;">
+      <span><i class="fa-solid fa-eye"></i> You are viewing this website in <strong>Live Preview Mode</strong> (Owner Access).</span>
+      <div style="display: flex; gap: 8px;">
+        <a href="/" class="btn-outline btn-sm" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); padding: 4px 12px; font-size: 0.8rem;"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/dashboard" class="btn-outline btn-sm" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.3); padding: 4px 12px; font-size: 0.8rem;"><i class="fa-solid fa-arrow-left"></i> Dashboard</a>
+      </div>
+    </div>
   </div>
 
   <!-- PASSCODE GATE SCREEN (FOR PRIVATE SHARE) -->
@@ -298,6 +334,11 @@
         // Show preview mode banner if owner is testing
         if (eventData.is_preview) {
           document.getElementById('preview-mode-banner').style.display = 'block';
+          const floatBtn = document.getElementById('floating-home-btn-wrap');
+          if (floatBtn) floatBtn.style.display = 'none';
+        } else {
+          const floatBtn = document.getElementById('floating-home-btn-wrap');
+          if (floatBtn) floatBtn.style.display = 'block';
         }
 
         document.getElementById('passcode-gate-screen').style.display = 'none';
