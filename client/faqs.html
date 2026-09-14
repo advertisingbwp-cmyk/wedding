@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions — Riwaayat Venue</title>
+  <meta name="description" content="Find answers to common questions about creating, personalizing, and hosting your event website on Riwaayat Venue.">
+  <link rel="canonical" href="https://riwaayatvenue.com/faqs">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/platform.css">
+  <style>
+    .faq-item {
+      background: #FFFFFF;
+      border: 1px solid #EAE2DB;
+      border-radius: var(--radius-sm);
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: all 0.25s ease;
+    }
+    .faq-question {
+      padding: 18px 22px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FFFFFF;
+    }
+    .faq-question:hover {
+      color: var(--primary-gold-dark);
+    }
+    .faq-answer {
+      padding: 0 22px 20px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      display: none;
+    }
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+    .faq-icon {
+      transition: transform 0.25s ease;
+      color: var(--primary-gold-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" style="position: sticky; top: 0; z-index: 1000; background: rgba(253, 251, 247, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid #EAE2DB;">
+    <div class="nav-container" style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" class="brand-logo" style="display: flex; flex-direction: column;">
+        <span style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; letter-spacing: 1.5px; color: var(--color-plum);">RIWAAYAT VENUE</span>
+        <span style="font-size: 0.68rem; letter-spacing: 1px; color: var(--primary-gold-dark); text-transform: uppercase;">Every Celebration, Beautifully Yours</span>
+      </a>
+
+      <div class="nav-links" style="display: flex; gap: 24px; align-items: center;">
+        <a href="/templates" style="color: var(--text-dark); font-weight: 500;">Templates</a>
+        <a href="/how-it-works" style="color: var(--text-dark); font-weight: 500;">How It Works</a>
+        <a href="/pricing" style="color: var(--text-dark); font-weight: 500;">Pricing</a>
+        <a href="/faqs" style="font-weight: 700; color: var(--primary-gold-dark);">FAQs</a>
+        <a href="/blog" style="color: var(--text-dark); font-weight: 500;">Blog</a>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="/login" class="btn-outline btn-sm">Sign In</a>
+        <a href="/login?mode=signup" class="btn-gold btn-sm">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header style="padding: 70px 24px 30px; text-align: center; background: linear-gradient(180deg, #FDFBF7 0%, #F5EBE1 100%);">
+    <div style="max-width: 760px; margin: 0 auto;" class="animate-fade-up">
+      <span style="font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Help & Clarifications</span>
+      <h1 style="font-family: var(--font-display); font-size: 2.8rem; color: var(--color-plum); margin: 12px 0 16px;">
+        Frequently Asked Questions
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.6;">
+        Everything you need to know about customizing templates, collecting RSVPs, privacy modes, and guest coordination.
+      </p>
+    </div>
+  </header>
+
+  <!-- FAQ List Container -->
+  <main style="max-width: 860px; margin: 0 auto; padding: 50px 24px 80px;">
+
+    <div class="faq-item active">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Can I preview a template before creating an account?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        Yes! All 18 templates are 100% accessible via our live public preview. You can interact with the layout, test the date reveal, view sample ceremony itineraries, and explore the design before signing up.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How does the "Use This Template" onboarding work?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        When you click "Use This Template", we remember your choice. If you aren't signed in, you can quickly sign in with Google or Email/Password. Immediately upon authentication, the system automatically clones the template into your account as a private Draft and opens the Live Studio editor. You never have to search for the template again.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Can I keep my celebration website completely private?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        Yes. Riwaayat Venue offers three distinct privacy modes: <strong>Draft</strong> (only you can see it), <strong>Private Share</strong> (requires a custom passcode or individual guest invite link to view), and <strong>Public</strong>. Search engines cannot index your website while in Draft or Private Share.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Are guest phone numbers and meal choices kept private?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        Yes, strictly. Guest RSVP records, phone numbers, and dietary preferences are stored in protected database subcollections and are visible only to the event owner in their secure dashboard. They are never exposed on the public website.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Can I add multiple ceremonies (Haldi, Mehendi, Sangeet, Nikah, Walima)?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        Yes. Every template comes pre-configured with culturally authentic ceremony defaults (such as Roka, Haldi, Mehendi, Sangeet, Baraat, Pheras, Vidaai, or Dholki, Nikah, Rukhsati, Walima). In the studio, you can add, delete, rename, reorder, and set specific dress codes and venues for every ceremony.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        What is the digital date reveal scratch card?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        It is an interactive HTML5 canvas feature that mimics a real metallic foil lottery scratch-off card. Guests use their finger on mobile or mouse on desktop to scratch off the golden surface and reveal your auspicious wedding or party date.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        How long does my event website stay active?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        Forever. We do not charge recurring monthly hosting subscriptions. Once published, your website stays online as a digital keepsake of your celebration for you and your family to revisit for years to come.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Can I switch templates later without losing my content?
+        <i class="fa-solid fa-chevron-down faq-icon"></i>
+      </div>
+      <div class="faq-answer">
+        Yes! In the Live Studio editor, you can switch between any of our 18 templates anytime. Your names, story milestones, ceremony details, and photos will automatically adapt to the newly chosen theme aesthetic.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer style="background: var(--color-plum); color: var(--color-ivory); padding: 40px 24px; text-align: center; font-size: 0.86rem;">
+    © 2026 Riwaayat Venue. All rights reserved.
+  </footer>
+
+  <script>
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      item.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

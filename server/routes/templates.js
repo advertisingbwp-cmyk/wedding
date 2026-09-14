@@ -8,10 +8,11 @@ const router = express.Router();
 const FirestoreStore = require('../services/firestoreStore');
 const { requireFirebaseAuth } = require('../middleware/requireFirebaseAuth');
 
-// 1. GET /api/templates - List public templates
+// 1. GET /api/templates - List public templates with optional type and style filters
 router.get('/', (req, res) => {
   try {
-    const templates = FirestoreStore.getAllTemplates();
+    const { type, style } = req.query;
+    const templates = FirestoreStore.getAllTemplates(type, style);
     res.json({ templates });
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve templates.' });

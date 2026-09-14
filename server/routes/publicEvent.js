@@ -6,6 +6,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../database/db');
+const FirestoreStore = require('../services/firestoreStore');
 const { optionalAuth } = require('../middleware/auth');
 const { verifyPassword } = require('../config/security');
 
@@ -237,6 +238,35 @@ router.get('/:slug', optionalAuth, (req, res) => {
     }
 
     if (!event) {
+      // Check FirestoreStore canonical templates
+      const canonicalTpl = FirestoreStore.getCanonicalTemplate(slug);
+      if (canonicalTpl) {
+        return res.json({
+          event: {
+            id: canonicalTpl.id,
+            slug: canonicalTpl.slug,
+            event_type: canonicalTpl.eventType,
+            eventType: canonicalTpl.eventType,
+            title: canonicalTpl.title,
+            headline: canonicalTpl.headline,
+            primary_names: canonicalTpl.primary_names,
+            event_date: canonicalTpl.event_date,
+            venue_name: canonicalTpl.venue_name,
+            venue_address: canonicalTpl.venue_address,
+            venue_map_url: canonicalTpl.venue_map_url,
+            visibility: 'public',
+            theme_id: canonicalTpl.theme_id,
+            hero_image_url: canonicalTpl.hero_image_url,
+            hashtag: canonicalTpl.hashtag,
+            is_preview: false,
+            isPublic: true,
+            isTemplate: true
+          },
+          sections: canonicalTpl.sections,
+          functions: canonicalTpl.functions
+        });
+      }
+
       // Infallible fallback for template showcases
       const staticTemplate = getStaticTemplate(slug);
       if (staticTemplate) {

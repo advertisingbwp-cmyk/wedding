@@ -3,279 +3,523 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Event Studio — Riwaayat Venue</title>
+  <title>Live Studio — Riwaayat Venue</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <link rel="stylesheet" href="css/platform.css">
   <style>
+    :root {
+      --sidebar-width: 440px;
+    }
+    body {
+      background: #F7F4F0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
     .studio-header {
-      height: 65px;
+      height: 64px;
       background: #FFFFFF;
       border-bottom: 1px solid #EAE2DB;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 20px;
+      flex-shrink: 0;
       z-index: 100;
     }
-    .studio-tab-bar {
+    .studio-workspace {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+    .studio-sidebar {
+      width: var(--sidebar-width);
+      background: #FFFFFF;
+      border-right: 1px solid #EAE2DB;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .studio-tabs {
       display: flex;
       border-bottom: 1px solid #EAE2DB;
-      background: #FDFBF8;
+      background: #FAF8F5;
+      overflow-x: auto;
     }
     .studio-tab-btn {
       flex: 1;
-      padding: 12px 10px;
-      text-align: center;
+      padding: 12px 8px;
       background: transparent;
       border: none;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      cursor: pointer;
       border-bottom: 2px solid transparent;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #6C5F56;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      white-space: nowrap;
       transition: all 0.2s;
     }
     .studio-tab-btn.active {
       color: var(--primary-gold-dark);
-      border-color: var(--primary-gold);
+      border-bottom-color: var(--primary-gold);
       background: #FFFFFF;
     }
-    .studio-tab-content {
+    .studio-tab-panel {
+      flex: 1;
+      overflow-y: auto;
       padding: 24px;
       display: none;
     }
-    .studio-tab-content.active {
+    .studio-tab-panel.active {
       display: block;
     }
-    .section-item-card {
-      background: #FDFBF9;
-      border: 1px solid #EAE2DB;
-      border-radius: var(--radius-sm);
-      padding: 14px;
-      margin-bottom: 12px;
+    .preview-viewport-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #ECE5DE;
+      overflow: hidden;
+    }
+    .preview-toolbar-top {
+      height: 48px;
+      background: #FFFFFF;
+      border-bottom: 1px solid #EAE2DB;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      padding: 0 16px;
     }
-    .function-edit-card {
+    .preview-frame-holder {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+    }
+    .preview-iframe {
+      height: 100%;
+      border: none;
       background: #FFFFFF;
-      border: 1.5px solid var(--border-light);
+      transition: all 0.3s ease;
       border-radius: var(--radius-sm);
-      padding: 18px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+    .preview-iframe.mode-desktop {
+      width: 100%;
+    }
+    .preview-iframe.mode-tablet {
+      width: 768px;
+    }
+    .preview-iframe.mode-mobile {
+      width: 375px;
+      border-radius: 36px;
+      box-shadow: 0 0 0 10px #181116, 0 16px 40px rgba(0,0,0,0.25);
+    }
+    .status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #6C5F56;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #F5EFEB;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2E7D32;
+    }
+    .status-dot.saving {
+      background: var(--primary-gold);
+      animation: pulse 1s infinite alternate;
+    }
+    .welcome-banner {
+      background: linear-gradient(135deg, #FAF1E4, #F5E5D3);
+      border-bottom: 1px solid #E4CDB5;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: var(--color-plum);
+    }
+    .ceremony-editor-card {
+      background: #FFFFFF;
+      border: 1px solid #EAE2DB;
+      border-radius: var(--radius-md);
+      padding: 16px;
       margin-bottom: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .section-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FDFBF8;
+      border: 1px solid #EAE2DB;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-bottom: 8px;
     }
   </style>
 </head>
-<body style="overflow: hidden;">
+<body>
 
-  <!-- Studio Top Navigation -->
+  <!-- Top Studio Navigation -->
   <header class="studio-header">
-    <div style="display: flex; align-items: center; gap: 12px;">
-      <a href="/" class="btn-outline btn-sm" title="Go to Website Home">
-        <i class="fa-solid fa-house"></i> Home
-      </a>
-      <a href="/dashboard" class="btn-outline btn-sm" title="Return to Dashboard">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="/dashboard" class="btn-outline btn-sm" title="Back to Dashboard">
         <i class="fa-solid fa-arrow-left"></i> Dashboard
       </a>
-      <span style="font-size: 1.15rem; font-family: var(--font-display); font-weight: 700;" id="studio-event-title">
-        Loading Studio...
-      </span>
-      <span id="studio-event-badge" class="badge-status badge-draft">Draft</span>
+      <div>
+        <div style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--color-plum); display: flex; align-items: center; gap: 8px;">
+          <span id="studio-event-title">Loading Event...</span>
+          <span id="studio-event-badge" class="badge-status badge-draft" style="font-size: 0.7rem; font-family: var(--font-body);">DRAFT</span>
+        </div>
+      </div>
     </div>
 
+    <!-- Auto-Save Status & Action Bar -->
     <div style="display: flex; align-items: center; gap: 12px;">
-      <button id="save-studio-btn" class="btn-gold btn-sm">
-        <i class="fa-solid fa-cloud-arrow-up"></i> Save Changes
+      <div id="save-status-pill" class="status-indicator">
+        <span class="status-dot" id="save-status-dot"></span>
+        <span id="save-status-text">Draft Saved</span>
+      </div>
+
+      <button type="button" id="manual-save-btn" class="btn-gold btn-sm" onclick="saveAllChanges()">
+        <i class="fa-solid fa-cloud-arrow-up"></i> Save Draft
       </button>
-      <a id="preview-new-tab-btn" href="#" target="_self" class="btn-outline btn-sm">
+
+      <button type="button" class="btn-outline btn-sm" onclick="openShareModal()">
+        <i class="fa-solid fa-share-nodes"></i> Share & Privacy
+      </button>
+
+      <a id="studio-view-live-btn" href="#" target="_self" class="btn-outline btn-sm">
         <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live Site
       </a>
     </div>
   </header>
 
-  <!-- Split Studio Workspace -->
-  <div class="editor-layout">
-    <!-- Left Sidebar Editor -->
-    <aside class="editor-sidebar">
-      <div class="studio-tab-bar">
-        <button class="studio-tab-btn active" onclick="switchStudioTab('tab-details')">
+  <!-- Welcome Onboarding Banner -->
+  <div id="onboarding-welcome-banner" class="welcome-banner" style="display: none;">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary-gold-dark); font-size: 1.1rem;"></i>
+      <span><strong>Your template is ready!</strong> Add your names, wedding/event date, ceremonies, and photorealistic gallery photos below.</span>
+    </div>
+    <button type="button" onclick="dismissWelcomeBanner()" style="background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--color-plum); padding: 4px 8px;">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+  </div>
+
+  <!-- Studio Workspace -->
+  <div class="studio-workspace">
+    <!-- Left Configuration Sidebar -->
+    <aside class="studio-sidebar">
+      <div class="studio-tabs">
+        <button class="studio-tab-btn active" onclick="switchStudioTab('tab-details', this)">
           <i class="fa-solid fa-sliders"></i> Details
         </button>
-        <button class="studio-tab-btn" onclick="switchStudioTab('tab-sections')">
+        <button class="studio-tab-btn" onclick="switchStudioTab('tab-ceremonies', this)">
+          <i class="fa-solid fa-calendar-days"></i> Ceremonies
+        </button>
+        <button class="studio-tab-btn" onclick="switchStudioTab('tab-sections', this)">
           <i class="fa-solid fa-layer-group"></i> Sections
         </button>
-        <button class="studio-tab-btn" onclick="switchStudioTab('tab-functions')">
-          <i class="fa-solid fa-calendar-days"></i> Functions
+        <button class="studio-tab-btn" onclick="switchStudioTab('tab-styling', this)">
+          <i class="fa-solid fa-palette"></i> Design
         </button>
-        <button class="studio-tab-btn" onclick="switchStudioTab('tab-privacy')">
+        <button class="studio-tab-btn" onclick="switchStudioTab('tab-privacy', this)">
           <i class="fa-solid fa-lock"></i> Privacy
         </button>
       </div>
 
-      <!-- TAB 1: BASIC DETAILS -->
-      <div class="studio-tab-content active" id="tab-details">
-        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">Core Event Information</h3>
+      <!-- TAB 1: DETAILS -->
+      <div class="studio-tab-panel active" id="tab-details">
+        <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-plum); margin-bottom: 16px;">Celebration Details</h4>
+        
         <div style="margin-bottom: 14px;">
           <label class="form-label" for="edit-names">Celebrant / Couple Names</label>
-          <input type="text" id="edit-names" class="form-input">
+          <input type="text" id="edit-names" class="form-input" placeholder="e.g. Vijay & Rashima or Aria Patel" oninput="markUnsaved()">
         </div>
+
         <div style="margin-bottom: 14px;">
           <label class="form-label" for="edit-title">Event Title</label>
-          <input type="text" id="edit-title" class="form-input">
+          <input type="text" id="edit-title" class="form-input" placeholder="e.g. The Royal Wedding of Vijay & Rashima" oninput="markUnsaved()">
         </div>
+
         <div style="margin-bottom: 14px;">
-          <label class="form-label" for="edit-headline">Romantic Headline / Tagline</label>
-          <input type="text" id="edit-headline" class="form-input">
+          <label class="form-label" for="edit-headline">Romantic Tagline / Invitation Heading</label>
+          <input type="text" id="edit-headline" class="form-input" placeholder="e.g. Two Souls, One Eternal Journey" oninput="markUnsaved()">
         </div>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
-          <div>
-            <label class="form-label" for="edit-date">Event Date</label>
-            <input type="date" id="edit-date" class="form-input">
-          </div>
-          <div>
-            <label class="form-label" for="edit-theme">Color Theme</label>
-            <select id="edit-theme" class="form-select">
-              <option value="luxury_pastel">Luxury Pastel & Gold</option>
-              <option value="emerald_ivory">Emerald, Ivory & Gold</option>
-              <option value="royal_navy">Royal Navy & Platinum</option>
-              <option value="princess_pink">Princess Pink & Sparkles</option>
-            </select>
-          </div>
-        </div>
+
         <div style="margin-bottom: 14px;">
-          <label class="form-label" for="edit-venue-name">Venue Name</label>
-          <input type="text" id="edit-venue-name" class="form-input">
+          <label class="form-label" for="edit-date">Event Date & Time</label>
+          <input type="date" id="edit-date" class="form-input" oninput="markUnsaved()">
         </div>
+
         <div style="margin-bottom: 14px;">
-          <label class="form-label" for="edit-venue-address">Venue Address</label>
-          <input type="text" id="edit-venue-address" class="form-input">
+          <label class="form-label" for="edit-venue-name">Primary Venue Name</label>
+          <input type="text" id="edit-venue-name" class="form-input" placeholder="e.g. The Oberoi Udaivilas" oninput="markUnsaved()">
         </div>
+
+        <div style="margin-bottom: 14px;">
+          <label class="form-label" for="edit-venue-address">Venue Address / City</label>
+          <input type="text" id="edit-venue-address" class="form-input" placeholder="e.g. Udaipur, Rajasthan, India" oninput="markUnsaved()">
+        </div>
+
         <div style="margin-bottom: 14px;">
           <label class="form-label" for="edit-hashtag">Official Hashtag</label>
-          <input type="text" id="edit-hashtag" class="form-input">
+          <input type="text" id="edit-hashtag" class="form-input" placeholder="#VijayWedsRashima" oninput="markUnsaved()">
         </div>
-        <div style="margin-bottom: 14px;">
-          <label class="form-label">Hero / Cover Image</label>
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <img id="edit-hero-preview" src="" style="width: 55px; height: 55px; border-radius: var(--radius-sm); object-fit: cover; border: 1px solid #CCC;">
-            <input type="file" id="edit-hero-file" accept="image/*" class="form-input" style="padding: 6px;">
+
+        <div style="margin-bottom: 18px;">
+          <label class="form-label">Hero Banner Photo</label>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <img id="edit-hero-preview" src="assets/images/hero_couple_real.jpg" style="width: 60px; height: 60px; border-radius: 8px; object-fit: cover; border: 1px solid #DDD;">
+            <input type="file" id="edit-hero-file" accept="image/*" class="form-input" style="padding: 6px; font-size: 0.85rem;">
           </div>
+        </div>
+
+        <div style="background: #FAF6F0; border: 1px solid #EAE0D5; border-radius: var(--radius-sm); padding: 14px; margin-bottom: 20px;">
+          <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: 600; color: var(--color-plum);">
+            <input type="checkbox" id="edit-scratch-card" onchange="markUnsaved()">
+            <span>Enable Interactive Scratch-to-Reveal Card</span>
+          </label>
+          <p style="font-size: 0.8rem; color: #73645A; margin: 6px 0 0 24px;">
+            Guests scratch a digital gold foil card on arrival to reveal your secret date or surprise destination!
+          </p>
         </div>
       </div>
 
-      <!-- TAB 2: SECTIONS MANAGER -->
-      <div class="studio-tab-content" id="tab-sections">
+      <!-- TAB 2: CEREMONIES / ITINERARY -->
+      <div class="studio-tab-panel" id="tab-ceremonies">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <div>
-            <h3 style="font-size: 1.1rem;">Website Sections</h3>
-            <small style="color: var(--text-muted);">Reorder, rename, or toggle visibility</small>
+            <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-plum); margin: 0;">Ceremonies & Itinerary</h4>
+            <small style="color: var(--text-muted);">Configure multi-day festivities & outfits</small>
           </div>
+          <button type="button" class="btn-gold btn-sm" onclick="addNewCeremony()">
+            <i class="fa-solid fa-plus"></i> Add
+          </button>
         </div>
+
+        <div id="ceremonies-list-container">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- TAB 3: SECTIONS -->
+      <div class="studio-tab-panel" id="tab-sections">
+        <div style="margin-bottom: 16px;">
+          <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-plum); margin: 0;">Website Sections</h4>
+          <small style="color: var(--text-muted);">Toggle section visibility and reorder</small>
+        </div>
+
         <div id="sections-list-container">
           <!-- Populated dynamically -->
         </div>
       </div>
 
-      <!-- TAB 3: FUNCTIONS / CEREMONIES -->
-      <div class="studio-tab-content" id="tab-functions">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-          <div>
-            <h3 style="font-size: 1.1rem;">Ceremonies & Activities</h3>
-            <small style="color: var(--text-muted);">Tailor each function's outfits & mood</small>
-          </div>
-          <button id="add-func-btn" class="btn-gold btn-sm">
-            <i class="fa-solid fa-plus"></i> Add Function
-          </button>
+      <!-- TAB 4: STYLING & TEMPLATE -->
+      <div class="studio-tab-panel" id="tab-styling">
+        <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-plum); margin-bottom: 16px;">Visual Styling</h4>
+
+        <div style="margin-bottom: 18px;">
+          <label class="form-label" for="edit-theme-id">Color & Palette Theme</label>
+          <select id="edit-theme-id" class="form-select" onchange="markUnsaved()">
+            <option value="royal_palace">Royal Palace (Antique Gold & Deep Plum)</option>
+            <option value="emerald_qasr">Emerald Qasr (Velvet Green & Gold)</option>
+            <option value="blush_romance">Blush Romance (Soft Pink & Rose Gold)</option>
+            <option value="marigold_celebration">Marigold Celebration (Vibrant Yellow & Ochre)</option>
+            <option value="midnight_navy">Midnight Royale (Deep Navy & Champagne)</option>
+            <option value="pastel_elegance">Pastel Elegance (Lavender & Ivory)</option>
+          </select>
         </div>
-        <div id="functions-list-container">
-          <!-- Populated dynamically -->
+
+        <div style="margin-bottom: 18px;">
+          <label class="form-label" for="edit-font-pair">Typography Pairing</label>
+          <select id="edit-font-pair" class="form-select" onchange="markUnsaved()">
+            <option value="cinzel_sans">Cinzel (Display Serif) + Plus Jakarta Sans</option>
+            <option value="playfair_sans">Playfair Display (Editorial) + Plus Jakarta Sans</option>
+            <option value="cormorant_mont">Cormorant Garamond + Montserrat</option>
+          </select>
+        </div>
+
+        <div style="border-top: 1px solid #EAE2DB; padding-top: 18px; margin-top: 18px;">
+          <h5 style="font-family: var(--font-display); font-size: 0.95rem; color: var(--color-plum); margin-bottom: 10px;">Switch Underlying Template</h5>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">
+            You can switch to any of our 18 canonical templates at any time without losing your names or dates.
+          </p>
+          <select id="template-switcher-select" class="form-select" style="margin-bottom: 12px;">
+            <optgroup label="Indian Wedding (8 Themes)">
+              <option value="royal_mandap">Royal Mandap</option>
+              <option value="palace_romance">Palace Romance</option>
+              <option value="marigold_bloom">Marigold Bloom</option>
+              <option value="mehendi_garden">Mehendi Garden</option>
+              <option value="sangeet_afterglow">Sangeet Afterglow</option>
+              <option value="south_heritage">South Heritage</option>
+              <option value="blush_vows">Blush Vows</option>
+              <option value="minimal_ivory">Minimal Ivory</option>
+            </optgroup>
+            <optgroup label="Muslim Wedding (6 Themes)">
+              <option value="noor_nikah">Noor Nikah</option>
+              <option value="emerald_qasr">Emerald Qasr</option>
+              <option value="ivory_dua">Ivory Dua</option>
+              <option value="zafraan_evening">Zafraan Evening</option>
+              <option value="resham_royale">Resham Royale</option>
+              <option value="midnight_walima">Midnight Walima</option>
+            </optgroup>
+            <optgroup label="Milestone Birthday (4 Themes)">
+              <option value="pastel_party">Pastel Party</option>
+              <option value="little_star">Little Star</option>
+              <option value="elegant_soiree">Elegant Soirée</option>
+              <option value="neon_celebration">Neon Celebration</option>
+            </optgroup>
+          </select>
+          <button type="button" class="btn-outline btn-sm" style="width: 100%;" onclick="applyTemplateSwitch()">
+            <i class="fa-solid fa-arrows-rotate"></i> Switch Template Layout
+          </button>
         </div>
       </div>
 
-      <!-- TAB 4: SHARING & PRIVACY -->
-      <div class="studio-tab-content" id="tab-privacy">
-        <h3 style="font-size: 1.1rem; margin-bottom: 16px;">Sharing & Privacy Settings</h3>
-        <div style="margin-bottom: 20px;">
-          <label class="form-label">Select Visibility</label>
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #DDD; border-radius: var(--radius-sm); cursor: pointer;">
-              <input type="radio" name="studio_visibility" value="draft">
-              <div>
-                <strong>Draft / Private</strong>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Visible strictly to you (the owner) while setting up.</div>
-              </div>
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #DDD; border-radius: var(--radius-sm); cursor: pointer;">
-              <input type="radio" name="studio_visibility" value="private_share">
-              <div>
-                <strong>Private Share (Recommended)</strong>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Gated with a secret passcode or individual invite links.</div>
-              </div>
-            </label>
-            <label style="display: flex; align-items: center; gap: 10px; padding: 10px; border: 1px solid #DDD; border-radius: var(--radius-sm); cursor: pointer;">
-              <input type="radio" name="studio_visibility" value="public">
-              <div>
-                <strong>Public</strong>
-                <div style="font-size: 0.8rem; color: var(--text-muted);">Anyone with the direct link can view and RSVP.</div>
-              </div>
-            </label>
-          </div>
+      <!-- TAB 5: PRIVACY & SHARING -->
+      <div class="studio-tab-panel" id="tab-privacy">
+        <h4 style="font-family: var(--font-display); font-size: 1.1rem; color: var(--color-plum); margin-bottom: 16px;">Sharing & Access Controls</h4>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+          <label style="display: flex; align-items: flex-start; gap: 12px; padding: 12px; border: 1.5px solid #EAE2DB; border-radius: var(--radius-sm); cursor: pointer;">
+            <input type="radio" name="studio_visibility" value="draft" style="margin-top: 4px;" onchange="markUnsaved()">
+            <div>
+              <strong style="color: var(--color-plum);">Draft Mode</strong>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">Only you (the host) can see this event. Hidden from visitors.</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: flex-start; gap: 12px; padding: 12px; border: 1.5px solid #EAE2DB; border-radius: var(--radius-sm); cursor: pointer;">
+            <input type="radio" name="studio_visibility" value="private_share" style="margin-top: 4px;" onchange="markUnsaved()">
+            <div>
+              <strong style="color: var(--color-plum);">Private Passcode (Recommended)</strong>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">Guests must enter your secret passcode to view ceremonies and submit RSVPs.</div>
+            </div>
+          </label>
+
+          <label style="display: flex; align-items: flex-start; gap: 12px; padding: 12px; border: 1.5px solid #EAE2DB; border-radius: var(--radius-sm); cursor: pointer;">
+            <input type="radio" name="studio_visibility" value="public" style="margin-top: 4px;" onchange="markUnsaved()">
+            <div>
+              <strong style="color: var(--color-plum);">Public Access</strong>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">Accessible to anyone with the direct event URL.</div>
+            </div>
+          </label>
         </div>
 
-        <div id="studio-passcode-box" style="margin-bottom: 20px; display: none;">
-          <label class="form-label" for="studio-passcode">Guest Passcode</label>
-          <input type="text" id="studio-passcode" class="form-input" placeholder="e.g. UDAIPUR2026">
-          <small style="color: var(--text-muted);">Guests visiting your link will be prompted for this code.</small>
+        <div id="passcode-container" style="margin-bottom: 24px; display: none;">
+          <label class="form-label" for="edit-passcode">Guest Access Passcode</label>
+          <input type="text" id="edit-passcode" class="form-input" placeholder="e.g. UDAIPUR2026" oninput="markUnsaved()">
+          <small style="color: var(--text-muted);">Share this passcode along with your website link.</small>
         </div>
 
-        <button id="save-privacy-btn" class="btn-gold btn-sm" style="width: 100%;">
-          <i class="fa-solid fa-lock"></i> Update Sharing Settings
-        </button>
+        <div style="border-top: 1px solid #EAE2DB; padding-top: 18px;">
+          <h5 style="font-family: var(--font-display); font-size: 0.95rem; color: var(--color-plum); margin-bottom: 8px;">RSVP Guest Spreadsheet</h5>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Export all attendee dietary choices, headcounts, and ceremony RSVPs.</p>
+          <a id="export-rsvps-btn" href="#" class="btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-file-excel"></i> Export RSVPs (.CSV)
+          </a>
+        </div>
       </div>
     </aside>
 
-    <!-- Right Live Responsive Preview Container -->
-    <section class="editor-preview-container">
-      <div class="editor-preview-toolbar">
-        <div style="font-size: 0.88rem; font-weight: 600; color: var(--text-dark);">
-          <i class="fa-solid fa-display"></i> Live Device Preview
+    <!-- Right Live Preview Screen -->
+    <main class="preview-viewport-stage">
+      <div class="preview-toolbar-top">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--color-plum);">
+            <i class="fa-solid fa-desktop" style="color: var(--primary-gold-dark);"></i> Live Interactive Canvas
+          </span>
         </div>
 
-        <div class="device-switcher">
-          <button class="device-btn active" onclick="setDevice('desktop')">
+        <!-- Responsive Switcher -->
+        <div class="preview-device-switcher">
+          <button type="button" class="preview-device-btn active" id="btn-dev-desktop" onclick="setStudioDevice('desktop')">
             <i class="fa-solid fa-desktop"></i> Desktop
           </button>
-          <button class="device-btn" onclick="setDevice('tablet')">
+          <button type="button" class="preview-device-btn" id="btn-dev-tablet" onclick="setStudioDevice('tablet')">
             <i class="fa-solid fa-tablet-screen-button"></i> Tablet
           </button>
-          <button class="device-btn" onclick="setDevice('mobile')">
+          <button type="button" class="preview-device-btn" id="btn-dev-mobile" onclick="setStudioDevice('mobile')">
             <i class="fa-solid fa-mobile-screen"></i> Mobile
           </button>
         </div>
 
-        <button class="btn-outline btn-sm" onclick="reloadPreview()" title="Refresh Preview Frame">
-          <i class="fa-solid fa-rotate-right"></i> Refresh
+        <div>
+          <button type="button" class="btn-outline btn-sm" onclick="reloadPreviewFrame()" title="Refresh Live Site">
+            <i class="fa-solid fa-rotate-right"></i> Refresh
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-frame-holder">
+        <iframe id="studio-preview-frame" class="preview-iframe mode-desktop" src="about:blank" title="Live Preview"></iframe>
+      </div>
+    </main>
+  </div>
+
+  <!-- Share & Passcode Modal -->
+  <div id="share-modal-backdrop" class="preview-modal-backdrop" style="display: none;">
+    <div style="background: #FFFFFF; border-radius: var(--radius-lg); width: 500px; max-width: 90vw; padding: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.25);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--color-plum); margin: 0;">Share Celebration Website</h3>
+        <button type="button" onclick="closeShareModal()" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #888;">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <div class="preview-frame-wrapper">
-        <iframe id="preview-iframe" class="preview-iframe preview-desktop" src="about:blank"></iframe>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+        Send this private invitation link directly to your family, friends, and wedding party:
+      </p>
+
+      <div style="margin-bottom: 16px;">
+        <label class="form-label">Direct Event URL</label>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" id="share-url-input" class="form-input" readonly>
+          <button type="button" class="btn-outline btn-sm" onclick="copyShareUrl()">Copy</button>
+        </div>
       </div>
-    </section>
+
+      <div id="share-passcode-box" style="margin-bottom: 24px;">
+        <label class="form-label">Guest Passcode</label>
+        <div style="padding: 10px 14px; background: #FAF5EE; border: 1px dashed var(--primary-gold); border-radius: var(--radius-sm); font-family: monospace; font-size: 1.1rem; font-weight: 700; color: var(--color-plum);" id="share-passcode-val">
+          None
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <a id="share-whatsapp-btn" href="#" target="_blank" class="btn-gold" style="flex: 1; justify-content: center; background: #25D366; border-color: #25D366;">
+          <i class="fa-brands fa-whatsapp"></i> Share on WhatsApp
+        </a>
+        <button type="button" class="btn-outline" style="flex: 1; justify-content: center;" onclick="closeShareModal()">
+          Close
+        </button>
+      </div>
+    </div>
   </div>
 
   <script src="js/api.js"></script>
@@ -284,274 +528,370 @@
     const eventId = urlParams.get('id');
 
     if (!eventId) {
-      alert('Event ID is missing.');
+      alert('Event ID is required to open Live Studio.');
       window.location.href = '/dashboard';
     }
 
     let eventData = null;
     let sectionsData = [];
-    let functionsData = [];
+    let ceremoniesData = [];
+    let isUnsaved = false;
 
-    function switchStudioTab(tabId) {
-      document.querySelectorAll('.studio-tab-btn').forEach((b) => b.classList.remove('active'));
-      document.querySelectorAll('.studio-tab-content').forEach((c) => c.classList.remove('active'));
-
-      event.currentTarget.classList.add('active');
-      document.getElementById(tabId).classList.add('active');
+    // Check if onboarding welcome
+    if (sessionStorage.getItem('onboardingTemplate') || urlParams.get('welcome') === '1') {
+      document.getElementById('onboarding-welcome-banner').style.display = 'flex';
+      sessionStorage.removeItem('onboardingTemplate');
     }
 
-    function setDevice(device) {
-      const iframe = document.getElementById('preview-iframe');
-      document.querySelectorAll('.device-btn').forEach((b) => b.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-
-      iframe.className = `preview-iframe preview-${device}`;
+    function dismissWelcomeBanner() {
+      document.getElementById('onboarding-welcome-banner').style.display = 'none';
     }
 
-    function reloadPreview() {
-      if (eventData && eventData.slug) {
-        document.getElementById('preview-iframe').src = `/event/${eventData.slug}?preview=true&t=${Date.now()}`;
+    function markUnsaved() {
+      isUnsaved = true;
+      const dot = document.getElementById('save-status-dot');
+      const text = document.getElementById('save-status-text');
+      if (dot && text) {
+        dot.style.background = '#F59E0B';
+        dot.classList.remove('saving');
+        text.textContent = 'Unsaved changes';
+      }
+
+      // Check visibility passcode toggle
+      const vis = document.querySelector('input[name="studio_visibility"]:checked')?.value;
+      const passBox = document.getElementById('passcode-container');
+      if (passBox) passBox.style.display = (vis === 'private_share' ? 'block' : 'none');
+    }
+
+    function markSaved() {
+      isUnsaved = false;
+      const dot = document.getElementById('save-status-dot');
+      const text = document.getElementById('save-status-text');
+      if (dot && text) {
+        dot.style.background = '#2E7D32';
+        dot.classList.remove('saving');
+        text.textContent = 'Draft Saved';
       }
     }
 
-    async function loadStudio() {
+    function markSaving() {
+      const dot = document.getElementById('save-status-dot');
+      const text = document.getElementById('save-status-text');
+      if (dot && text) {
+        dot.style.background = 'var(--primary-gold)';
+        dot.classList.add('saving');
+        text.textContent = 'Saving to Cloud...';
+      }
+    }
+
+    function switchStudioTab(tabId, btnEl) {
+      document.querySelectorAll('.studio-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.studio-tab-panel').forEach(p => p.classList.remove('active'));
+      btnEl.classList.add('active');
+      const panel = document.getElementById(tabId);
+      if (panel) panel.classList.add('active');
+    }
+
+    function setStudioDevice(mode) {
+      const frame = document.getElementById('studio-preview-frame');
+      const btnDesk = document.getElementById('btn-dev-desktop');
+      const btnTab = document.getElementById('btn-dev-tablet');
+      const btnMob = document.getElementById('btn-dev-mobile');
+
+      btnDesk.classList.remove('active');
+      btnTab.classList.remove('active');
+      btnMob.classList.remove('active');
+
+      if (mode === 'mobile') {
+        frame.className = 'preview-iframe mode-mobile';
+        btnMob.classList.add('active');
+      } else if (mode === 'tablet') {
+        frame.className = 'preview-iframe mode-tablet';
+        btnTab.classList.add('active');
+      } else {
+        frame.className = 'preview-iframe mode-desktop';
+        btnDesk.classList.add('active');
+      }
+    }
+
+    function reloadPreviewFrame() {
+      if (eventData && eventData.slug) {
+        const frame = document.getElementById('studio-preview-frame');
+        frame.src = `/event/${eventData.slug}?preview=true&t=${Date.now()}`;
+      }
+    }
+
+    async function loadStudioData() {
       try {
         const data = await API.getEvent(eventId);
         eventData = data.event;
         sectionsData = data.sections || [];
-        functionsData = data.functions || [];
+        ceremoniesData = data.functions || [];
 
-        // Header info
-        document.getElementById('studio-event-title').textContent = eventData.primary_names;
+        // Title & live links
+        document.getElementById('studio-event-title').textContent = eventData.primary_names || 'Untitled Event';
         const badge = document.getElementById('studio-event-badge');
-        badge.textContent = eventData.visibility.replace('_', ' ').toUpperCase();
+        badge.textContent = (eventData.visibility || 'draft').toUpperCase().replace('_', ' ');
         badge.className = `badge-status badge-${eventData.visibility === 'public' ? 'public' : (eventData.visibility === 'private_share' ? 'private' : 'draft')}`;
-        document.getElementById('preview-new-tab-btn').href = `/event/${eventData.slug}`;
+        document.getElementById('studio-view-live-btn').href = `/event/${eventData.slug}`;
 
-        // Basic Tab Inputs
+        // Inputs
         document.getElementById('edit-names').value = eventData.primary_names || '';
         document.getElementById('edit-title').value = eventData.title || '';
         document.getElementById('edit-headline').value = eventData.headline || '';
         document.getElementById('edit-date').value = eventData.event_date || '';
-        document.getElementById('edit-theme').value = eventData.theme_id || 'luxury_pastel';
         document.getElementById('edit-venue-name').value = eventData.venue_name || '';
         document.getElementById('edit-venue-address').value = eventData.venue_address || '';
         document.getElementById('edit-hashtag').value = eventData.hashtag || '';
-        document.getElementById('edit-hero-preview').src = eventData.hero_image_url || 'assets/images/hero_couple.jpg';
+        document.getElementById('edit-hero-preview').src = eventData.hero_image_url || 'assets/images/hero_couple_real.jpg';
+        
+        if (document.getElementById('edit-theme-id')) {
+          document.getElementById('edit-theme-id').value = eventData.theme_id || 'royal_palace';
+        }
 
-        // Privacy Tab
-        document.querySelectorAll('input[name="studio_visibility"]').forEach((r) => {
+        // Passcode & Visibility
+        document.querySelectorAll('input[name="studio_visibility"]').forEach(r => {
           r.checked = (r.value === eventData.visibility);
         });
-        document.getElementById('studio-passcode-box').style.display = (eventData.visibility === 'private_share' ? 'block' : 'none');
+        document.getElementById('passcode-container').style.display = (eventData.visibility === 'private_share' ? 'block' : 'none');
+        document.getElementById('edit-passcode').value = eventData.passcode || '';
 
-        // Render Sections Tab
-        renderSectionsTab();
+        // RSVP Export Link
+        document.getElementById('export-rsvps-btn').href = API.getRSVPExportUrl(eventId);
 
-        // Render Functions Tab
-        renderFunctionsTab();
+        // Render Lists
+        renderSections();
+        renderCeremonies();
 
-        // Load Live Preview
-        reloadPreview();
+        // Load preview frame
+        reloadPreviewFrame();
+        markSaved();
       } catch (err) {
-        alert(err.message);
+        console.error('Studio load failed:', err);
+        API.showToast('Unable to load studio event data');
       }
     }
 
-    // Render Sections List
-    function renderSectionsTab() {
+    function renderSections() {
       const container = document.getElementById('sections-list-container');
       container.innerHTML = '';
 
       sectionsData.forEach((sec, idx) => {
-        const item = document.createElement('div');
-        item.className = 'section-item-card';
-        item.innerHTML = `
+        const row = document.createElement('div');
+        row.className = 'section-row';
+        row.innerHTML = `
           <div style="display: flex; align-items: center; gap: 10px;">
-            <input type="checkbox" id="sec-enable-${sec.id}" ${sec.is_enabled ? 'checked' : ''} onchange="toggleSection(${sec.id})">
-            <input type="text" class="form-input" style="padding: 4px 8px; font-weight: 600; width: 220px;" value="${sec.title}" onchange="renameSection(${sec.id}, this.value)">
+            <input type="checkbox" id="sec-cb-${sec.id}" ${sec.is_enabled ? 'checked' : ''} onchange="toggleSectionState(${sec.id})">
+            <span style="font-weight: 600; font-size: 0.9rem; color: var(--color-plum);">${sec.title}</span>
           </div>
-          <div style="display: flex; gap: 4px;">
-            <button class="btn-outline btn-sm" onclick="moveSection(${idx}, -1)" ${idx === 0 ? 'disabled' : ''}><i class="fa-solid fa-arrow-up"></i></button>
-            <button class="btn-outline btn-sm" onclick="moveSection(${idx}, 1)" ${idx === sectionsData.length - 1 ? 'disabled' : ''}><i class="fa-solid fa-arrow-down"></i></button>
+          <div style="display: flex; gap: 6px;">
+            <button type="button" class="btn-outline btn-sm" onclick="moveSection(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} style="padding: 4px 8px;">
+              <i class="fa-solid fa-arrow-up"></i>
+            </button>
+            <button type="button" class="btn-outline btn-sm" onclick="moveSection(${idx}, 1)" ${idx === sectionsData.length - 1 ? 'disabled' : ''} style="padding: 4px 8px;">
+              <i class="fa-solid fa-arrow-down"></i>
+            </button>
           </div>
         `;
-        container.appendChild(item);
+        container.appendChild(row);
       });
     }
 
-    function toggleSection(id) {
-      const sec = sectionsData.find((s) => s.id === id);
+    function toggleSectionState(id) {
+      const sec = sectionsData.find(s => s.id === id);
       if (sec) {
         sec.is_enabled = sec.is_enabled ? 0 : 1;
-        saveSections();
-      }
-    }
-
-    function renameSection(id, newTitle) {
-      const sec = sectionsData.find((s) => s.id === id);
-      if (sec) {
-        sec.title = newTitle;
-        saveSections();
+        saveSectionsState();
       }
     }
 
     function moveSection(index, direction) {
       const targetIndex = index + direction;
       if (targetIndex < 0 || targetIndex >= sectionsData.length) return;
-      const temp = sectionsData[index];
+      const tmp = sectionsData[index];
       sectionsData[index] = sectionsData[targetIndex];
-      sectionsData[targetIndex] = temp;
-
+      sectionsData[targetIndex] = tmp;
       sectionsData.forEach((s, i) => s.sort_order = i);
-      renderSectionsTab();
-      saveSections();
+      renderSections();
+      saveSectionsState();
     }
 
-    async function saveSections() {
+    async function saveSectionsState() {
       try {
         await API.updateSections(eventId, sectionsData);
-        reloadPreview();
+        reloadPreviewFrame();
       } catch (err) {
-        console.error('Save sections failed:', err);
+        console.error('Section save error:', err);
       }
     }
 
-    // Render Functions Tab
-    function renderFunctionsTab() {
-      const container = document.getElementById('functions-list-container');
+    function renderCeremonies() {
+      const container = document.getElementById('ceremonies-list-container');
       container.innerHTML = '';
 
-      functionsData.forEach((func) => {
+      ceremoniesData.forEach((func, idx) => {
         const card = document.createElement('div');
-        card.className = 'function-edit-card';
+        card.className = 'ceremony-editor-card';
         card.innerHTML = `
-          <div style="display: flex; gap: 14px; margin-bottom: 10px;">
-            <img src="${func.illustration_url || 'assets/images/hero_couple.jpg'}" style="width: 70px; height: 70px; border-radius: 8px; object-fit: cover;">
-            <div style="flex-grow: 1;">
-              <input type="text" class="form-input" style="font-weight: 700; font-size: 1.05rem; margin-bottom: 6px;" value="${func.title}" onchange="updateFuncField(${func.id}, 'title', this.value)">
-              <input type="text" class="form-input" style="font-size: 0.85rem;" placeholder="Subtitle / Ritual" value="${func.subtitle || ''}" onchange="updateFuncField(${func.id}, 'subtitle', this.value)">
-            </div>
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+            <input type="text" class="form-input" style="font-weight: 700; font-size: 1rem; color: var(--color-plum);" value="${func.title}" onchange="updateCeremonyProp(${func.id}, 'title', this.value)">
+            <button type="button" class="btn-danger btn-sm" onclick="removeCeremony(${func.id})" style="margin-left: 8px; padding: 6px 10px;">
+              <i class="fa-solid fa-trash"></i>
+            </button>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
             <div>
-              <label class="form-label" style="font-size: 0.78rem;">Time / Date</label>
-              <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.date_time || ''}" onchange="updateFuncField(${func.id}, 'date_time', this.value)">
+              <label class="form-label" style="font-size: 0.75rem;">Time / Date</label>
+              <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.date_time || ''}" placeholder="e.g. 10:00 AM" onchange="updateCeremonyProp(${func.id}, 'date_time', this.value)">
             </div>
             <div>
-              <label class="form-label" style="font-size: 0.78rem;">Venue Hall</label>
-              <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.venue_name || ''}" onchange="updateFuncField(${func.id}, 'venue_name', this.value)">
+              <label class="form-label" style="font-size: 0.75rem;">Hall / Venue</label>
+              <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.venue_name || ''}" placeholder="e.g. Courtyard Lawn" onchange="updateCeremonyProp(${func.id}, 'venue_name', this.value)">
             </div>
           </div>
-          <div style="margin-bottom: 10px;">
-            <label class="form-label" style="font-size: 0.78rem;">Dress Code Advice</label>
-            <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.dress_code || ''}" onchange="updateFuncField(${func.id}, 'dress_code', this.value)">
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #EEE; padding-top: 8px; margin-top: 8px;">
-            <span style="font-size: 0.78rem; color: var(--text-muted);">Ceremony #${func.sort_order + 1}</span>
-            <button class="btn-danger btn-sm" onclick="deleteFunction(${func.id})">
-              <i class="fa-solid fa-trash"></i> Delete
-            </button>
+          <div>
+            <label class="form-label" style="font-size: 0.75rem;">Dress Code Advice</label>
+            <input type="text" class="form-input" style="font-size: 0.85rem;" value="${func.dress_code || ''}" placeholder="e.g. Yellow Silk & Florals" onchange="updateCeremonyProp(${func.id}, 'dress_code', this.value)">
           </div>
         `;
         container.appendChild(card);
       });
     }
 
-    async function updateFuncField(funcId, field, val) {
-      const payload = {};
-      payload[field] = val;
+    async function updateCeremonyProp(funcId, key, val) {
+      const p = {};
+      p[key] = val;
       try {
-        await API.updateFunction(eventId, funcId, payload);
-        reloadPreview();
+        await API.updateFunction(eventId, funcId, p);
+        const f = ceremoniesData.find(c => c.id === funcId);
+        if (f) f[key] = val;
+        reloadPreviewFrame();
       } catch (err) {
-        alert(err.message);
+        console.error('Update ceremony failed:', err);
       }
     }
 
-    async function deleteFunction(funcId) {
-      if (!confirm('Are you sure you want to remove this ceremony/activity?')) return;
+    async function removeCeremony(funcId) {
+      if (!confirm('Remove this ceremony from the itinerary?')) return;
       try {
         await API.deleteFunction(eventId, funcId);
-        functionsData = functionsData.filter((f) => f.id !== funcId);
-        renderFunctionsTab();
-        reloadPreview();
+        ceremoniesData = ceremoniesData.filter(c => c.id !== funcId);
+        renderCeremonies();
+        reloadPreviewFrame();
       } catch (err) {
         alert(err.message);
       }
     }
 
-    document.getElementById('add-func-btn').addEventListener('click', async () => {
-      const title = prompt('Enter Ceremony / Activity Name:');
+    async function addNewCeremony() {
+      const title = prompt('Enter Ceremony or Event Name:');
       if (!title) return;
       try {
         const res = await API.addFunction(eventId, { title });
-        functionsData.push({ id: res.functionId, title, sort_order: functionsData.length });
-        renderFunctionsTab();
-        reloadPreview();
+        ceremoniesData.push({ id: res.functionId, title, sort_order: ceremoniesData.length });
+        renderCeremonies();
+        reloadPreviewFrame();
       } catch (err) {
         alert(err.message);
       }
-    });
+    }
 
-    // Image Upload
+    // Hero image upload
     document.getElementById('edit-hero-file').addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (!file) return;
+      markSaving();
       try {
         const res = await API.uploadImage(file);
         document.getElementById('edit-hero-preview').src = res.url;
         await API.updateEvent(eventId, { hero_image_url: res.url });
-        API.showToast('Hero image updated!');
-        reloadPreview();
+        API.showToast('Hero photo updated!');
+        markSaved();
+        reloadPreviewFrame();
       } catch (err) {
-        alert(err.message);
+        alert('Photo upload failed: ' + err.message);
+        markUnsaved();
       }
     });
 
-    // Save Overall Details
-    document.getElementById('save-studio-btn').addEventListener('click', async () => {
+    // Save All Core Details
+    async function saveAllChanges() {
+      markSaving();
+      const vis = document.querySelector('input[name="studio_visibility"]:checked')?.value || 'draft';
+      const pass = document.getElementById('edit-passcode').value;
+
       const payload = {
         primary_names: document.getElementById('edit-names').value,
         title: document.getElementById('edit-title').value,
         headline: document.getElementById('edit-headline').value,
         event_date: document.getElementById('edit-date').value,
-        theme_id: document.getElementById('edit-theme').value,
         venue_name: document.getElementById('edit-venue-name').value,
         venue_address: document.getElementById('edit-venue-address').value,
-        hashtag: document.getElementById('edit-hashtag').value
+        hashtag: document.getElementById('edit-hashtag').value,
+        theme_id: document.getElementById('edit-theme-id').value,
+        visibility: vis,
+        passcode: pass
       };
+
       try {
         await API.updateEvent(eventId, payload);
-        API.showToast('All changes saved successfully!');
-        reloadPreview();
-      } catch (err) {
-        alert(err.message);
-      }
-    });
-
-    // Privacy Controls
-    document.querySelectorAll('input[name="studio_visibility"]').forEach((r) => {
-      r.addEventListener('change', () => {
-        document.getElementById('studio-passcode-box').style.display = (r.value === 'private_share' ? 'block' : 'none');
-      });
-    });
-
-    document.getElementById('save-privacy-btn').addEventListener('click', async () => {
-      const vis = document.querySelector('input[name="studio_visibility"]:checked').value;
-      const pass = document.getElementById('studio-passcode').value;
-      try {
         await API.updateVisibility(eventId, vis, pass);
-        API.showToast(`Privacy mode updated to ${vis}!`);
+        API.showToast('Celebration draft saved to cloud!');
+        markSaved();
+        
+        // Update header badge
         const badge = document.getElementById('studio-event-badge');
-        badge.textContent = vis.replace('_', ' ').toUpperCase();
+        badge.textContent = vis.toUpperCase().replace('_', ' ');
         badge.className = `badge-status badge-${vis === 'public' ? 'public' : (vis === 'private_share' ? 'private' : 'draft')}`;
+        
+        reloadPreviewFrame();
       } catch (err) {
-        alert(err.message);
+        alert('Failed saving changes: ' + err.message);
+        markUnsaved();
       }
-    });
+    }
 
-    loadStudio();
+    // Apply Template Switcher
+    async function applyTemplateSwitch() {
+      const selectedTemplate = document.getElementById('template-switcher-select').value;
+      if (!confirm(`Switch layout to "${selectedTemplate}"? This will update styles while preserving your event data.`)) return;
+      markSaving();
+      try {
+        await API.updateEvent(eventId, { template_type: selectedTemplate });
+        API.showToast(`Template updated to ${selectedTemplate}!`);
+        markSaved();
+        reloadPreviewFrame();
+      } catch (err) {
+        alert('Template switch failed: ' + err.message);
+      }
+    }
+
+    // Share Modal
+    function openShareModal() {
+      const fullUrl = `${window.location.origin}/event/${eventData.slug}`;
+      document.getElementById('share-url-input').value = fullUrl;
+      const passVal = eventData.passcode || document.getElementById('edit-passcode').value || 'None';
+      document.getElementById('share-passcode-val').textContent = passVal;
+
+      const text = encodeURIComponent(`You are joyfully invited to our celebration! Explore our event website: ${fullUrl}${passVal !== 'None' ? ` (Passcode: ${passVal})` : ''}`);
+      document.getElementById('share-whatsapp-btn').href = `https://api.whatsapp.com/send?text=${text}`;
+
+      document.getElementById('share-modal-backdrop').style.display = 'flex';
+    }
+
+    function closeShareModal() {
+      document.getElementById('share-modal-backdrop').style.display = 'none';
+    }
+
+    function copyShareUrl() {
+      const inp = document.getElementById('share-url-input');
+      inp.select();
+      navigator.clipboard.writeText(inp.value);
+      API.showToast('Event link copied to clipboard!');
+    }
+
+    // Initial load
+    loadStudioData();
   </script>
 </body>
 </html>

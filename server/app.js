@@ -59,6 +59,55 @@ app.get('/terms', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/terms.html'));
 });
 
+app.get('/templates', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/templates.html'));
+});
+
+app.get('/how-it-works', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/how-it-works.html'));
+});
+
+app.get('/pricing', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/pricing.html'));
+});
+
+app.get('/faqs', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/faqs.html'));
+});
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/about.html'));
+});
+
+app.get('/contact', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/contact.html'));
+});
+
+app.get('/refund', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/refund.html'));
+});
+
+app.get('/blog', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/blog.html'));
+});
+
+app.get('/blog/:slug', (req, res) => {
+  const articlePath = path.join(__dirname, '../client/blog', `${req.params.slug}.html`);
+  res.sendFile(articlePath, (err) => {
+    if (err) {
+      res.sendFile(path.join(__dirname, '../client/blog.html'));
+    }
+  });
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/sitemap.xml'));
+});
+
+app.get('/robots.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/robots.txt'));
+});
+
 // Event Website Viewers: /event/:slug or /e/:slug
 app.get('/event/:slug', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/event-view.html'));

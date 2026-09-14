@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Concierge — Riwaayat Venue</title>
+  <meta name="description" content="Get in touch with the Riwaayat Venue concierge team for custom wedding website design, VIP support, and platform inquiries.">
+  <link rel="canonical" href="https://riwaayatvenue.com/contact">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/platform.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" style="position: sticky; top: 0; z-index: 1000; background: rgba(253, 251, 247, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid #EAE2DB;">
+    <div class="nav-container" style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" class="brand-logo" style="display: flex; flex-direction: column;">
+        <span style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; letter-spacing: 1.5px; color: var(--color-plum);">RIWAAYAT VENUE</span>
+        <span style="font-size: 0.68rem; letter-spacing: 1px; color: var(--primary-gold-dark); text-transform: uppercase;">Every Celebration, Beautifully Yours</span>
+      </a>
+
+      <div class="nav-links" style="display: flex; gap: 24px; align-items: center;">
+        <a href="/templates" style="color: var(--text-dark); font-weight: 500;">Templates</a>
+        <a href="/how-it-works" style="color: var(--text-dark); font-weight: 500;">How It Works</a>
+        <a href="/pricing" style="color: var(--text-dark); font-weight: 500;">Pricing</a>
+        <a href="/faqs" style="color: var(--text-dark); font-weight: 500;">FAQs</a>
+        <a href="/blog" style="color: var(--text-dark); font-weight: 500;">Blog</a>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="/login" class="btn-outline btn-sm">Sign In</a>
+        <a href="/login?mode=signup" class="btn-gold btn-sm">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header style="padding: 70px 24px 30px; text-align: center; background: linear-gradient(180deg, #FDFBF7 0%, #F5EBE1 100%);">
+    <div style="max-width: 760px; margin: 0 auto;" class="animate-fade-up">
+      <span style="font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Concierge Support</span>
+      <h1 style="font-family: var(--font-display); font-size: 2.8rem; color: var(--color-plum); margin: 12px 0 16px;">
+        We Are Here to Help
+      </h1>
+      <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.6;">
+        Have questions about custom design concierge or technical setup? Send us a message and our team will get back to you within hours.
+      </p>
+    </div>
+  </header>
+
+  <!-- Form Container -->
+  <main style="max-width: 900px; margin: 0 auto; padding: 40px 24px 80px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+      
+      <div class="glass-panel" style="padding: 36px; border-radius: var(--radius-md);">
+        <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--text-dark); margin-bottom: 18px;">Send a Message</h3>
+        <form onsubmit="handleContact(event)">
+          <div style="margin-bottom: 14px;">
+            <label class="form-label" for="contact-name">Your Full Name</label>
+            <input type="text" id="contact-name" required class="form-input" placeholder="e.g. Priyal Sharma">
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label class="form-label" for="contact-email">Email Address</label>
+            <input type="email" id="contact-email" required class="form-input" placeholder="priyal@example.com">
+          </div>
+          <div style="margin-bottom: 14px;">
+            <label class="form-label" for="contact-type">Event Type</label>
+            <select id="contact-type" class="form-select">
+              <option value="indian_wedding">Indian Wedding</option>
+              <option value="muslim_wedding">Muslim Wedding / Nikah</option>
+              <option value="birthday">Milestone Birthday</option>
+              <option value="concierge">White-Glove Concierge Inquiry</option>
+              <option value="other">Other Inquiry</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 18px;">
+            <label class="form-label" for="contact-message">How can we assist you?</label>
+            <textarea id="contact-message" rows="4" required class="form-input" placeholder="Tell us your celebration dates, questions, or ideas..."></textarea>
+          </div>
+          <button type="submit" class="btn-gold" style="width: 100%; justify-content: center;">
+            <i class="fa-solid fa-paper-plane"></i> Send Inquiry
+          </button>
+        </form>
+        <div id="contact-status" style="margin-top: 14px; font-size: 0.88rem; display: none;"></div>
+      </div>
+
+      <!-- Direct Channels -->
+      <div style="display: flex; flex-direction: column; gap: 24px; justify-content: center;">
+        <div class="glass-panel" style="padding: 24px; border-radius: var(--radius-sm); display: flex; gap: 16px; align-items: center;">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--color-plum); color: var(--primary-gold); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div>
+            <div style="font-weight: 700; color: var(--text-dark);">Email Concierge</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">concierge@riwaayatvenue.com</div>
+          </div>
+        </div>
+
+        <div class="glass-panel" style="padding: 24px; border-radius: var(--radius-sm); display: flex; gap: 16px; align-items: center;">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--color-emerald); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <div>
+            <div style="font-weight: 700; color: var(--text-dark);">WhatsApp VIP Support</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">Available for Royale & Concierge clients</div>
+          </div>
+        </div>
+
+        <div class="glass-panel" style="padding: 24px; border-radius: var(--radius-sm); display: flex; gap: 16px; align-items: center;">
+          <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary-gold-dark); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+            <i class="fa-solid fa-clock"></i>
+          </div>
+          <div>
+            <div style="font-weight: 700; color: var(--text-dark);">Turnaround Time</div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">Responses typically within 2 to 4 hours</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background: var(--color-plum); color: var(--color-ivory); padding: 40px 24px; text-align: center; font-size: 0.86rem;">
+    © 2026 Riwaayat Venue. All rights reserved.
+  </footer>
+
+  <script>
+    function handleContact(e) {
+      e.preventDefault();
+      const status = document.getElementById('contact-status');
+      status.style.display = 'block';
+      status.style.color = '#2E7D32';
+      status.textContent = 'Thank you for reaching out! A Riwaayat Venue concierge specialist will contact you shortly.';
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>

@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Riwaayat Venue — Luxury Event Website Builder</title>
-  <meta name="description" content="Design bespoke, interactive invitation websites for Indian Weddings, Muslim Weddings, and Birthday Celebrations with photorealistic event imagery, realistic scratch cards, live countdowns, and privacy-first sharing.">
+  <meta name="description" content="Every Celebration, Beautifully Yours. Design bespoke, interactive invitation websites for Indian Weddings, Muslim Weddings, and Milestone Birthdays with photorealistic event imagery, interactive scratch cards, and multi-ceremony RSVPs.">
+  <link rel="canonical" href="https://riwaayatvenue.com/">
   <meta property="og:title" content="Riwaayat Venue — Luxury Event Website Builder">
-  <meta property="og:description" content="Every Celebration, Beautifully Yours. Design bespoke invitation websites with photorealistic imagery and private sharing.">
+  <meta property="og:description" content="Every Celebration, Beautifully Yours. Design bespoke invitation websites with photorealistic imagery, live countdowns, and private sharing.">
+  <meta property="og:image" content="/assets/images/hero_couple_real.jpg">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,303 +21,670 @@
   <!-- Platform Styles -->
   <link rel="stylesheet" href="css/platform.css">
   <style>
-    .landing-hero {
-      padding: 90px 20px 60px;
-      text-align: center;
+    .hero-wrapper {
       position: relative;
+      padding: 100px 24px 80px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 20%, rgba(212,175,55,0.08) 0%, rgba(253,251,247,0) 70%), linear-gradient(180deg, #FDFBF7 0%, #F6EDE3 100%);
       overflow: hidden;
     }
-    .landing-badge {
+    .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       padding: 6px 18px;
       border-radius: var(--radius-full);
-      background: rgba(212, 175, 55, 0.15);
+      background: rgba(212, 175, 55, 0.12);
       color: var(--primary-gold-dark);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
       margin-bottom: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.3);
     }
-    .landing-title {
+    .hero-title {
       font-family: var(--font-display);
       font-size: 3.4rem;
       line-height: 1.2;
-      color: var(--text-dark);
-      max-width: 880px;
-      margin: 0 auto 20px;
+      color: var(--color-plum);
+      max-width: 920px;
+      margin: 0 auto 18px;
     }
-    .landing-subtitle {
-      font-size: 1.18rem;
-      color: var(--text-muted);
-      max-width: 760px;
-      margin: 0 auto 36px;
-      line-height: 1.6;
-    }
-    .landing-tagline {
+    .hero-tagline {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       color: var(--primary-gold-dark);
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       margin-bottom: 18px;
     }
-    .cta-group {
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+    .hero-cta-group {
       display: flex;
       justify-content: center;
       gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 50px;
+      margin-bottom: 40px;
     }
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      max-width: 1200px;
-      margin: 0 auto 80px;
-      padding: 0 20px;
-    }
-    .showcase-card {
-      padding: 24px;
-      border-radius: var(--radius-lg);
-      background: rgba(255, 255, 255, 0.88);
-      border: 1px solid var(--border-light);
-      box-shadow: var(--shadow-card);
-      transition: transform 0.35s ease;
+    .hero-trust-bar {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .showcase-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-    }
-    .showcase-img {
-      width: 100%;
-      height: 240px;
-      border-radius: var(--radius-md);
-      object-fit: cover;
-      margin-bottom: 18px;
-    }
-    .features-section {
-      background: #FFFFFF;
-      padding: 80px 20px;
-      border-top: 1px solid #ECE4DC;
-      border-bottom: 1px solid #ECE4DC;
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      max-width: 1200px;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: #726257;
+      border-top: 1px solid rgba(212, 175, 55, 0.2);
+      padding-top: 24px;
+      max-width: 900px;
       margin: 0 auto;
     }
-    .feature-box {
-      padding: 24px;
-      border-radius: var(--radius-md);
-      background: var(--bg-sand);
-      border: 1px solid var(--border-light);
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .feature-icon {
-      width: 50px;
-      height: 50px;
+    .hero-trust-item i {
+      color: var(--primary-gold);
+    }
+    .category-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 36px rgba(45, 15, 30, 0.12);
+      border-color: var(--primary-gold);
+    }
+    .step-num {
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: var(--primary-gold-light);
-      color: var(--primary-gold-dark);
+      background: var(--color-plum);
+      color: var(--primary-gold);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
       margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(45,15,30,0.25);
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid #F0E8E2;
+      font-size: 0.95rem;
+    }
+    .comparison-table th {
+      background: #FAF5F0;
+      font-family: var(--font-display);
+      color: var(--color-plum);
+      font-weight: 700;
+    }
+    .comparison-table tr:hover td {
+      background: #FDFAF7;
+    }
+    .faq-item {
+      background: #FFFFFF;
+      border: 1px solid var(--border-light);
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .faq-q {
+      padding: 18px 24px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--color-plum);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    .faq-a {
+      padding: 0 24px 20px;
+      color: #554840;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      display: none;
+    }
+    .faq-item.active .faq-a {
+      display: block;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+      color: var(--primary-gold-dark);
     }
     @media (max-width: 900px) {
-      .landing-title { font-size: 2.5rem; }
-      .showcase-grid { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .hero-title { font-size: 2.5rem; }
+      .grid-3col { grid-template-columns: 1fr !important; }
+      .grid-4col { grid-template-columns: 1fr 1fr !important; }
     }
     @media (max-width: 600px) {
-      .feature-grid { grid-template-columns: 1fr; }
+      .grid-4col { grid-template-columns: 1fr !important; }
+      .hero-trust-bar { flex-direction: column; align-items: center; gap: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navbar -->
-  <header class="platform-navbar">
-    <a href="/" class="platform-brand">
-      <i class="fa-solid fa-crown" style="color: var(--primary-gold);"></i>
-      <span>RIWAAYAT VENUE</span>
-    </a>
+  <!-- Top Navigation -->
+  <nav class="navbar" style="position: sticky; top: 0; z-index: 1000; background: rgba(253, 251, 247, 0.96); backdrop-filter: blur(16px); border-bottom: 1px solid #EAE2DB;">
+    <div class="nav-container" style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" class="brand-logo" style="display: flex; flex-direction: column; text-decoration: none;">
+        <span style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; letter-spacing: 1.5px; color: var(--color-plum);">RIWAAYAT VENUE</span>
+        <span style="font-size: 0.68rem; letter-spacing: 1px; color: var(--primary-gold-dark); text-transform: uppercase;">Every Celebration, Beautifully Yours</span>
+      </a>
 
-    <ul class="platform-nav-links">
-      <li><a href="/"><i class="fa-solid fa-house"></i> Home</a></li>
-      <li><a href="#templates">Templates</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="/privacy">Privacy & Security</a></li>
-      <li><a href="/login" class="btn-outline btn-sm">Log In</a></li>
-      <li><a href="/login?mode=signup" class="btn-gold btn-sm">Get Started Free</a></li>
-    </ul>
-  </header>
+      <div class="nav-links" style="display: flex; gap: 22px; align-items: center;">
+        <a href="/templates" style="color: var(--text-dark); font-weight: 600;">Templates</a>
+        <a href="/how-it-works" style="color: var(--text-dark); font-weight: 500;">How It Works</a>
+        <a href="/pricing" style="color: var(--text-dark); font-weight: 500;">Pricing</a>
+        <a href="/faqs" style="color: var(--text-dark); font-weight: 500;">FAQs</a>
+        <a href="/about" style="color: var(--text-dark); font-weight: 500;">About</a>
+        <a href="/blog" style="color: var(--text-dark); font-weight: 500;">Journal</a>
+        <a href="/contact" style="color: var(--text-dark); font-weight: 500;">Contact</a>
+      </div>
+
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <a href="/login" class="btn-outline btn-sm">Sign In</a>
+        <a href="/templates" class="btn-gold btn-sm">Explore 18 Designs</a>
+      </div>
+    </div>
+  </nav>
 
   <!-- Hero Section -->
-  <section class="landing-hero">
-    <div class="landing-badge">
-      <i class="fa-solid fa-wand-magic-sparkles"></i> The Luxury Event Website Platform
+  <header class="hero-wrapper">
+    <div class="hero-badge animate-fade-up">
+      <i class="fa-solid fa-crown sparkle-icon"></i> Luxury Event Website Platform
     </div>
-    <div class="landing-tagline">“Every Celebration, Beautifully Yours”</div>
-    <h1 class="landing-title">
+    <div class="hero-tagline animate-fade-up stagger-1">“Every Celebration, Beautifully Yours”</div>
+    <h1 class="hero-title animate-fade-up stagger-2">
       Craft Dream Invitation Websites for Life's Greatest Milestones
     </h1>
-    <p class="landing-subtitle">
-      Design bespoke, interactive invitation websites for <strong>Indian Weddings</strong>, <strong>Muslim Weddings</strong>, and <strong>Birthday Celebrations</strong> with photorealistic event imagery, realistic scratch cards, live countdowns, and privacy-first sharing.
+    <p class="hero-subtitle animate-fade-up stagger-3">
+      Design bespoke, interactive invitation websites for <strong>Indian Weddings</strong>, <strong>Muslim Weddings</strong>, and <strong>Milestone Birthdays</strong> with photorealistic event imagery, interactive scratch cards, multi-ceremony itineraries, and private passcode sharing.
     </p>
 
-    <div class="cta-group">
-      <a href="/login?mode=signup" class="btn-gold" style="padding: 14px 36px; font-size: 1.05rem;">
-        <i class="fa-solid fa-plus-circle"></i> Create Your Event Website
+    <div class="hero-cta-group animate-fade-up stagger-4">
+      <a href="/templates" class="btn-gold" style="padding: 15px 36px; font-size: 1.05rem;">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Explore 18 Curated Designs
       </a>
-      <a href="#templates" class="btn-outline" style="padding: 14px 32px; font-size: 1.05rem;">
-        <i class="fa-regular fa-eye"></i> Explore Templates
+      <a href="/login?mode=signup" class="btn-outline" style="padding: 15px 32px; font-size: 1.05rem;">
+        <i class="fa-solid fa-feather"></i> Start Free Draft
       </a>
     </div>
 
-    <!-- Quick Trust Indicators -->
-    <div style="font-size: 0.9rem; color: var(--text-muted);">
-      <i class="fa-solid fa-shield-halved" style="color: #2E7D32;"></i> 
-      Multi-tenant row-level security • Photorealistic luxury event imagery • Private attendee isolation
+    <!-- Trust & Security Signals -->
+    <div class="hero-trust-bar">
+      <div class="hero-trust-item"><i class="fa-solid fa-camera"></i> Photorealistic Luxury Photography</div>
+      <div class="hero-trust-item"><i class="fa-solid fa-calendar-days"></i> Multi-Ceremony RSVP Itinerary</div>
+      <div class="hero-trust-item"><i class="fa-solid fa-shield-halved"></i> Passcode & Privacy Isolation</div>
+      <div class="hero-trust-item"><i class="fa-brands fa-whatsapp"></i> 1-Tap Guest Sharing</div>
     </div>
-  </section>
+  </header>
 
-  <!-- 3 Event Categories Showcase -->
-  <section id="templates" style="padding: 40px 0;">
-    <div style="text-align: center; margin-bottom: 40px;">
-      <span style="font-family: var(--font-script); font-size: 2.2rem; color: var(--brand-pink); display: block;">Curated Elegance</span>
-      <h2 style="font-family: var(--font-display); font-size: 2.4rem;">Three Distinct Celebration Experiences</h2>
+  <!-- Featured 3 Event Categories Showcase -->
+  <section style="padding: 80px 24px; max-width: 1240px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 48px;">
+      <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Tailored Experiences</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.5rem; color: var(--color-plum); margin-top: 6px;">Three Bespoke Celebration Traditions</h2>
+      <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 650px; margin: 10px auto 0;">
+        Every culture and milestone has a distinct rhythm. Riwaayat Venue provides custom ceremony itineraries, authentic color palettes, and cultural ceremony cards.
+      </p>
     </div>
 
-    <div class="showcase-grid">
+    <div class="grid-3col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
       <!-- 1. Indian Wedding -->
-      <div class="showcase-card">
-        <div>
-          <img src="assets/images/hero_couple.jpg" alt="Indian Wedding Couple" class="showcase-img">
-          <div class="badge-status badge-public" style="margin-bottom: 8px;">Indian Wedding</div>
-          <h3 style="font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px;">Vijay & Rashima</h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
-            Pre-configured with Haldi (yellow floral), Mehendi (green ethnic), Sangeet (glam Indo-western), Sacred Mandap Wedding, and Grand Reception. Featuring photorealistic editorial photography.
-          </p>
+      <div class="category-card">
+        <div style="position: relative; height: 260px; overflow: hidden;">
+          <img src="assets/images/hero_couple_real.jpg" alt="Indian Wedding Couple" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+          <span style="position: absolute; top: 16px; left: 16px; background: rgba(45,15,30,0.85); color: var(--color-ivory); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px;">8 Curated Themes</span>
         </div>
-        <div style="display: flex; gap: 8px; margin-top: 14px;">
-          <button type="button" onclick="openPreviewModal('vijay-rashima-wedding', 'Vijay & Rashima Wedding', 'indian_wedding', 'Indian Wedding')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Preview Template">
-            <i class="fa-solid fa-eye"></i> Preview Template
-          </button>
-          <button type="button" onclick="useTemplate('indian_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
-          </button>
+        <div style="padding: 24px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--color-plum); margin-bottom: 8px;">Indian Weddings</h3>
+            <p style="font-size: 0.92rem; color: #62564F; line-height: 1.6; margin-bottom: 16px;">
+              Pre-configured for Haldi, Mehendi, Sangeet, Sacred Mandap, and Reception. Includes marigold accents, gold borders, and separate ceremony RSVPs.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Royal Mandap</span>
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Palace Romance</span>
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Marigold Bloom</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" onclick="openPreviewModal('palace-romance', 'Palace Romance — Indian Wedding', 'palace_romance', 'Indian Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('palace_romance')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Theme
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- 2. Muslim Wedding -->
-      <div class="showcase-card">
-        <div>
-          <img src="assets/images/muslim_couple.jpg" alt="Muslim Wedding Couple" class="showcase-img">
-          <div class="badge-status badge-public" style="margin-bottom: 8px;">Muslim Wedding</div>
-          <h3 style="font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px;">Zain & Ayla</h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
-            Pre-configured with Dholki, Mehendi, Sacred Nikah, and Grand Walima. Designed with Islamic geometric patterns, emerald and gold elegance.
-          </p>
+      <div class="category-card">
+        <div style="position: relative; height: 260px; overflow: hidden;">
+          <img src="assets/images/hero_muslim_real.jpg" alt="Muslim Wedding Couple" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+          <span style="position: absolute; top: 16px; left: 16px; background: rgba(14,64,48,0.85); color: var(--color-ivory); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px;">6 Curated Themes</span>
         </div>
-        <div style="display: flex; gap: 8px; margin-top: 14px;">
-          <button type="button" onclick="openPreviewModal('zain-ayla-nikah', 'Zain & Ayla Nikah', 'muslim_wedding', 'Muslim Wedding')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Preview Template">
-            <i class="fa-solid fa-eye"></i> Preview Template
-          </button>
-          <button type="button" onclick="useTemplate('muslim_wedding')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
-          </button>
+        <div style="padding: 24px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--color-plum); margin-bottom: 8px;">Muslim Weddings</h3>
+            <p style="font-size: 0.92rem; color: #62564F; line-height: 1.6; margin-bottom: 16px;">
+              Designed for Dholki, Mehendi, Sacred Nikah, Dua, and Grand Walima. Features Islamic geometric motifs, emerald velvet, and Quranic blessing quotes.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Noor Nikah</span>
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Emerald Qasr</span>
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Midnight Walima</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" onclick="openPreviewModal('noor-nikah', 'Noor Nikah — Muslim Wedding', 'noor_nikah', 'Muslim Wedding')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('noor_nikah')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Theme
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- 3. Birthday Celebration -->
-      <div class="showcase-card">
-        <div>
-          <img src="assets/images/birthday_hero.jpg" alt="Birthday Celebration" class="showcase-img">
-          <div class="badge-status badge-public" style="margin-bottom: 8px;">Birthday Celebration</div>
-          <h3 style="font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px;">Aria's Sweet 16</h3>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
-            Pre-configured with Red Carpet Welcome, Interactive Games, Cake Cutting, Dinner Buffet, and DJ Dance Party with luxury pastel themes.
+      <!-- 3. Birthday Celebrations -->
+      <div class="category-card">
+        <div style="position: relative; height: 260px; overflow: hidden;">
+          <img src="assets/images/birthday_hero_real.jpg" alt="Birthday Celebration" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+          <span style="position: absolute; top: 16px; left: 16px; background: rgba(30,41,59,0.85); color: var(--color-ivory); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 20px;">4 Curated Themes</span>
+        </div>
+        <div style="padding: 24px; display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 1.45rem; color: var(--color-plum); margin-bottom: 8px;">Milestone Birthdays</h3>
+            <p style="font-size: 0.92rem; color: #62564F; line-height: 1.6; margin-bottom: 16px;">
+              Designed for Sweet 16s, 18th, 21st, 30th, 50th, and 1st birthdays. Featuring red carpet schedule, cake cutting, DJ party, and wish guestbooks.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;">
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Pastel Party</span>
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Little Star</span>
+              <span class="filter-pill-btn" style="padding: 3px 10px; font-size: 0.72rem;">Elegant Soirée</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" onclick="openPreviewModal('pastel-party', 'Pastel Party — Milestone Birthday', 'pastel_party', 'Birthday')" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-regular fa-eye"></i> Preview
+            </button>
+            <button type="button" onclick="useTemplate('pastel_party')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Use Theme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 36px;">
+      <a href="/templates" class="btn-outline" style="padding: 12px 30px; font-weight: 600;">
+        Browse All 18 Canonical Templates <i class="fa-solid fa-arrow-right" style="margin-left: 6px;"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section style="background: #FFFFFF; padding: 90px 24px; border-top: 1px solid #EAE2DB; border-bottom: 1px solid #EAE2DB;">
+    <div style="max-width: 1240px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Effortless Creation</span>
+        <h2 style="font-family: var(--font-display); font-size: 2.5rem; color: var(--color-plum); margin-top: 6px;">Your Event Website in Three Easy Steps</h2>
+      </div>
+
+      <div class="grid-3col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px;">
+        <div style="text-align: center; padding: 24px;">
+          <div class="step-num" style="margin: 0 auto 20px;">1</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; color: var(--color-plum); margin-bottom: 12px;">Choose Your Aesthetic</h3>
+          <p style="color: #6A5E57; font-size: 0.95rem; line-height: 1.7;">
+            Browse 18 bespoke templates spanning royal palace heritage, modern pastel minimalism, and emerald elegance. Preview live across desktop and mobile.
           </p>
         </div>
-        <div style="display: flex; gap: 8px; margin-top: 14px;">
-          <button type="button" onclick="openPreviewModal('arias-sweet-16', 'Aria\'s Sweet 16 Bash', 'birthday', 'Birthday Celebration')" class="btn-outline btn-sm" style="padding: 8px 14px;" title="Preview Template">
-            <i class="fa-solid fa-eye"></i> Preview Template
-          </button>
-          <button type="button" onclick="useTemplate('birthday')" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
-          </button>
+
+        <div style="text-align: center; padding: 24px;">
+          <div class="step-num" style="margin: 0 auto 20px;">2</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; color: var(--color-plum); margin-bottom: 12px;">Personalize in Live Studio</h3>
+          <p style="color: #6A5E57; font-size: 0.95rem; line-height: 1.7;">
+            Add your names, love story timeline, ceremony schedules, photorealistic photo gallery, venue pins, and enable interactive scratch card date reveals.
+          </p>
         </div>
+
+        <div style="text-align: center; padding: 24px;">
+          <div class="step-num" style="margin: 0 auto 20px;">3</div>
+          <h3 style="font-family: var(--font-display); font-size: 1.35rem; color: var(--color-plum); margin-bottom: 12px;">Publish & Collect RSVPs</h3>
+          <p style="color: #6A5E57; font-size: 0.95rem; line-height: 1.7;">
+            Share with guests via WhatsApp or SMS. Collect multi-ceremony headcounts, meal preferences, plus-ones, and heartfelt blessings in real time.
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="/how-it-works" class="btn-gold" style="padding: 12px 28px;">Read Full Step-by-Step Guide</a>
       </div>
     </div>
   </section>
 
-  <!-- Platform Features Grid -->
-  <section id="features" class="features-section">
+  <!-- Key Features Grid -->
+  <section style="padding: 90px 24px; max-width: 1240px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 50px;">
-      <span style="font-family: var(--font-script); font-size: 2.2rem; color: var(--primary-gold-dark); display: block;">Architected for Perfection</span>
-      <h2 style="font-family: var(--font-display); font-size: 2.3rem;">Enterprise Security & Creative Freedom</h2>
+      <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Architected for Hospitality</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.4rem; color: var(--color-plum); margin-top: 6px;">Features Designed for Memorable Celebrations</h2>
     </div>
 
-    <div class="feature-grid">
-      <!-- 1 -->
-      <div class="feature-box">
-        <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
-        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Photorealistic Event Imagery</h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">
-          Bespoke cinematic photography with realistic fabric details, natural skin tones, and luxury editorial composition. No cartoons or 3D renders.
+    <div class="grid-4col" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+      <!-- Feature 1 -->
+      <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-card);">
+        <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 14px;"><i class="fa-solid fa-camera"></i></div>
+        <h4 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--color-plum); margin-bottom: 8px;">Photorealistic Imagery</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          Authentic cinematic photography with natural skin tones, real fabric textures, and luxury lighting. Absolutely zero cartoon art.
         </p>
       </div>
 
-      <!-- 2 -->
-      <div class="feature-box">
-        <div class="feature-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Realistic Scratch Cards</h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">
-          Delight guests with interactive HTML5 canvas scratch cards coated in gold or silver foil that dissolve into confetti upon reveal!
+      <!-- Feature 2 -->
+      <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-card);">
+        <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 14px;"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <h4 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--color-plum); margin-bottom: 8px;">Foil Scratch Cards</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          Guests interact with gold or silver foil canvas scratch cards that dissolve into celebration confetti upon unveiling the date.
         </p>
       </div>
 
-      <!-- 3 -->
-      <div class="feature-box">
-        <div class="feature-icon"><i class="fa-solid fa-user-lock"></i></div>
-        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">3-Tier Privacy Control</h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">
-          Choose between Draft (owner-only), Private Share (gated with guest passcode or expiring single-use invite tokens), or Public.
+      <!-- Feature 3 -->
+      <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-card);">
+        <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 14px;"><i class="fa-solid fa-user-shield"></i></div>
+        <h4 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--color-plum); margin-bottom: 8px;">Passcode Protection</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          Keep family photos, suite numbers, and RSVP submissions private from public search engines with private host passcodes.
         </p>
       </div>
 
-      <!-- 4 -->
-      <div class="feature-box">
-        <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Private Attendee Isolation</h3>
-        <p style="font-size: 0.88rem; color: var(--text-muted);">
-          Guest phone numbers and dietary details are strictly owner-only. Editors receive aggregated counts, and guests never see attendee contact info.
+      <!-- Feature 4 -->
+      <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-card);">
+        <div style="font-size: 1.8rem; color: var(--primary-gold); margin-bottom: 14px;"><i class="fa-solid fa-list-check"></i></div>
+        <h4 style="font-family: var(--font-display); font-size: 1.15rem; color: var(--color-plum); margin-bottom: 8px;">Multi-Event RSVP</h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          Segment your guest list easily: track individual headcounts for Haldi, Sangeet, Nikah, and Reception in one live sheet.
         </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Comparison Table -->
+  <section style="background: #FAF7F2; padding: 80px 24px; border-top: 1px solid #EAE2DB; border-bottom: 1px solid #EAE2DB;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Transparent Tiers</span>
+        <h2 style="font-family: var(--font-display); font-size: 2.3rem; color: var(--color-plum); margin-top: 6px;">Compare Riwaayat Venue Plans</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Choose the perfect level of hospitality for your celebration.</p>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th style="width: 40%;">Feature</th>
+              <th style="width: 20%; text-align: center;">Essential ($0)</th>
+              <th style="width: 20%; text-align: center; background: #FAF0E6; color: var(--primary-gold-dark);">Royale ($49)</th>
+              <th style="width: 20%; text-align: center;">Concierge ($149)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>18 Curated Luxury Templates</strong></td>
+              <td style="text-align: center;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+              <td style="text-align: center; background: #FCF6F0;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+              <td style="text-align: center;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+            </tr>
+            <tr>
+              <td><strong>Digital RSVPs & Headcount</strong></td>
+              <td style="text-align: center;">Up to 50 Guests</td>
+              <td style="text-align: center; background: #FCF6F0;"><strong>Unlimited</strong></td>
+              <td style="text-align: center;"><strong>Unlimited</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Passcode Protection & Privacy</strong></td>
+              <td style="text-align: center;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+              <td style="text-align: center; background: #FCF6F0;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+              <td style="text-align: center;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+            </tr>
+            <tr>
+              <td><strong>Interactive Gold Scratch Card</strong></td>
+              <td style="text-align: center;">Standard</td>
+              <td style="text-align: center; background: #FCF6F0;">Custom Foil & Audio</td>
+              <td style="text-align: center;">Custom Foil & Audio</td>
+            </tr>
+            <tr>
+              <td><strong>Export RSVP Spreadsheet (.CSV)</strong></td>
+              <td style="text-align: center;">—</td>
+              <td style="text-align: center; background: #FCF6F0;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+              <td style="text-align: center;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+            </tr>
+            <tr>
+              <td><strong>Custom Domain Connection</strong></td>
+              <td style="text-align: center;">—</td>
+              <td style="text-align: center; background: #FCF6F0;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+              <td style="text-align: center;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i></td>
+            </tr>
+            <tr>
+              <td><strong>Dedicated Designer Setup</strong></td>
+              <td style="text-align: center;">—</td>
+              <td style="text-align: center; background: #FCF6F0;">—</td>
+              <td style="text-align: center;"><i class="fa-solid fa-check" style="color: #2E7D32;"></i> Done For You</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="/pricing" class="btn-gold">View Full Pricing Details</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section style="padding: 90px 24px; max-width: 1240px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 50px;">
+      <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Love Stories & Testimonials</span>
+      <h2 style="font-family: var(--font-display); font-size: 2.4rem; color: var(--color-plum); margin-top: 6px;">Cherished by Couples Worldwide</h2>
+    </div>
+
+    <div class="grid-3col" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;">
+      <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-card);">
+        <div style="color: var(--primary-gold); margin-bottom: 12px;">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p style="font-style: italic; color: #4A3E39; line-height: 1.7; margin-bottom: 20px;">
+          “Our guests were blown away by the gold scratch card revealing our wedding date! Managing RSVPs for 4 separate ceremonies across 3 days was completely effortless.”
+        </p>
+        <div style="font-weight: 700; color: var(--color-plum);">Ananya & Rohan</div>
+        <div style="font-size: 0.82rem; color: var(--text-muted);">Udaipur Palace Wedding</div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-card);">
+        <div style="color: var(--primary-gold); margin-bottom: 12px;">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p style="font-style: italic; color: #4A3E39; line-height: 1.7; margin-bottom: 20px;">
+          “The Noor Nikah theme captured the exact elegance of our Islamic traditions. Being able to keep our event protected with a private family passcode was paramount.”
+        </p>
+        <div style="font-weight: 700; color: var(--color-plum);">Zainab & Tariq</div>
+        <div style="font-size: 0.82rem; color: var(--text-muted);">Dubai Nikah & Walima</div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 32px; box-shadow: var(--shadow-card);">
+        <div style="color: var(--primary-gold); margin-bottom: 12px;">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        </div>
+        <p style="font-style: italic; color: #4A3E39; line-height: 1.7; margin-bottom: 20px;">
+          “Created our daughter's Sweet 16 website in less than 20 minutes! The music player, live countdown, and wish guestbook made the celebration so unforgettable.”
+        </p>
+        <div style="font-weight: 700; color: var(--color-plum);">The Mehta Family</div>
+        <div style="font-size: 0.82rem; color: var(--text-muted);">Sweet 16 Milestone Celebration</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive FAQs Section -->
+  <section style="background: #FAF7F2; padding: 80px 24px; border-top: 1px solid #EAE2DB; border-bottom: 1px solid #EAE2DB;">
+    <div style="max-width: 840px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold-dark);">Frequently Asked Questions</span>
+        <h2 style="font-family: var(--font-display); font-size: 2.3rem; color: var(--color-plum); margin-top: 6px;">Everything You Need to Know</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Can I preview all templates before signing up?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            Yes! You can preview all 18 templates live right in your browser with responsive desktop and mobile switches. You do not need to enter credit card details to browse or test templates.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>How does the 1-Click "Use This Template" process work?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            When you find a design you love, click "Use This Template". If you are not signed in, you will be invited to create your free account. Your chosen design is immediately cloned into your personal Live Studio with all ceremonies, photo slots, and RSVPs ready to personalize.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>How does private passcode protection work?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            In your event settings, you can choose "Private Share" mode and set a unique passcode. Guests visiting your link must enter the passcode to view private itineraries, maps, and submit RSVPs. Your event will never be indexed by Google.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span>Can guests RSVP for multiple separate ceremonies?</span>
+            <i class="fa-solid fa-chevron-down faq-icon"></i>
+          </div>
+          <div class="faq-a">
+            Yes. South Asian and multi-day celebrations often have different guest lists for Haldi, Sangeet, Nikah, and Reception. Riwaayat Venue lets you configure segmented RSVPs with dietary preferences and plus-one counts.
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="/faqs" class="btn-outline">View All Frequently Asked Questions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section style="background: linear-gradient(135deg, var(--color-plum) 0%, #1A0A12 100%); color: var(--color-ivory); padding: 90px 24px; text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <span style="font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-gold); margin-bottom: 12px; display: inline-block;">
+        Your Milestone Deserves a Masterpiece
+      </span>
+      <h2 style="font-family: var(--font-display); font-size: 2.8rem; margin-bottom: 16px; line-height: 1.25;">
+        Begin Your Bespoke Celebration Website Today
+      </h2>
+      <p style="color: #D6C7BC; font-size: 1.1rem; line-height: 1.7; margin-bottom: 36px;">
+        Choose from 18 curated templates, customize with photorealistic imagery, and share joy with your beloved guests in minutes.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+        <a href="/templates" class="btn-gold" style="padding: 16px 38px; font-size: 1.05rem;">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Explore 18 Luxury Templates
+        </a>
+        <a href="/login?mode=signup" class="btn-outline" style="border-color: var(--primary-gold); color: var(--color-ivory); padding: 16px 34px;">
+          Create Free Draft
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer style="padding: 40px 20px; text-align: center; font-size: 0.88rem; color: var(--text-muted);">
-    <div style="margin-bottom: 14px;">
-      <a href="/privacy" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">Privacy Policy</a> |
-      <a href="/terms" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">Terms of Service</a> |
-      <a href="/login" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">User Dashboard</a>
+  <footer class="footer" style="background: #181116; color: #E0D7D0; padding: 60px 24px 30px; border-top: 1px solid rgba(212,175,55,0.2);">
+    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px;">
+      <div>
+        <a href="/" style="text-decoration: none; display: inline-block; margin-bottom: 14px;">
+          <span style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; letter-spacing: 1.5px; color: var(--primary-gold);">RIWAAYAT VENUE</span>
+        </a>
+        <p style="font-style: italic; font-family: 'Playfair Display', serif; color: var(--color-ivory); font-size: 1rem; margin-bottom: 14px;">
+          “Every Celebration, Beautifully Yours”
+        </p>
+        <p style="font-size: 0.88rem; color: #A89F98; line-height: 1.6; max-width: 340px;">
+          Bespoke luxury digital event invitations, photorealistic imagery, and multi-ceremony guest management.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--color-ivory); margin-bottom: 16px;">Platform</h4>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+          <a href="/templates" style="color: #A89F98;">18 Templates</a>
+          <a href="/how-it-works" style="color: #A89F98;">How It Works</a>
+          <a href="/pricing" style="color: #A89F98;">Pricing Plans</a>
+          <a href="/faqs" style="color: #A89F98;">FAQs</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--color-ivory); margin-bottom: 16px;">Stories & Trust</h4>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+          <a href="/blog" style="color: #A89F98;">Wedding Journal</a>
+          <a href="/about" style="color: #A89F98;">About Our Brand</a>
+          <a href="/contact" style="color: #A89F98;">Concierge Support</a>
+          <a href="/refund" style="color: #A89F98;">Refund Policy</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--color-ivory); margin-bottom: 16px;">Legal</h4>
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
+          <a href="/privacy" style="color: #A89F98;">Privacy Policy</a>
+          <a href="/terms" style="color: #A89F98;">Terms of Service</a>
+          <a href="/login" style="color: #A89F98;">Client Login</a>
+        </div>
+      </div>
     </div>
-    <p style="font-weight: 600; color: var(--text-dark); margin-bottom: 4px;">© 2026 Riwaayat Venue. All rights reserved.</p>
-    <p style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--primary-gold-dark); font-size: 0.92rem;">“Every Celebration, Beautifully Yours”</p>
+
+    <div style="max-width: 1240px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; text-align: center; font-size: 0.82rem; color: #7A726C;">
+      © 2026 Riwaayat Venue. All rights reserved. Designed with cultural reverence and architectural refinement.
+    </div>
   </footer>
 
-  <!-- Interactive In-Page Template Preview Modal (No New Tab) -->
+  <!-- Responsive Live Template Preview Modal -->
   <div id="template-preview-modal" class="preview-modal-backdrop" style="display: none;">
     <div class="preview-modal-card">
       <div class="preview-modal-header">
@@ -327,7 +696,6 @@
           </div>
         </div>
 
-        <!-- Responsive Viewport Switcher -->
         <div class="preview-device-switcher">
           <button type="button" id="preview-btn-desktop" class="preview-device-btn active" onclick="setPreviewDevice('desktop')" title="Desktop View">
             <i class="fa-solid fa-desktop"></i> <span>Desktop</span>
@@ -337,12 +705,11 @@
           </button>
         </div>
 
-        <!-- Actions -->
         <div style="display: flex; align-items: center; gap: 10px;">
           <button type="button" id="preview-modal-clone-btn" class="btn-gold btn-sm" onclick="handlePreviewClone()">
             <i class="fa-solid fa-wand-magic-sparkles"></i> Use This Template
           </button>
-          <a id="preview-modal-fullpage-link" href="#" class="btn-outline btn-sm" title="View Fullscreen in same window">
+          <a id="preview-modal-fullpage-link" href="#" class="btn-outline btn-sm" title="View Fullpage in current window">
             <i class="fa-solid fa-expand"></i> Full View
           </a>
           <button type="button" class="preview-close-btn" onclick="closePreviewModal()" title="Close Preview">
@@ -366,6 +733,11 @@
   <script>
     let currentPreviewSlug = '';
     let currentPreviewType = '';
+
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      item.classList.toggle('active');
+    }
 
     function openPreviewModal(slug, title, eventType, typeBadge) {
       currentPreviewSlug = slug;
@@ -433,11 +805,8 @@
       }
     }
 
-    // Close on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closePreviewModal();
-      }
+      if (e.key === 'Escape') closePreviewModal();
     });
 
     async function useTemplate(type) {
@@ -447,10 +816,10 @@
         window.location.href = `/login?mode=signup&template=${encodeURIComponent(type)}`;
       } else {
         try {
-          API.showToast('Your account is ready. Creating your template…');
+          API.showToast('Setting up your bespoke template…');
           const res = await API.cloneTemplate(type);
           sessionStorage.removeItem('pendingTemplateType');
-          API.showToast(res.message || 'Your template is ready to customize.');
+          API.showToast(res.message || 'Your template is ready to personalize.');
           setTimeout(() => {
             window.location.href = `/editor?id=${res.eventId}`;
           }, 400);
@@ -460,7 +829,6 @@
         }
       }
     }
-    const tryTemplate = useTemplate;
   </script>
 </body>
 </html>

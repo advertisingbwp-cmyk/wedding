@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard.html
+Disallow: /editor.html
+Disallow: /admin.html
+Disallow: /login.html
+
+Sitemap: https://riwaayatvenue.com/sitemap.xml

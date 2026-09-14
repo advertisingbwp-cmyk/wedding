@@ -544,3 +544,384 @@ a {
   display: block;
 }
 
+/* ===================================================
+   RIWAAYAT VENUE — LUXURY MOTION & ANIMATION SYSTEM
+   Original motion design tailored for celebratory websites.
+   =================================================== */
+
+/* Color Tokens Extended */
+:root {
+  --color-plum: #3E1F30;
+  --color-ivory: #FDFBF7;
+  --color-blush: #F4D6D2;
+  --color-peach: #FCE4D8;
+  --color-lavender: #E8E3F2;
+  --color-emerald: #004D40;
+  --color-beige: #F5EBE1;
+  --color-navy: #0A192F;
+}
+
+/* 1. Page Load Gentle Fade & Upward Reveal */
+@keyframes luxuryFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: luxuryFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 2. Hero Text Stagger */
+.stagger-1 {
+  opacity: 0;
+  animation: luxuryFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.stagger-2 {
+  opacity: 0;
+  animation: luxuryFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
+}
+
+.stagger-3 {
+  opacity: 0;
+  animation: luxuryFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.46s forwards;
+}
+
+.stagger-4 {
+  opacity: 0;
+  animation: luxuryFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.64s forwards;
+}
+
+/* 3. Soft Floral / Leaf Sway Motion */
+@keyframes gentleSway {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: rotate(2.5deg) translateY(-4px);
+  }
+}
+
+.sway-element {
+  display: inline-block;
+  animation: gentleSway 6s ease-in-out infinite;
+}
+
+/* 4. Floating Hearts for Romantic Wedding Themes */
+@keyframes floatingHeart {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6) rotate(0deg);
+  }
+  20% {
+    opacity: 0.75;
+    transform: translateY(-20px) scale(1) rotate(6deg);
+  }
+  80% {
+    opacity: 0.6;
+    transform: translateY(-90px) scale(1.05) rotate(-6deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-130px) scale(0.85) rotate(10deg);
+  }
+}
+
+.floating-heart {
+  position: absolute;
+  pointer-events: none;
+  color: rgba(244, 214, 210, 0.75);
+  font-size: 1.1rem;
+  animation: floatingHeart 4.5s ease-in-out infinite;
+}
+
+/* 5. Gold Dust & Sparkles Drift */
+@keyframes sparkleGlow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15) rotate(180deg);
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.8));
+  }
+}
+
+.sparkle-icon {
+  display: inline-block;
+  color: var(--primary-gold);
+  animation: sparkleGlow 3.5s ease-in-out infinite;
+}
+
+/* 6. Section Scroll Reveal (IntersectionObserver target) */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 7. Refined Hover Lift with Gold Border on Template Cards */
+.template-card {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: var(--radius-md);
+  border: 1px solid #EAE2DB;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.template-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.65);
+  box-shadow: 0 16px 36px rgba(62, 31, 48, 0.12), 0 0 0 1px rgba(212, 175, 55, 0.2);
+}
+
+.template-card-image-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 62.5%; /* 16:10 aspect */
+  overflow: hidden;
+  background: #F5EBE1;
+}
+
+.template-card-image-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.template-card:hover .template-card-image-wrap img {
+  transform: scale(1.05);
+}
+
+.template-card-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(26, 35, 126, 0.85);
+  backdrop-filter: blur(8px);
+  color: #FFFFFF;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.template-card-badge.badge-indian {
+  background: rgba(183, 28, 28, 0.88);
+}
+
+.template-card-badge.badge-muslim {
+  background: rgba(0, 77, 64, 0.88);
+}
+
+.template-card-badge.badge-birthday {
+  background: rgba(194, 24, 91, 0.88);
+}
+
+.template-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.template-card-title {
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+
+.template-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+.template-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.template-tag-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #F7F3EE;
+  color: #615254;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  border: 1px solid #EAE2DB;
+  transition: all 0.2s ease;
+}
+
+.template-tag-pill:hover {
+  background: var(--color-beige);
+  color: var(--text-dark);
+}
+
+.template-card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border-top: 1px solid #F0EAE1;
+  padding-top: 14px;
+}
+
+/* 8. Filter Pills Bar */
+.filter-pills-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.filter-pill-btn {
+  background: #FFFFFF;
+  border: 1.5px solid #EAE2DB;
+  color: #5C4A4D;
+  padding: 7px 16px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.filter-pill-btn:hover {
+  border-color: var(--primary-gold);
+  color: var(--text-dark);
+  transform: translateY(-1px);
+}
+
+.filter-pill-btn.active {
+  background: var(--color-plum);
+  color: #FDFBF7;
+  border-color: var(--color-plum);
+  box-shadow: 0 4px 12px rgba(62, 31, 48, 0.25);
+}
+
+/* 9. Countdown Digit Flip Pulse */
+@keyframes digitPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); color: var(--primary-gold); }
+  100% { transform: scale(1); }
+}
+
+.digit-pulse {
+  animation: digitPulse 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 10. Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 12, 0.92);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  transform: scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-modal.active .lightbox-content {
+  transform: scale(1);
+}
+
+/* 11. Scratch Card Canvas Container */
+.scratch-card-wrapper {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  height: 140px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 2px solid var(--primary-gold);
+}
+
+.scratch-card-underlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #FFFDF8 0%, #F5EBE1 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-plum);
+}
+
+.scratch-card-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+/* 12. Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .floating-heart, .sparkle-icon, .sway-element {
+    animation: none !important;
+  }
+}
+

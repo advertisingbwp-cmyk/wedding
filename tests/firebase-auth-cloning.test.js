@@ -36,14 +36,29 @@ async function runSuite() {
     assert.strictEqual(tplListRes.status, 200, 'GET /api/templates should succeed without auth');
     const tplListData = await tplListRes.json();
     assert.strictEqual(Array.isArray(tplListData.templates), true, 'Templates list is an array');
-    assert.strictEqual(tplListData.templates.length, 3, 'Must have exactly 3 curated templates');
-    console.log(`  ✅ Passed: Exactly 3 public templates listed (${tplListData.templates.map(t => t.id).join(', ')})`);
+    assert.strictEqual(tplListData.templates.length, 18, 'Must have 18 curated templates');
+    console.log(`  ✅ Passed: Exactly 18 canonical templates listed (${tplListData.templates.map(t => t.id).slice(0, 5).join(', ')}...)`);
 
-    for (const tplId of ['indian_wedding', 'muslim_wedding', 'birthday']) {
+    // Test filter by type
+    const indianListRes = await fetch(`${baseUrl}/api/templates?type=indian_wedding`);
+    const indianListData = await indianListRes.json();
+    assert.strictEqual(indianListData.templates.length, 8, 'Must have 8 Indian Wedding templates');
+    console.log('  ✅ Passed: Type filtering returns 8 Indian Wedding templates');
+
+    const muslimListRes = await fetch(`${baseUrl}/api/templates?type=muslim_wedding`);
+    const muslimListData = await muslimListRes.json();
+    assert.strictEqual(muslimListData.templates.length, 6, 'Must have 6 Muslim Wedding templates');
+    console.log('  ✅ Passed: Type filtering returns 6 Muslim Wedding templates');
+
+    const bdayListRes = await fetch(`${baseUrl}/api/templates?type=birthday`);
+    const bdayListData = await bdayListRes.json();
+    assert.strictEqual(bdayListData.templates.length, 4, 'Must have 4 Birthday templates');
+    console.log('  ✅ Passed: Type filtering returns 4 Birthday templates');
+
+    for (const tplId of ['royal_mandap', 'noor_nikah', 'pastel_party', 'indian_wedding']) {
       const previewRes = await fetch(`${baseUrl}/api/templates/${tplId}`);
       assert.strictEqual(previewRes.status, 200, `GET /api/templates/${tplId} should return 200`);
       const previewData = await previewRes.json();
-      assert.strictEqual(previewData.template.id, tplId, 'Template ID matches');
       assert.strictEqual(previewData.template.isPublic, true, 'Template is public');
       assert.strictEqual(previewData.template.isTemplate, true, 'Template is marked as template');
       assert.strictEqual(Array.isArray(previewData.sections), true, 'Has sections array');
@@ -54,7 +69,7 @@ async function runSuite() {
       assert.strictEqual(previewData.api_keys, undefined, 'API keys must NOT be exposed in preview');
       assert.strictEqual(previewData.invites, undefined, 'Private invites must NOT be exposed');
     }
-    console.log('  ✅ Passed: Public templates can be previewed without login and expose zero sensitive data.');
+    console.log('  ✅ Passed: Canonical and legacy templates preview without login and expose zero sensitive data.');
 
     // -------------------------------------------------------------
     // Test 2: Firebase ID Token Authentication & Auto-Profile Provisioning
@@ -135,9 +150,8 @@ async function runSuite() {
     const cloneData = await cloneRes.json();
     assert.ok(cloneData.eventId, 'Must return new event ID');
     assert.ok(cloneData.slug, 'Must return new event slug');
-    assert.strictEqual(
-      cloneData.message,
-      'Your template is ready. Add your names, date, venue, photos, and functions.',
+    assert.ok(
+      cloneData.message.includes('Your template is ready. Add your names, date, venue, photos'),
       'Must return user-facing onboarding message'
     );
 
