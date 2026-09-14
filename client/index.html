@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CelebrationCraft — Luxury Multi-Tenant Event Website Builder</title>
-  <meta name="description" content="Create bespoke, privacy-first invitation websites for Indian Weddings, Muslim Weddings, and Birthday Celebrations with cartoon illustrations, scratch cards, and real-time RSVPs.">
+  <title>Riwaayat Venue — Luxury Event Website Builder</title>
+  <meta name="description" content="Design bespoke, interactive invitation websites for Indian Weddings, Muslim Weddings, and Birthday Celebrations with photorealistic event imagery, realistic scratch cards, live countdowns, and privacy-first sharing.">
+  <meta property="og:title" content="Riwaayat Venue — Luxury Event Website Builder">
+  <meta property="og:description" content="Every Celebration, Beautifully Yours. Design bespoke invitation websites with photorealistic imagery and private sharing.">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -49,8 +51,16 @@
     .landing-subtitle {
       font-size: 1.18rem;
       color: var(--text-muted);
-      max-width: 680px;
+      max-width: 760px;
       margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+    .landing-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--primary-gold-dark);
+      font-size: 1.3rem;
+      margin-bottom: 18px;
     }
     .cta-group {
       display: flex;
@@ -135,8 +145,8 @@
   <!-- Top Navbar -->
   <header class="platform-navbar">
     <a href="/" class="platform-brand">
-      <i class="fa-solid fa-crown"></i>
-      <span>CelebrationCraft</span>
+      <i class="fa-solid fa-crown" style="color: var(--primary-gold);"></i>
+      <span>RIWAAYAT VENUE</span>
     </a>
 
     <ul class="platform-nav-links">
@@ -154,11 +164,12 @@
     <div class="landing-badge">
       <i class="fa-solid fa-wand-magic-sparkles"></i> The Luxury Event Website Platform
     </div>
+    <div class="landing-tagline">“Every Celebration, Beautifully Yours”</div>
     <h1 class="landing-title">
       Craft Dream Invitation Websites for Life's Greatest Milestones
     </h1>
     <p class="landing-subtitle">
-      Design bespoke, interactive invitation websites for <strong>Indian Weddings</strong>, <strong>Muslim Weddings</strong>, and <strong>Birthday Celebrations</strong> with custom cartoon characters, realistic scratch cards, live countdowns, and bank-grade privacy isolation.
+      Design bespoke, interactive invitation websites for <strong>Indian Weddings</strong>, <strong>Muslim Weddings</strong>, and <strong>Birthday Celebrations</strong> with photorealistic event imagery, realistic scratch cards, live countdowns, and privacy-first sharing.
     </p>
 
     <div class="cta-group">
@@ -170,10 +181,10 @@
       </a>
     </div>
 
-    <!-- Quick Demo Pill -->
+    <!-- Quick Trust Indicators -->
     <div style="font-size: 0.9rem; color: var(--text-muted);">
       <i class="fa-solid fa-shield-halved" style="color: #2E7D32;"></i> 
-      Multi-tenant row-level security • AES-256 encrypted API keys • 1-click demo accounts
+      Multi-tenant row-level security • Photorealistic luxury event imagery • Private attendee isolation
     </div>
   </section>
 
@@ -192,7 +203,7 @@
           <div class="badge-status badge-public" style="margin-bottom: 8px;">Indian Wedding</div>
           <h3 style="font-size: 1.4rem; font-family: var(--font-display); margin-bottom: 8px;">Vijay & Rashima</h3>
           <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 14px;">
-            Pre-configured with Haldi (yellow floral), Mehendi (green ethnic), Sangeet (glam Indo-western), Sacred Mandap Wedding, and Grand Reception.
+            Pre-configured with Haldi (yellow floral), Mehendi (green ethnic), Sangeet (glam Indo-western), Sacred Mandap Wedding, and Grand Reception. Featuring photorealistic editorial photography.
           </p>
         </div>
         <div style="display: flex; gap: 8px; margin-top: 14px;">
@@ -257,10 +268,10 @@
     <div class="feature-grid">
       <!-- 1 -->
       <div class="feature-box">
-        <div class="feature-icon"><i class="fa-solid fa-paintbrush"></i></div>
-        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Live Interactive Studio</h3>
+        <div class="feature-icon"><i class="fa-solid fa-camera-retro"></i></div>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Photorealistic Event Imagery</h3>
         <p style="font-size: 0.88rem; color: var(--text-muted);">
-          Drag, reorder, hide, rename, and customize sections with real-time responsive device previews (Desktop, Tablet, Mobile).
+          Bespoke cinematic photography with realistic fabric details, natural skin tones, and luxury editorial composition. No cartoons or 3D renders.
         </p>
       </div>
 
@@ -285,9 +296,9 @@
       <!-- 4 -->
       <div class="feature-box">
         <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Encrypted API Keys</h3>
+        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Private Attendee Isolation</h3>
         <p style="font-size: 0.88rem; color: var(--text-muted);">
-          Third-party keys (Google Maps, SendGrid) are encrypted with AES-256-GCM at rest and masked in the UI. Strict row-level security.
+          Guest phone numbers and dietary details are strictly owner-only. Editors receive aggregated counts, and guests never see attendee contact info.
         </p>
       </div>
     </div>
@@ -300,7 +311,8 @@
       <a href="/terms" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">Terms of Service</a> |
       <a href="/login" style="margin: 0 12px; color: var(--text-dark); font-weight: 600;">User Dashboard</a>
     </div>
-    <p>© 2026 CelebrationCraft Platform. All rights reserved. Crafted with love and bank-grade privacy.</p>
+    <p style="font-weight: 600; color: var(--text-dark); margin-bottom: 4px;">© 2026 Riwaayat Venue. All rights reserved.</p>
+    <p style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--primary-gold-dark); font-size: 0.92rem;">“Every Celebration, Beautifully Yours”</p>
   </footer>
 
   <script src="js/api.js"></script>
@@ -308,15 +320,18 @@
     async function tryTemplate(type) {
       const token = API.getToken();
       if (!token) {
-        // Automatically sign in with instant demo account so user can test the template without friction!
-        try {
-          await API.login('demo@eventmaker.com', 'Password123!');
-          window.location.href = `/dashboard?tryTemplate=${type}`;
-        } catch {
-          window.location.href = `/login?tryTemplate=${type}`;
-        }
+        window.location.href = `/login?mode=signup&template=${type}`;
       } else {
-        window.location.href = `/dashboard?tryTemplate=${type}`;
+        try {
+          API.showToast('Cloning template into your account...');
+          const res = await API.cloneTemplate(type);
+          API.showToast('Template cloned! Redirecting to studio...');
+          setTimeout(() => {
+            window.location.href = `/editor?id=${res.eventId}`;
+          }, 500);
+        } catch (err) {
+          window.location.href = `/dashboard?tryTemplate=${type}`;
+        }
       }
     }
   </script>

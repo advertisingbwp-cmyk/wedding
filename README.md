@@ -1,30 +1,34 @@
-# CelebrationCraft — Luxury Event Website Builder Platform & Indian Wedding Suite
+# Riwaayat Venue — Luxury Event Website Builder Platform & Celebration Suite
 
-A bespoke, privacy-first, multi-tenant event website builder platform designed for **Indian Weddings**, **Muslim Weddings**, and **Birthday Celebrations**.
+> *“Every Celebration, Beautifully Yours”*
+
+A bespoke, privacy-first, multi-tenant event website builder platform designed for **Indian Weddings**, **Muslim Weddings**, and **Birthday Celebrations** with photorealistic cinematic event imagery, realistic scratch cards, live countdowns, and granular role-based access control (RBAC).
 
 ---
 
 ## 🌟 Key Features
 
-1. **Three Celebration Presets**:
-   - **Indian Wedding**: Haldi (yellow floral), Mehendi (green ethnic), Sangeet (glam Indo-western), Sacred Mandap Wedding, and Grand Reception with custom couple illustrations.
+1. **Three Curated Celebration Presets**:
+   - **Indian Wedding**: Haldi (yellow floral), Mehendi (green ethnic), Sangeet (glam Indo-western), Sacred Mandap Wedding, and Grand Reception with photorealistic editorial photography.
    - **Muslim Wedding**: Dholki & Mayun, Mehendi, Sacred Nikah, and Grand Walima with emerald, gold & ivory arabesque aesthetics.
-   - **Birthday Celebration**: Red Carpet Welcome, Party Games & Trivia, Cake Cutting, Dinner Buffet, and DJ Dance Party.
+   - **Birthday Celebration**: Red Carpet Welcome, Party Games & Trivia, Cake Cutting, Dinner Buffet, and DJ Dance Party with luxury pastel aesthetics.
 2. **Interactive Elements**:
    - Realistic HTML5 Canvas Gold Foil Scratch Card
    - Live Auspicious Countdown Timer
-   - Couple Photo Gallery with Lightbox
+   - Photorealistic Couple Photo Gallery with Lightbox
    - Digital Wishes Wall / Guestbook
    - Google Maps Venue Navigation
    - Synthesized Romance Ambient Audio (Web Audio API)
-3. **Enterprise Privacy & Security**:
-   - Row-Level Tenant Isolation
-   - Cloud Firestore Security Rules (`firestore.rules`)
+3. **Enterprise Privacy & Granular RBAC**:
+   - Distinct Roles: `owner`, `editor`, `viewer`, `guest`
+   - Cloud Firestore Security Rules (`firestore.rules`) enforcing RBAC
+   - Disallowed direct client writes on RSVPs and Guestbook (routed via validated, rate-limited backend with honeypot spam protection)
+   - Attendee Data Segregation: phone numbers and meal details strictly owner-only; editors receive aggregate metrics
    - Firebase Google 1-Click OAuth
    - AES-256-GCM Encrypted API Keys at rest
    - 3-Tier Visibility: Draft, Private Passcode / Expiring Link, and Public
-4. **1-Click "Try This Template"**:
-   - Instant template cloning from the landing page or dashboard into the Live Responsive Studio.
+4. **1-Click Template Cloning**:
+   - Instant template cloning from the landing page or dashboard into the user's private account.
 5. **Standalone Site Included**:
    - `standalone-wedding-site/`: Single static website for Vijay & Rashima.
 
@@ -50,11 +54,11 @@ npm install
 npm start
 # Open http://localhost:4000
 
-# Run Firestore Security Rules Tests
+# Run Security & RBAC Tests
 npm test
 ```
 
 ---
 
 ## 📜 License
-MIT License. Crafted with love.
+© 2026 Riwaayat Venue. All rights reserved. Crafted with love and bank-grade privacy.

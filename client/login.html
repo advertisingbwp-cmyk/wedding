@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In / Register — CelebrationCraft</title>
+  <title>Sign In / Register — Riwaayat Venue</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -51,14 +51,6 @@
     .auth-tab-btn.active {
       color: var(--primary-gold-dark);
       border-color: var(--primary-gold);
-    }
-    .demo-pill {
-      background: #FFF9E6;
-      border: 1px dashed var(--primary-gold);
-      border-radius: var(--radius-sm);
-      padding: 14px;
-      text-align: center;
-      margin-bottom: 20px;
     }
     .btn-google {
       display: flex;
@@ -119,28 +111,17 @@
       <a href="/" class="btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
         <i class="fa-solid fa-house"></i> Home
       </a>
-      <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 500;">CelebrationCraft</span>
+      <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600; letter-spacing: 0.05em;">RIWAAYAT VENUE</span>
     </div>
 
     <div style="text-align: center; margin-bottom: 24px;">
       <a href="/" class="platform-brand" style="justify-content: center; margin-bottom: 8px;">
-        <i class="fa-solid fa-crown"></i>
-        <span>CelebrationCraft</span>
+        <i class="fa-solid fa-crown" style="color: var(--primary-gold);"></i>
+        <span>RIWAAYAT VENUE</span>
       </a>
-      <p style="font-size: 0.9rem; color: var(--text-muted);">Secure Multi-Tenant Event Studio</p>
-    </div>
-
-    <!-- Quick Demo Sign In Box -->
-    <div class="demo-pill">
-      <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary-gold-dark); margin-bottom: 4px;">
-        <i class="fa-solid fa-bolt"></i> Instant Demo Login
-      </div>
-      <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 10px;">
-        Explore pre-seeded Indian, Muslim, and Birthday templates:
-      </p>
-      <button type="button" id="demo-login-btn" class="btn-gold btn-sm" style="width: 100%; justify-content: center;">
-        <i class="fa-solid fa-user-check"></i> Sign In as Demo (Vijay & Rashima)
-      </button>
+      <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-dark); margin-bottom: 4px;">Welcome to Riwaayat Venue</h2>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 4px;">Create and share beautiful celebrations, privately.</p>
+      <div style="font-family: 'Playfair Display', serif; font-style: italic; color: var(--primary-gold-dark); font-size: 0.84rem;">“Every Celebration, Beautifully Yours”</div>
     </div>
 
     <!-- Google 1-Click Sign-In -->
@@ -276,17 +257,6 @@
     if (new URLSearchParams(window.location.search).get('mode') === 'signup') {
       switchTab('register');
     }
-
-    // Demo Login 1-Click
-    document.getElementById('demo-login-btn').addEventListener('click', async () => {
-      try {
-        await API.login('demo@eventmaker.com', 'Password123!');
-        API.showToast('Welcome back, Vijay & Rashima!');
-        setTimeout(() => { window.location.href = '/dashboard'; }, 400);
-      } catch (err) {
-        alert(err.message);
-      }
-    });
 
     // Handle Login
     document.getElementById('login-form').addEventListener('submit', async (e) => {

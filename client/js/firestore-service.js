@@ -1,5 +1,5 @@
 /**
- * FIRESTORE SERVICE ENGINE — CELEBRATIONCRAFT
+ * FIRESTORE SERVICE ENGINE — RIWAAYAT VENUE
  * Implements strict client-side Firestore access adhering to Firestore Security Rules.
  * 
  * Architecture Rules:

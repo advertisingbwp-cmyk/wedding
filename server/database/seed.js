@@ -9,22 +9,25 @@
 const db = require('./db');
 const { hashPassword } = require('../config/security');
 
-function seedDatabase() {
-  console.log('Seeding demo accounts and event templates...');
+const crypto = require('node:crypto');
 
-  // 1. Create Demo User
-  const existingUser = db.prepare('SELECT id FROM users WHERE email = ?').get('demo@eventmaker.com');
+function seedDatabase() {
+  console.log('Seeding public template showcases (Riwaayat Venue)...');
+
+  // 1. Internal System Template Author (No public login / credentials)
+  const templateEmail = 'system-templates@riwaayatvenue.internal';
+  const existingUser = db.prepare('SELECT id FROM users WHERE email = ?').get(templateEmail);
   let userId;
 
   if (!existingUser) {
-    const passwordHash = hashPassword('Password123!');
+    const unguessableHash = 'INTERNAL_TEMPLATE_LOCKED_' + crypto.randomBytes(32).toString('hex');
     const insertUser = db.prepare(`
       INSERT INTO users (email, password_hash, full_name)
       VALUES (?, ?, ?)
     `);
-    const result = insertUser.run('demo@eventmaker.com', passwordHash, 'Vijay & Rashima');
+    const result = insertUser.run(templateEmail, unguessableHash, 'Riwaayat Venue Curated Templates');
     userId = result.lastInsertRowid;
-    console.log(`Created demo user with ID: ${userId}`);
+    console.log(`Initialized internal template author with ID: ${userId}`);
   } else {
     userId = existingUser.id;
   }

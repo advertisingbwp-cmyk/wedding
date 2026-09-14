@@ -7,20 +7,14 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/db');
 const { requireAuth } = require('../middleware/auth');
-const { requireEventOwnership } = require('../middleware/rbac');
-const { checkRateLimit } = require('../services/firestoreSubmission');
+const { getEventRole, requireEventOwner } = require('../middleware/rbac');
+const { handleRSVPSubmission, checkRateLimit } = require('../services/firestoreSubmission');
 
-// 1. Public / Guest RSVP submission
+// 1. Public / Guest RSVP submission (Passed through Server Validation, Honeypot & Rate-Limiter)
 router.post('/:id/rsvp', (req, res) => {
   try {
     const clientIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || '127.0.0.1';
-    if (!checkRateLimit(clientIp, 10)) {
-      return res.status(429).json({ error: 'Too many submissions. Please wait a minute.' });
-    }
-
-    if (req.body._hp_honey_field) {
-      return res.status(400).json({ error: 'Automated submission rejected.' });
-    }
+    const appCheckToken = req.headers['x-firebase-appcheck'];
 
     const eventId = req.params.id;
     const event = db.prepare('SELECT id, visibility FROM events WHERE id = ?').get(eventId);
@@ -29,23 +23,8 @@ router.post('/:id/rsvp', (req, res) => {
       return res.status(404).json({ error: 'Event not found.' });
     }
 
-    const {
-      guest_name,
-      phone,
-      email,
-      guest_count,
-      attendance,
-      meal_preference,
-      functions_attending,
-      message
-    } = req.body;
-
-    if (!guest_name || !phone) {
-      return res.status(400).json({ error: 'Guest name and phone number are required.' });
-    }
-
-    const validAttendances = ['attending', 'not_attending', 'maybe'];
-    const sanitizedAttendance = validAttendances.includes(attendance) ? attendance : 'attending';
+    // Validate and sanitize input with honeypot, rate-limit, and XSS sanitization
+    const validated = handleRSVPSubmission(req.body, clientIp, appCheckToken);
 
     const insert = db.prepare(`
       INSERT INTO rsvps (
@@ -57,33 +36,54 @@ router.post('/:id/rsvp', (req, res) => {
 
     insert.run(
       event.id,
-      guest_name.trim(),
-      phone.trim(),
-      email ? email.trim() : null,
-      parseInt(guest_count, 10) || 1,
-      sanitizedAttendance,
-      meal_preference || 'Vegetarian',
-      JSON.stringify(functions_attending || []),
-      message ? message.trim() : null
+      validated.publicData.guestName,
+      validated.privateAttendeeData.phone,
+      validated.privateAttendeeData.email,
+      validated.publicData.guestsCount,
+      validated.publicData.attendance,
+      validated.privateAttendeeData.mealPreference,
+      JSON.stringify(validated.privateAttendeeData.functionsAttending),
+      validated.privateAttendeeData.privateNotes
     );
 
     res.status(201).json({
-      message: 'Thank you! Your RSVP has been confirmed.'
+      message: 'Thank you! Your RSVP has been confirmed.',
+      guest: validated.publicData.guestName
     });
   } catch (err) {
+    if (err.message.includes('Too many requests') || err.message.includes('Spam') || err.message.includes('rejected')) {
+      return res.status(429).json({ error: err.message });
+    }
+    if (err.message.includes('required') || err.message.includes('App Check')) {
+      return res.status(400).json({ error: err.message });
+    }
     console.error('RSVP submission error:', err);
     res.status(500).json({ error: 'Failed to record RSVP.' });
   }
 });
 
-// 2. Owner-Only: Get all RSVPs & summary metrics
-router.get('/:id/rsvps', requireAuth, requireEventOwnership, (req, res) => {
+// 2. Role-Gated: Get RSVPs & Summary Metrics
+// - Owner: Full access with phone numbers, emails, and attendee notes
+// - Editor: Aggregated summary metrics only; guest contact info redacted
+// - Viewer / Guest: Completely blocked (403)
+router.get('/:id/rsvps', requireAuth, (req, res) => {
   try {
-    const rsvps = db.prepare(`
+    const eventId = req.params.id;
+    const event = db.prepare('SELECT * FROM events WHERE id = ?').get(eventId);
+    if (!event) {
+      return res.status(404).json({ error: 'Event not found.' });
+    }
+
+    const role = getEventRole(req.user.id, event);
+    if (role !== 'owner' && role !== 'editor') {
+      return res.status(403).json({ error: 'Access denied: You do not have permission to view RSVP records.' });
+    }
+
+    const rawRsvps = db.prepare(`
       SELECT * FROM rsvps
       WHERE event_id = ?
       ORDER BY created_at DESC
-    `).all(req.event.id);
+    `).all(event.id);
 
     // Compute summary metrics
     let totalGuests = 0;
@@ -92,7 +92,7 @@ router.get('/:id/rsvps', requireAuth, requireEventOwnership, (req, res) => {
     let maybeCount = 0;
     const mealBreakdown = {};
 
-    for (let r of rsvps) {
+    for (let r of rawRsvps) {
       const count = parseInt(r.guest_count, 10) || 1;
       totalGuests += count;
       if (r.attendance === 'attending') {
@@ -106,16 +106,35 @@ router.get('/:id/rsvps', requireAuth, requireEventOwnership, (req, res) => {
       }
     }
 
+    // Role-based redaction: only OWNER gets private phone numbers and personal notes
+    const sanitizedRsvps = rawRsvps.map(r => {
+      if (role === 'owner') {
+        return r; // Owner gets full details
+      }
+      // Editors get redacted attendee data
+      return {
+        id: r.id,
+        guest_name: r.guest_name,
+        guest_count: r.guest_count,
+        attendance: r.attendance,
+        phone: '[REDACTED - OWNER ACCESS ONLY]',
+        email: r.email ? '[REDACTED]' : null,
+        meal_preference: r.meal_preference,
+        created_at: r.created_at
+      };
+    });
+
     res.json({
+      role,
       metrics: {
-        totalRsvps: rsvps.length,
+        totalRsvps: rawRsvps.length,
         totalGuests,
         attendingGuests,
         decliningCount,
         maybeCount,
         mealBreakdown
       },
-      rsvps
+      rsvps: sanitizedRsvps
     });
   } catch (err) {
     console.error('Fetch RSVPs error:', err);
@@ -124,7 +143,7 @@ router.get('/:id/rsvps', requireAuth, requireEventOwnership, (req, res) => {
 });
 
 // 3. Owner-Only: Export RSVPs as CSV
-router.get('/:id/rsvps/export', requireAuth, requireEventOwnership, (req, res) => {
+router.get('/:id/rsvps/export', requireAuth, requireEventOwner, (req, res) => {
   try {
     const rsvps = db.prepare('SELECT * FROM rsvps WHERE event_id = ? ORDER BY created_at ASC').all(req.event.id);
 

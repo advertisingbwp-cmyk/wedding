@@ -39,7 +39,24 @@ class FirestoreRulesSimulator {
     return this.signedIn(auth) && this.members.has(`${eventId}/${auth.uid}`);
   }
 
-  canManage(auth, eventId) {
+  getMemberRole(auth, eventId) {
+    const m = this.members.get(`${eventId}/${auth.uid}`);
+    return m ? m.role : null;
+  }
+
+  isEditor(auth, eventId) {
+    return this.isMember(auth, eventId) && this.getMemberRole(auth, eventId) === 'editor';
+  }
+
+  isViewer(auth, eventId) {
+    return this.isMember(auth, eventId) && this.getMemberRole(auth, eventId) === 'viewer';
+  }
+
+  canEdit(auth, eventId) {
+    return this.isOwner(auth, eventId) || this.isEditor(auth, eventId);
+  }
+
+  canViewPrivate(auth, eventId) {
     return this.isOwner(auth, eventId) || this.isMember(auth, eventId);
   }
 
@@ -55,13 +72,16 @@ class FirestoreRulesSimulator {
   canReadEvent(auth, eventId) {
     const ev = this.getEvent(eventId);
     if (!ev) return false;
-    return Boolean(ev.visibility === 'public' || this.canManage(auth, eventId));
+    return Boolean(ev.visibility === 'public' || this.canViewPrivate(auth, eventId));
   }
 
-  canUpdateEvent(auth, eventId, newOwnerId) {
+  canUpdateEvent(auth, eventId, newOwnerId, newVisibility) {
     const ev = this.getEvent(eventId);
     if (!ev) return false;
-    return Boolean(this.canManage(auth, eventId) && newOwnerId === ev.ownerId);
+    if (!this.canEdit(auth, eventId)) return false;
+    if (newOwnerId !== ev.ownerId) return false;
+    if (!this.isOwner(auth, eventId) && newVisibility !== ev.visibility) return false;
+    return true;
   }
 
   canDeleteEvent(auth, eventId) {
@@ -69,11 +89,21 @@ class FirestoreRulesSimulator {
   }
 
   canReadPrivateDoc(auth, eventId) {
-    return Boolean(this.canManage(auth, eventId));
+    return Boolean(this.isOwner(auth, eventId));
   }
 
   canReadRSVPs(auth, eventId) {
-    return Boolean(this.canManage(auth, eventId));
+    return Boolean(this.canEdit(auth, eventId));
+  }
+
+  canDirectClientCreateRSVP(auth, eventId) {
+    // allow create: if false;
+    return false;
+  }
+
+  canDirectClientCreateGuestbook(auth, eventId) {
+    // allow create: if false;
+    return false;
   }
 }
 
@@ -83,6 +113,7 @@ function runSecurityTests() {
 
   const userA = { uid: 'user_A_123', email: 'userA@example.com' };
   const userB = { uid: 'user_B_456', email: 'userB@example.com' };
+  const userC = { uid: 'user_C_789', email: 'userC@example.com' };
   const unauthenticated = null;
 
   // Test 1: User Profile Isolation
@@ -121,26 +152,42 @@ function runSecurityTests() {
   assert.strictEqual(sim.canReadEvent(userA, 'event_private_2'), true, 'Owner User A CAN read private event');
   console.log('  ✅ Passed: Private events completely gated; public events viewable.');
 
-  // Test 4: Member Collaboration & Role Gating
-  console.log('\nTest 4: Member Collaboration (/events/{eventId}/members/{uid})');
-  // Add User B as member to event_private_2
+  // Test 4: Member Collaboration & Role Gating (Owner, Editor, Viewer)
+  console.log('\nTest 4: Member Collaboration & Role Gating');
+  // Add User B as editor, User C as viewer
   sim.members.set('event_private_2/user_B_456', { role: 'editor' });
-  assert.strictEqual(sim.canReadEvent(userB, 'event_private_2'), true, 'Invited member User B can now access private event');
-  assert.strictEqual(sim.canUpdateEvent(userB, 'event_private_2', 'user_A_123'), true, 'Member editor can update event content');
-  assert.strictEqual(sim.canUpdateEvent(userB, 'event_private_2', 'user_B_456'), false, 'Member CANNOT alter original ownerId');
-  assert.strictEqual(sim.canDeleteEvent(userB, 'event_private_2'), false, 'Member CANNOT delete event (Owner-only)');
+  sim.members.set('event_private_2/user_C_789', { role: 'viewer' });
+
+  assert.strictEqual(sim.canReadEvent(userB, 'event_private_2'), true, 'Invited editor User B can view private event');
+  assert.strictEqual(sim.canReadEvent(userC, 'event_private_2'), true, 'Invited viewer User C can view private event');
+
+  assert.strictEqual(sim.canUpdateEvent(userB, 'event_private_2', 'user_A_123', 'private'), true, 'Editor can update event content');
+  assert.strictEqual(sim.canUpdateEvent(userB, 'event_private_2', 'user_B_456', 'private'), false, 'Editor CANNOT alter original ownerId');
+  assert.strictEqual(sim.canUpdateEvent(userB, 'event_private_2', 'user_A_123', 'public'), false, 'Editor CANNOT toggle event visibility');
+  assert.strictEqual(sim.canUpdateEvent(userC, 'event_private_2', 'user_A_123', 'private'), false, 'Viewer CANNOT update event content');
+
+  assert.strictEqual(sim.canDeleteEvent(userB, 'event_private_2'), false, 'Editor CANNOT delete event (Owner-only)');
+  assert.strictEqual(sim.canDeleteEvent(userC, 'event_private_2'), false, 'Viewer CANNOT delete event');
   assert.strictEqual(sim.canDeleteEvent(userA, 'event_private_2'), true, 'Owner CAN delete event');
-  console.log('  ✅ Passed: Member editing permitted; ownership transfer and deletion blocked.');
+  console.log('  ✅ Passed: Member editing permitted for editors; visibility tampering, viewer editing, and deletion blocked.');
 
   // Test 5: Sensitive / Private Data Subcollections
-  console.log('\nTest 5: Private Data & RSVP Protection (/private/{docId} and /rsvps/{rsvpId})');
-  assert.strictEqual(sim.canReadPrivateDoc(unauthenticated, 'event_public_1'), false, 'Public CANNOT read /private/ settings on public events');
-  assert.strictEqual(sim.canReadPrivateDoc(userA, 'event_public_1'), true, 'Owner can read /private/ settings');
+  console.log('\nTest 5: Private Data & RSVP Protection');
+  assert.strictEqual(sim.canReadPrivateDoc(unauthenticated, 'event_public_1'), false, 'Public CANNOT read /private/ settings');
+  assert.strictEqual(sim.canReadPrivateDoc(userB, 'event_private_2'), false, 'Editor CANNOT read /private/ documents (Owner-only)');
+  assert.strictEqual(sim.canReadPrivateDoc(userA, 'event_private_2'), true, 'Owner CAN read /private/ settings');
+  
   assert.strictEqual(sim.canReadRSVPs(unauthenticated, 'event_public_1'), false, 'Public CANNOT view guest RSVPs');
-  assert.strictEqual(sim.canReadRSVPs(userA, 'event_public_1'), true, 'Owner can view guest RSVPs');
-  console.log('  ✅ Passed: Private data and RSVPs remain strictly confidential.');
+  assert.strictEqual(sim.canReadRSVPs(userC, 'event_private_2'), false, 'Viewer CANNOT read RSVPs');
+  assert.strictEqual(sim.canReadRSVPs(userB, 'event_private_2'), true, 'Editor CAN read RSVP summary');
+  assert.strictEqual(sim.canReadRSVPs(userA, 'event_private_2'), true, 'Owner CAN view guest RSVPs');
 
-  console.log('\n🎉 ALL 5 FIRESTORE SECURITY RULES VERIFICATION TESTS PASSED SUCCESSFULLY!\n');
+  // Direct client writes are blocked
+  assert.strictEqual(sim.canDirectClientCreateRSVP(unauthenticated, 'event_public_1'), false, 'Direct client writes blocked on RSVPs');
+  assert.strictEqual(sim.canDirectClientCreateGuestbook(unauthenticated, 'event_public_1'), false, 'Direct client writes blocked on Guestbook');
+  console.log('  ✅ Passed: Private data, RSVPs, and direct write prohibitions verified.');
+
+  console.log('\n🎉 ALL FIRESTORE SECURITY RULES SIMULATION TESTS PASSED SUCCESSFULLY!\n');
 }
 
 runSecurityTests();

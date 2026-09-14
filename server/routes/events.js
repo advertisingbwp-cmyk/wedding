@@ -7,22 +7,31 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database/db');
 const { requireAuth } = require('../middleware/auth');
-const { requireEventOwnership } = require('../middleware/rbac');
+const { 
+  requireEventOwner, 
+  requireEventEditor, 
+  requireEventViewer 
+} = require('../middleware/rbac');
 const upload = require('../middleware/upload');
 
-// 1. List user's events with RSVP counts
+// 1. List user's events (both owned and shared as editor/viewer) with RSVP counts
 router.get('/', requireAuth, (req, res) => {
   try {
     const events = db.prepare(`
       SELECT 
         e.*,
+        CASE 
+          WHEN e.owner_user_id = ? THEN 'owner'
+          ELSE m.role
+        END as user_role,
         (SELECT COUNT(*) FROM rsvps r WHERE r.event_id = e.id) as rsvp_count,
         (SELECT COUNT(*) FROM rsvps r WHERE r.event_id = e.id AND r.attendance = 'attending') as attending_count,
         (SELECT COUNT(*) FROM guestbook_messages g WHERE g.event_id = e.id) as guestbook_count
       FROM events e
-      WHERE e.owner_user_id = ?
+      LEFT JOIN event_members m ON m.event_id = e.id AND m.user_id = ?
+      WHERE e.owner_user_id = ? OR m.user_id = ?
       ORDER BY e.created_at DESC
-    `).all(req.user.id);
+    `).all(req.user.id, req.user.id, req.user.id, req.user.id);
 
     res.json({ events });
   } catch (err) {
@@ -197,10 +206,89 @@ router.post('/', requireAuth, (req, res) => {
   }
 });
 
-// Quick 1-Click Launch from Pre-Built Template ("Try This Template")
-router.post('/from-template', requireAuth, (req, res) => {
+// Helper: clone or instantiate event from template preset or existing event
+function cloneTemplateHandler(req, res) {
   try {
-    const { template_type } = req.body;
+    const { template_type, template_slug } = req.body;
+    
+    // Check if source template exists in SQLite database
+    let sourceEvent = null;
+    if (template_slug) {
+      sourceEvent = db.prepare('SELECT * FROM events WHERE slug = ?').get(template_slug);
+    } else if (template_type) {
+      // Look for seeded slug
+      const slugMap = {
+        indian_wedding: 'vijay-rashima-wedding',
+        muslim_wedding: 'zain-ayla-nikah',
+        birthday: 'arias-sweet-16'
+      };
+      if (slugMap[template_type]) {
+        sourceEvent = db.prepare('SELECT * FROM events WHERE slug = ?').get(slugMap[template_type]);
+      }
+    }
+
+    if (sourceEvent) {
+      const baseSlug = (sourceEvent.primary_names + '-celebration')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+      const slug = `${baseSlug}-${Date.now().toString().slice(-4)}`;
+
+      const insertEvent = db.prepare(`
+        INSERT INTO events (
+          owner_user_id, slug, event_type, title, headline, primary_names,
+          event_date, venue_name, venue_address, venue_map_url, visibility, theme_id,
+          hero_image_url, hashtag
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'draft', ?, ?, ?)
+      `);
+
+      const result = insertEvent.run(
+        req.user.id,
+        slug,
+        sourceEvent.event_type,
+        sourceEvent.title,
+        sourceEvent.headline,
+        sourceEvent.primary_names,
+        sourceEvent.event_date,
+        sourceEvent.venue_name,
+        sourceEvent.venue_address,
+        sourceEvent.venue_map_url,
+        sourceEvent.theme_id,
+        sourceEvent.hero_image_url,
+        sourceEvent.hashtag
+      );
+
+      const eventId = result.lastInsertRowid;
+
+      // Copy sections
+      const sections = db.prepare('SELECT * FROM event_sections WHERE event_id = ? ORDER BY sort_order ASC').all(sourceEvent.id);
+      const insertSection = db.prepare(`
+        INSERT INTO event_sections (event_id, section_key, title, is_enabled, sort_order, custom_content_json)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `);
+      for (const s of sections) {
+        insertSection.run(eventId, s.section_key, s.title, s.is_enabled, s.sort_order, s.custom_content_json);
+      }
+
+      // Copy functions
+      const functions = db.prepare('SELECT * FROM event_functions WHERE event_id = ? ORDER BY sort_order ASC').all(sourceEvent.id);
+      const insertFunc = db.prepare(`
+        INSERT INTO event_functions (event_id, function_key, title, subtitle, date_time, venue_name, dress_code, palette_colors_json, illustration_url, description, sort_order)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      for (const f of functions) {
+        insertFunc.run(eventId, f.function_key, f.title, f.subtitle, f.date_time, f.venue_name, f.dress_code, f.palette_colors_json, f.illustration_url, f.description, f.sort_order);
+      }
+
+      return res.status(201).json({
+        message: 'Template cloned successfully into your account!',
+        eventId,
+        slug
+      });
+    }
+
+    // Fallback: build from built-in preset definitions
     const presets = {
       indian_wedding: {
         event_type: 'indian_wedding',
@@ -241,7 +329,7 @@ router.post('/from-template', requireAuth, (req, res) => {
     };
 
     const chosen = presets[template_type] || presets.indian_wedding;
-    const baseSlug = (chosen.primary_names + '-template')
+    const baseSlug = (chosen.primary_names + '-celebration')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '');
@@ -367,13 +455,17 @@ router.post('/from-template', requireAuth, (req, res) => {
       slug
     });
   } catch (err) {
-    console.error('Try template error:', err);
+    console.error('Clone template error:', err);
     res.status(500).json({ error: 'Failed to launch template.' });
   }
-});
+}
 
-// 3. Get Full Event details with Sections and Functions (Owner only)
-router.get('/:id', requireAuth, requireEventOwnership, (req, res) => {
+// 1-Click Clone Template into User's Private Account
+router.post('/clone-template', requireAuth, cloneTemplateHandler);
+router.post('/from-template', requireAuth, cloneTemplateHandler);
+
+// 3. Get Full Event details with Sections and Functions (Owner, Editor, or Viewer)
+router.get('/:id', requireAuth, requireEventViewer, (req, res) => {
   try {
     const event = req.event;
     const sections = db.prepare('SELECT * FROM event_sections WHERE event_id = ? ORDER BY sort_order ASC').all(event.id);
@@ -382,7 +474,8 @@ router.get('/:id', requireAuth, requireEventOwnership, (req, res) => {
     res.json({
       event,
       sections,
-      functions
+      functions,
+      role: req.userRole
     });
   } catch (err) {
     console.error('Get event error:', err);
@@ -390,8 +483,8 @@ router.get('/:id', requireAuth, requireEventOwnership, (req, res) => {
   }
 });
 
-// 4. Update Event Info (Owner only)
-router.put('/:id', requireAuth, requireEventOwnership, (req, res) => {
+// 4. Update Event Info (Owner or Editor)
+router.put('/:id', requireAuth, requireEventEditor, (req, res) => {
   try {
     const {
       title,
@@ -407,6 +500,11 @@ router.put('/:id', requireAuth, requireEventOwnership, (req, res) => {
       hashtag
     } = req.body;
 
+    // Safety: only owners can toggle visibility
+    const finalVisibility = (req.userRole === 'owner' && visibility !== undefined) 
+      ? visibility 
+      : req.event.visibility;
+
     db.prepare(`
       UPDATE events
       SET 
@@ -417,7 +515,7 @@ router.put('/:id', requireAuth, requireEventOwnership, (req, res) => {
         venue_name = COALESCE(?, venue_name),
         venue_address = COALESCE(?, venue_address),
         venue_map_url = COALESCE(?, venue_map_url),
-        visibility = COALESCE(?, visibility),
+        visibility = ?,
         theme_id = COALESCE(?, theme_id),
         hero_image_url = COALESCE(?, hero_image_url),
         hashtag = COALESCE(?, hashtag),
@@ -425,7 +523,7 @@ router.put('/:id', requireAuth, requireEventOwnership, (req, res) => {
       WHERE id = ?
     `).run(
       title, headline, primary_names, event_date, venue_name,
-      venue_address, venue_map_url, visibility, theme_id,
+      venue_address, venue_map_url, finalVisibility, theme_id,
       hero_image_url, hashtag, req.event.id
     );
 
@@ -437,7 +535,7 @@ router.put('/:id', requireAuth, requireEventOwnership, (req, res) => {
 });
 
 // 5. Delete Event (Owner only)
-router.delete('/:id', requireAuth, requireEventOwnership, (req, res) => {
+router.delete('/:id', requireAuth, requireEventOwner, (req, res) => {
   try {
     db.prepare('DELETE FROM events WHERE id = ?').run(req.event.id);
     res.json({ message: 'Event deleted successfully.' });
@@ -447,8 +545,8 @@ router.delete('/:id', requireAuth, requireEventOwnership, (req, res) => {
   }
 });
 
-// 6. Update / Reorder Sections
-router.put('/:id/sections', requireAuth, requireEventOwnership, (req, res) => {
+// 6. Update / Reorder Sections (Owner or Editor)
+router.put('/:id/sections', requireAuth, requireEventEditor, (req, res) => {
   try {
     const { sections } = req.body; // array of { id, title, is_enabled, sort_order, custom_content_json }
     if (!Array.isArray(sections)) {
@@ -479,8 +577,8 @@ router.put('/:id/sections', requireAuth, requireEventOwnership, (req, res) => {
   }
 });
 
-// 7. Add Function / Ceremony
-router.post('/:id/functions', requireAuth, requireEventOwnership, (req, res) => {
+// 7. Add Function / Ceremony (Owner or Editor)
+router.post('/:id/functions', requireAuth, requireEventEditor, (req, res) => {
   try {
     const {
       function_key,
@@ -528,8 +626,8 @@ router.post('/:id/functions', requireAuth, requireEventOwnership, (req, res) => 
   }
 });
 
-// 8. Update Function / Ceremony
-router.put('/:id/functions/:funcId', requireAuth, requireEventOwnership, (req, res) => {
+// 8. Update Function / Ceremony (Owner or Editor)
+router.put('/:id/functions/:funcId', requireAuth, requireEventEditor, (req, res) => {
   try {
     const { funcId } = req.params;
     const {
@@ -571,8 +669,8 @@ router.put('/:id/functions/:funcId', requireAuth, requireEventOwnership, (req, r
   }
 });
 
-// 9. Delete Function / Ceremony
-router.delete('/:id/functions/:funcId', requireAuth, requireEventOwnership, (req, res) => {
+// 9. Delete Function / Ceremony (Owner or Editor)
+router.delete('/:id/functions/:funcId', requireAuth, requireEventEditor, (req, res) => {
   try {
     const { funcId } = req.params;
     db.prepare('DELETE FROM event_functions WHERE id = ? AND event_id = ?').run(funcId, req.event.id);
@@ -583,7 +681,88 @@ router.delete('/:id/functions/:funcId', requireAuth, requireEventOwnership, (req
   }
 });
 
-// 10. Secure Image Upload
+// 10. Member Management (Owner only)
+router.get('/:id/members', requireAuth, requireEventOwner, (req, res) => {
+  try {
+    const members = db.prepare(`
+      SELECT 
+        em.id,
+        em.event_id,
+        em.user_id,
+        em.role,
+        em.created_at,
+        u.email,
+        u.full_name
+      FROM event_members em
+      JOIN users u ON u.id = em.user_id
+      WHERE em.event_id = ?
+      ORDER BY em.created_at ASC
+    `).all(req.event.id);
+
+    res.json({ members });
+  } catch (err) {
+    console.error('Fetch members error:', err);
+    res.status(500).json({ error: 'Failed to fetch event members.' });
+  }
+});
+
+router.post('/:id/members', requireAuth, requireEventOwner, (req, res) => {
+  try {
+    const { email, user_id, role } = req.body;
+    if (!role || (role !== 'editor' && role !== 'viewer')) {
+      return res.status(400).json({ error: "Invalid role. Role must be either 'editor' or 'viewer'." });
+    }
+
+    let targetUser = null;
+    if (user_id) {
+      targetUser = db.prepare('SELECT id, email, full_name FROM users WHERE id = ?').get(user_id);
+    } else if (email) {
+      targetUser = db.prepare('SELECT id, email, full_name FROM users WHERE LOWER(email) = ?').get(email.trim().toLowerCase());
+    }
+
+    if (!targetUser) {
+      return res.status(404).json({ error: 'User not found. They must have a registered account to be invited.' });
+    }
+
+    if (targetUser.id === req.user.id) {
+      return res.status(400).json({ error: 'You are the event owner and already possess full access.' });
+    }
+
+    // Upsert member
+    const existing = db.prepare('SELECT id FROM event_members WHERE event_id = ? AND user_id = ?').get(req.event.id, targetUser.id);
+    if (existing) {
+      db.prepare('UPDATE event_members SET role = ? WHERE id = ?').run(role, existing.id);
+    } else {
+      db.prepare('INSERT INTO event_members (event_id, user_id, role) VALUES (?, ?, ?)').run(req.event.id, targetUser.id, role);
+    }
+
+    res.json({
+      message: `Member ${targetUser.email} granted '${role}' role successfully!`,
+      member: {
+        user_id: targetUser.id,
+        email: targetUser.email,
+        full_name: targetUser.full_name,
+        role
+      }
+    });
+  } catch (err) {
+    console.error('Add member error:', err);
+    res.status(500).json({ error: 'Failed to add event member.' });
+  }
+});
+
+router.delete('/:id/members/:userId', requireAuth, requireEventOwner, (req, res) => {
+  try {
+    const { userId } = req.params;
+    db.prepare('DELETE FROM event_members WHERE event_id = ? AND user_id = ?').run(req.event.id, userId);
+    res.json({ message: 'Member removed successfully.' });
+  } catch (err) {
+    console.error('Delete member error:', err);
+    res.status(500).json({ error: 'Failed to remove member.' });
+  }
+});
+
+// 11. Secure Image Upload
 router.post('/upload', requireAuth, upload.single('image'), (req, res) => {
   try {
     if (!req.file) {

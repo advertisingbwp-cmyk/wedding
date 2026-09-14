@@ -1,4 +1,4 @@
-# Photorealistic Cinematic Image Prompts — CelebrationCraft
+# Photorealistic Cinematic Image Prompts — Riwaayat Venue
 
 Curated library of **photorealistic wedding and birthday prompts** engineered for Midjourney v6, Flux.1, Imagen 3, and DALL-E 3. No 3D render, no cartoon, no illustration — pure editorial luxury photography.
 

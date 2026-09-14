@@ -131,6 +131,37 @@ const API = {
     });
   },
 
+  async cloneTemplate(templateTypeOrSlug) {
+    const payload = (typeof templateTypeOrSlug === 'string' && templateTypeOrSlug.includes('-'))
+      ? { template_slug: templateTypeOrSlug }
+      : { template_type: templateTypeOrSlug };
+    return this.request('/api/events/clone-template', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+  },
+
+  // Member Management (RBAC)
+  async getMembers(eventId) {
+    return this.request(`/api/events/${eventId}/members`);
+  },
+
+  async addMember(eventId, emailOrUserId, role) {
+    const body = typeof emailOrUserId === 'number'
+      ? { user_id: emailOrUserId, role }
+      : { email: emailOrUserId, role };
+    return this.request(`/api/events/${eventId}/members`, {
+      method: 'POST',
+      body: JSON.stringify(body)
+    });
+  },
+
+  async removeMember(eventId, userId) {
+    return this.request(`/api/events/${eventId}/members/${userId}`, {
+      method: 'DELETE'
+    });
+  },
+
   async getEvent(id) {
     return this.request(`/api/events/${id}`);
   },

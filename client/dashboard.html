@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Dashboard — CelebrationCraft</title>
+  <title>User Dashboard — Riwaayat Venue</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- FontAwesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -159,8 +159,8 @@
         <i class="fa-solid fa-house"></i> Home
       </a>
       <a href="/dashboard" class="platform-brand">
-        <i class="fa-solid fa-crown"></i>
-        <span>CelebrationCraft</span>
+        <i class="fa-solid fa-crown" style="color: var(--primary-gold);"></i>
+        <span>RIWAAYAT VENUE</span>
       </a>
     </div>
 
@@ -224,13 +224,13 @@
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
         <div>
           <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary-gold-dark); text-transform: uppercase; letter-spacing: 1px;">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> 1-Click Quick Starters
+            <i class="fa-solid fa-wand-magic-sparkles"></i> 1-Click Template Cloning
           </span>
           <h2 style="font-family: var(--font-display); font-size: 1.4rem; margin-top: 2px;">
-            Try a Pre-Built Celebration Template
+            Clone a Curated Celebration Template
           </h2>
           <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0;">
-            Click <strong>"Try This Template"</strong> to instantly create and open it in the Live Interactive Studio with all custom cartoon artwork, countdown, and ceremonies pre-configured.
+            Click <strong>"Clone Template"</strong> to copy any authentic design directly into your account and customize with photorealistic event imagery, countdown, and ceremonies.
           </p>
         </div>
         <button class="btn-outline btn-sm" onclick="openNewEventModal()">
@@ -247,7 +247,7 @@
               <div style="font-size: 0.75rem; font-weight: 700; color: #D4AF37; text-transform: uppercase;">Indian Wedding</div>
               <h4 style="font-size: 1.05rem; margin: 4px 0 6px;">Vijay & Rashima</h4>
               <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
-                5 Functions: Haldi, Mehendi, Sangeet, Mandap & Reception with custom illustrations.
+                5 Functions: Haldi, Mehendi, Sangeet, Mandap & Reception with photorealistic event imagery.
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
@@ -255,7 +255,7 @@
                 <i class="fa-solid fa-eye"></i> Preview
               </a>
               <button onclick="launchTemplate('indian_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-                <i class="fa-solid fa-sparkles"></i> Try This Template
+                <i class="fa-solid fa-clone"></i> Clone Template
               </button>
             </div>
           </div>
@@ -277,7 +277,7 @@
                 <i class="fa-solid fa-eye"></i> Preview
               </a>
               <button onclick="launchTemplate('muslim_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-                <i class="fa-solid fa-sparkles"></i> Try This Template
+                <i class="fa-solid fa-clone"></i> Clone Template
               </button>
             </div>
           </div>
@@ -291,7 +291,7 @@
               <div style="font-size: 0.75rem; font-weight: 700; color: #FF4081; text-transform: uppercase;">Birthday Celebration</div>
               <h4 style="font-size: 1.05rem; margin: 4px 0 6px;">Aria's Sweet 16</h4>
               <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
-                Welcome mocktails, party games, cake cutting, buffet dinner, and DJ dance party.
+                Welcome mocktails, party games, cake cutting, buffet dinner, and DJ dance party with realistic photography.
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
@@ -299,7 +299,7 @@
                 <i class="fa-solid fa-eye"></i> Preview
               </a>
               <button onclick="launchTemplate('birthday', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-                <i class="fa-solid fa-sparkles"></i> Try This Template
+                <i class="fa-solid fa-clone"></i> Clone Template
               </button>
             </div>
           </div>
@@ -614,13 +614,22 @@
           card.className = 'event-card-item';
           const badgeClass = e.visibility === 'public' ? 'badge-public' : (e.visibility === 'private_share' ? 'badge-private' : 'badge-draft');
           const badgeLabel = e.visibility === 'public' ? 'Public' : (e.visibility === 'private_share' ? 'Private Share' : 'Draft');
+          const roleBadge = (e.user_role && e.user_role !== 'owner') 
+            ? `<span class="badge-status" style="background: #EDE7F6; color: #5E35B1; text-transform: uppercase; font-size: 0.72rem;">Role: ${e.user_role}</span>` 
+            : '';
+
+          const isViewer = e.user_role === 'viewer';
+          const isOwner = !e.user_role || e.user_role === 'owner';
 
           card.innerHTML = `
             <img src="${e.hero_image_url || 'assets/images/hero_couple.jpg'}" alt="${e.title}" class="event-card-cover">
             <div class="event-card-body">
               <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                  <span class="badge-status ${badgeClass}">${badgeLabel}</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 6px;">
+                  <div style="display: flex; gap: 6px; align-items: center;">
+                    <span class="badge-status ${badgeClass}">${badgeLabel}</span>
+                    ${roleBadge}
+                  </div>
                   <span style="font-size: 0.8rem; color: var(--text-muted);"><i class="fa-regular fa-calendar"></i> ${e.event_date}</span>
                 </div>
                 <h3 style="font-size: 1.25rem; font-family: var(--font-display); margin-bottom: 4px;">${e.primary_names}</h3>
@@ -632,18 +641,26 @@
               </div>
 
               <div class="event-actions">
-                <a href="/editor?id=${e.id}" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
-                  <i class="fa-solid fa-paintbrush"></i> Edit Studio
-                </a>
+                ${!isViewer ? `
+                  <a href="/editor?id=${e.id}" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
+                    <i class="fa-solid fa-paintbrush"></i> Edit Studio
+                  </a>
+                ` : `
+                  <a href="/event/${e.slug}" target="_blank" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+                    <i class="fa-solid fa-eye"></i> View Event
+                  </a>
+                `}
                 <a href="/event/${e.slug}" target="_blank" class="btn-outline btn-sm" title="View Live Site">
                   <i class="fa-solid fa-external-link"></i>
                 </a>
                 <button class="btn-outline btn-sm" onclick="openRsvpModal(${e.id}, '${e.primary_names}')" title="View Guest RSVPs">
                   <i class="fa-solid fa-list-check"></i>
                 </button>
-                <button class="btn-outline btn-sm" onclick="openShareModal(${e.id}, '${e.visibility}')" title="Share & Privacy">
-                  <i class="fa-solid fa-share-nodes"></i>
-                </button>
+                ${isOwner ? `
+                  <button class="btn-outline btn-sm" onclick="openShareModal(${e.id}, '${e.visibility}')" title="Share & Privacy">
+                    <i class="fa-solid fa-share-nodes"></i>
+                  </button>
+                ` : ''}
               </div>
             </div>
           `;
@@ -848,17 +865,17 @@
       if (btn) {
         originalHtml = btn.innerHTML;
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Preparing...';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Cloning...';
       }
       try {
-        API.showToast('Initializing authentic template...', 'fa-wand-magic-sparkles');
-        const res = await API.createFromTemplate(type);
-        API.showToast('Template initialized! Opening Live Studio...', 'fa-circle-check');
+        API.showToast('Cloning authentic template into your account...', 'fa-wand-magic-sparkles');
+        const res = await API.cloneTemplate(type);
+        API.showToast('Template cloned successfully! Opening Live Studio...', 'fa-circle-check');
         setTimeout(() => {
           window.location.href = `/editor?id=${res.eventId}`;
         }, 500);
       } catch (err) {
-        alert('Failed to launch template: ' + err.message);
+        alert('Failed to clone template: ' + err.message);
         if (btn) {
           btn.disabled = false;
           btn.innerHTML = originalHtml;
