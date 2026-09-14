@@ -77,8 +77,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'An unexpected server error occurred.' });
 });
 
-app.listen(PORT, () => {
-  console.log(`✨ Event Platform Server running at http://localhost:${PORT}`);
-});
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`✨ Event Platform Server running at http://localhost:${PORT}`);
+  });
+}
 
 module.exports = app;

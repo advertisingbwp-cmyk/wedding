@@ -145,3 +145,14 @@ try {
 console.log('Database initialized successfully with foreign key constraints.');
 
 module.exports = db;
+
+// Auto-seed template showcases if not present in the current database instance (vital for Vercel serverless)
+try {
+  const checkSeed = db.prepare("SELECT id FROM events WHERE slug = 'vijay-rashima-wedding'").get();
+  if (!checkSeed) {
+    const { seedDatabase } = require('./seed');
+    seedDatabase();
+  }
+} catch (seedErr) {
+  console.warn('Auto-seed check warning:', seedErr.message);
+}

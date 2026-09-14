@@ -251,9 +251,9 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <a href="/event/vijay-rashima-wedding" target="_blank" class="btn-outline btn-sm" style="padding: 6px 10px;" title="Live Preview">
+              <button type="button" onclick="openPreviewModal('vijay-rashima-wedding', 'Vijay & Rashima Wedding', 'indian_wedding', 'Indian Wedding')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Interactive Preview">
                 <i class="fa-solid fa-eye"></i> Preview
-              </a>
+              </button>
               <button onclick="launchTemplate('indian_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
                 <i class="fa-solid fa-clone"></i> Clone Template
               </button>
@@ -273,9 +273,9 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <a href="/event/zain-ayla-nikah" target="_blank" class="btn-outline btn-sm" style="padding: 6px 10px;" title="Live Preview">
+              <button type="button" onclick="openPreviewModal('zain-ayla-nikah', 'Zain & Ayla Nikah', 'muslim_wedding', 'Muslim Wedding')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Interactive Preview">
                 <i class="fa-solid fa-eye"></i> Preview
-              </a>
+              </button>
               <button onclick="launchTemplate('muslim_wedding', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
                 <i class="fa-solid fa-clone"></i> Clone Template
               </button>
@@ -295,9 +295,9 @@
               </p>
             </div>
             <div style="display: flex; gap: 8px;">
-              <a href="/event/arias-sweet-16" target="_blank" class="btn-outline btn-sm" style="padding: 6px 10px;" title="Live Preview">
+              <button type="button" onclick="openPreviewModal('arias-sweet-16', 'Aria\'s Sweet 16 Bash', 'birthday', 'Birthday Celebration')" class="btn-outline btn-sm" style="padding: 6px 12px;" title="Interactive Preview">
                 <i class="fa-solid fa-eye"></i> Preview
-              </a>
+              </button>
               <button onclick="launchTemplate('birthday', this)" class="btn-gold btn-sm" style="flex: 1; justify-content: center;">
                 <i class="fa-solid fa-clone"></i> Clone Template
               </button>
@@ -646,13 +646,13 @@
                     <i class="fa-solid fa-paintbrush"></i> Edit Studio
                   </a>
                 ` : `
-                  <a href="/event/${e.slug}" target="_blank" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
+                  <a href="/event/${e.slug}" class="btn-outline btn-sm" style="flex: 1; justify-content: center;">
                     <i class="fa-solid fa-eye"></i> View Event
                   </a>
                 `}
-                <a href="/event/${e.slug}" target="_blank" class="btn-outline btn-sm" title="View Live Site">
-                  <i class="fa-solid fa-external-link"></i>
-                </a>
+                <button type="button" onclick="openPreviewModal('${e.slug}', '${(e.title || '').replace(/'/g, "\\'")}', '${e.event_type}', '${(e.primary_names || '').replace(/'/g, "\\'")}')" class="btn-outline btn-sm" title="Interactive Preview Site">
+                  <i class="fa-solid fa-eye"></i>
+                </button>
                 <button class="btn-outline btn-sm" onclick="openRsvpModal(${e.id}, '${e.primary_names}')" title="View Guest RSVPs">
                   <i class="fa-solid fa-list-check"></i>
                 </button>
@@ -890,6 +890,142 @@
       window.history.replaceState({}, document.title, window.location.pathname);
       launchTemplate(tryParam);
     }
+  </script>
+
+  <!-- Interactive In-Page Template Preview Modal (No New Tab) -->
+  <div id="template-preview-modal" class="preview-modal-backdrop" style="display: none;">
+    <div class="preview-modal-card">
+      <div class="preview-modal-header">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div class="preview-modal-icon"><i class="fa-solid fa-sparkles"></i></div>
+          <div>
+            <h3 id="preview-modal-title" style="font-family: var(--font-display); font-size: 1.15rem; margin: 0; color: #2F200A;">Template Preview</h3>
+            <span id="preview-modal-badge" class="badge-status badge-public" style="font-size: 0.72rem; padding: 2px 8px;">Indian Wedding</span>
+          </div>
+        </div>
+
+        <!-- Responsive Viewport Switcher -->
+        <div class="preview-device-switcher">
+          <button type="button" id="preview-btn-desktop" class="preview-device-btn active" onclick="setPreviewDevice('desktop')" title="Desktop View">
+            <i class="fa-solid fa-desktop"></i> <span>Desktop</span>
+          </button>
+          <button type="button" id="preview-btn-mobile" class="preview-device-btn" onclick="setPreviewDevice('mobile')" title="Mobile View">
+            <i class="fa-solid fa-mobile-screen-button"></i> <span>Mobile</span>
+          </button>
+        </div>
+
+        <!-- Actions -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button type="button" id="preview-modal-clone-btn" class="btn-gold btn-sm" onclick="handlePreviewClone()">
+            <i class="fa-solid fa-clone"></i> Clone Template
+          </button>
+          <a id="preview-modal-fullpage-link" href="#" class="btn-outline btn-sm" title="View Fullscreen in same window">
+            <i class="fa-solid fa-expand"></i> Full View
+          </a>
+          <button type="button" class="preview-close-btn" onclick="closePreviewModal()" title="Close Preview">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-iframe-wrapper">
+        <div id="preview-loading-spinner" class="preview-spinner">
+          <i class="fa-solid fa-circle-notch fa-spin"></i> Loading template live experience...
+        </div>
+        <div id="preview-frame-container" class="preview-frame-desktop">
+          <iframe id="preview-iframe" src="about:blank" title="Live Template Preview" onload="onPreviewIframeLoaded()"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentPreviewSlug = '';
+    let currentPreviewType = '';
+
+    function openPreviewModal(slug, title, eventType, typeBadge) {
+      currentPreviewSlug = slug;
+      currentPreviewType = eventType;
+
+      const modal = document.getElementById('template-preview-modal');
+      const titleEl = document.getElementById('preview-modal-title');
+      const badgeEl = document.getElementById('preview-modal-badge');
+      const iframe = document.getElementById('preview-iframe');
+      const fullpageLink = document.getElementById('preview-modal-fullpage-link');
+      const spinner = document.getElementById('preview-loading-spinner');
+      const cloneBtn = document.getElementById('preview-modal-clone-btn');
+
+      if (titleEl) titleEl.textContent = title;
+      if (badgeEl) badgeEl.textContent = typeBadge || eventType;
+      if (fullpageLink) fullpageLink.href = `/event/${slug}`;
+      if (spinner) spinner.style.display = 'flex';
+
+      // If it's one of the user's custom events rather than a stock template, update clone button text
+      if (cloneBtn) {
+        if (['indian_wedding', 'muslim_wedding', 'birthday'].includes(eventType)) {
+          cloneBtn.style.display = 'inline-flex';
+        } else {
+          cloneBtn.style.display = 'none';
+        }
+      }
+
+      setPreviewDevice('desktop');
+
+      if (iframe) {
+        iframe.src = `/event/${slug}`;
+      }
+
+      if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closePreviewModal() {
+      const modal = document.getElementById('template-preview-modal');
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe) iframe.src = 'about:blank';
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+
+    function onPreviewIframeLoaded() {
+      const spinner = document.getElementById('preview-loading-spinner');
+      if (spinner) spinner.style.display = 'none';
+    }
+
+    function setPreviewDevice(mode) {
+      const container = document.getElementById('preview-frame-container');
+      const btnDesktop = document.getElementById('preview-btn-desktop');
+      const btnMobile = document.getElementById('preview-btn-mobile');
+
+      if (mode === 'mobile') {
+        if (container) container.className = 'preview-frame-mobile';
+        if (btnDesktop) btnDesktop.classList.remove('active');
+        if (btnMobile) btnMobile.classList.add('active');
+      } else {
+        if (container) container.className = 'preview-frame-desktop';
+        if (btnDesktop) btnDesktop.classList.add('active');
+        if (btnMobile) btnMobile.classList.remove('active');
+      }
+    }
+
+    function handlePreviewClone() {
+      const btn = document.getElementById('preview-modal-clone-btn');
+      closePreviewModal();
+      if (currentPreviewType) {
+        launchTemplate(currentPreviewType, btn);
+      }
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closePreviewModal();
+      }
+    });
 
     loadDashboard();
   </script>
