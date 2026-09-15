@@ -6,6 +6,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('node:path');
+const fs = require('node:fs');
 
 const authRoutes = require('./routes/auth');
 const eventRoutes = require('./routes/events');
@@ -19,16 +20,13 @@ const templateRoutes = require('./routes/templates');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-// Security & Parsing Middleware
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Static Assets
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.use(express.static(path.join(__dirname, '../client')));
 
-// API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/templates', templateRoutes);
 app.use('/api/events', eventRoutes);
@@ -38,95 +36,47 @@ app.use('/api/events', sharingRoutes);
 app.use('/api/keys', apiKeysRoutes);
 app.use('/api/public/event', publicEventRoutes);
 
-// Frontend Page Routing
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/login.html'));
-});
-
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dashboard.html'));
-});
-
-app.get('/editor', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/editor.html'));
-});
-
-app.get('/privacy', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/privacy.html'));
-});
-
-app.get('/terms', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/terms.html'));
-});
-
-app.get('/templates', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/templates.html'));
-});
-
-app.get('/custom-template', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/custom-template/index.html'));
-});
-
-app.get('/how-it-works', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/how-it-works.html'));
-});
-
-app.get('/pricing', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/pricing.html'));
-});
-
-app.get('/faqs', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/faqs.html'));
-});
-
-app.get('/about', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/about.html'));
-});
-
-app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/contact.html'));
-});
-
-app.get('/refund', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/refund.html'));
-});
-
-app.get('/blog', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/blog.html'));
-});
-
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, '../client/login.html')));
+app.get('/dashboard', (req, res) => res.sendFile(path.join(__dirname, '../client/dashboard.html')));
+app.get('/editor', (req, res) => res.sendFile(path.join(__dirname, '../client/editor.html')));
+app.get('/privacy', (req, res) => res.sendFile(path.join(__dirname, '../client/privacy.html')));
+app.get('/terms', (req, res) => res.sendFile(path.join(__dirname, '../client/terms.html')));
+app.get('/templates', (req, res) => res.sendFile(path.join(__dirname, '../client/templates.html')));
+app.get('/custom-template', (req, res) => res.sendFile(path.join(__dirname, '../client/custom-template/index.html')));
+app.get('/how-it-works', (req, res) => res.sendFile(path.join(__dirname, '../client/how-it-works.html')));
+app.get('/pricing', (req, res) => res.sendFile(path.join(__dirname, '../client/pricing.html')));
+app.get('/faqs', (req, res) => res.sendFile(path.join(__dirname, '../client/faqs.html')));
+app.get('/about', (req, res) => res.sendFile(path.join(__dirname, '../client/about.html')));
+app.get('/contact', (req, res) => res.sendFile(path.join(__dirname, '../client/contact.html')));
+app.get('/refund', (req, res) => res.sendFile(path.join(__dirname, '../client/refund.html')));
+app.get('/blog', (req, res) => res.sendFile(path.join(__dirname, '../client/blog.html')));
 app.get('/blog/:slug', (req, res) => {
   const articlePath = path.join(__dirname, '../client/blog', `${req.params.slug}.html`);
   res.sendFile(articlePath, (err) => {
-    if (err) {
-      res.sendFile(path.join(__dirname, '../client/blog.html'));
-    }
+    if (err) res.sendFile(path.join(__dirname, '../client/blog.html'));
   });
 });
+app.get('/sitemap.xml', (req, res) => res.sendFile(path.join(__dirname, '../client/sitemap.xml')));
+app.get('/robots.txt', (req, res) => res.sendFile(path.join(__dirname, '../client/robots.txt')));
 
-app.get('/sitemap.xml', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/sitemap.xml'));
-});
+function sendEventView(res) {
+  const filePath = path.join(__dirname, '../client/event-view.html');
+  try {
+    const html = fs.readFileSync(filePath, 'utf8');
+    const marker = '<script src="/js/universal-event-features.js"></script>';
+    const output = html.includes(marker) ? html : html.replace('</head>', `    ${marker}\n</head>`);
+    return res.type('html').send(output);
+  } catch (err) {
+    console.error('Event view load error:', err);
+    return res.status(500).send('Failed to load event website.');
+  }
+}
 
-app.get('/robots.txt', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/robots.txt'));
-});
+app.get('/event/:slug', (req, res) => sendEventView(res));
+app.get('/e/:slug', (req, res) => sendEventView(res));
 
-// Event Website Viewers: /event/:slug or /e/:slug
-app.get('/event/:slug', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/event-view.html'));
-});
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../client/index.html')));
 
-app.get('/e/:slug', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/event-view.html'));
-});
-
-// Fallback for root
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/index.html'));
-});
-
-// Global Error Handler
 app.use((err, req, res, next) => {
   console.error('Server error:', err.stack);
   res.status(500).json({ error: 'An unexpected server error occurred.' });
