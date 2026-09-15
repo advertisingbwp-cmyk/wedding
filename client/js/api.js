@@ -324,3 +324,155 @@ const API = {
     }, 3600);
   }
 };
+
+/**
+ * RIWAAYAT VENUE — TEMPLATE DEMO MEDIA NORMALIZER
+ *
+ * Canonical template records historically used relative paths such as
+ * "assets/images/foo.jpg". On /event/<slug> those resolve to /event/assets/...
+ * and can silently break. The canonical asset pipeline now lives under
+ * /assets/templates/<template-slug>/.
+ *
+ * This browser-side layer is intentionally non-destructive:
+ * - fixes legacy local asset URLs by making them root-relative
+ * - keeps user-provided/uploaded images untouched
+ * - fills the default template gallery with that template's own sample media
+ * - never writes demo media back to user events or Firestore
+ */
+(function initRiwaayatTemplateDemoMedia() {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
+  const ASSET_SLUGS = {
+    'royal-mandap': 'royal-mandap',
+    'marigold-bloom': 'marigold-bloom',
+    'mehendi-garden': 'mehendi-garden',
+    'sangeet-afterglow': 'sangeet-afterglow',
+    'palace-romance': 'palace-romance',
+    'south-heritage': 'south-heritage',
+    'blush-vows': 'blush-vows',
+    'minimal-ivory': 'minimal-ivory',
+    'noor-nikah': 'noor-nikah',
+    'emerald-qasr': 'emerald-qasr',
+    'ivory-dua': 'ivory-dua',
+    'zafraan-evening': 'zafraan-evening',
+    'resham-royale': 'resham-royale',
+    'midnight-walima': 'midnight-walima',
+    'pastel-party': 'pastel-party',
+    'little-star': 'little-star',
+    'elegant-soiree': 'elegant-soiree',
+    'neon-celebration': 'neon-celebration'
+  };
+
+  function rootLocalAssetUrl(src) {
+    if (!src || typeof src !== 'string') return src;
+    if (/^(data:|blob:|https?:|\/)/i.test(src)) return src;
+    if (/^(assets\/|\.\/assets\/)/i.test(src)) {
+      return '/' + src.replace(/^\.\//, '').replace(/^\//, '');
+    }
+    return src;
+  }
+
+  function getTemplateSlug() {
+    const match = Array.from(document.body.classList)
+      .find((name) => name.indexOf('template-') === 0);
+    if (!match) return null;
+    const slug = match.slice('template-'.length).toLowerCase();
+    return ASSET_SLUGS[slug] || null;
+  }
+
+  function fixLegacyImageSources(root) {
+    const scope = root && root.querySelectorAll ? root : document;
+    scope.querySelectorAll('img[src], source[src], video[poster]').forEach((el) => {
+      const attr = el.tagName.toLowerCase() === 'video' ? 'poster' : 'src';
+      const current = el.getAttribute(attr);
+      const fixed = rootLocalAssetUrl(current);
+      if (fixed && fixed !== current) el.setAttribute(attr, fixed);
+    });
+  }
+
+  function getGallerySection() {
+    const sections = Array.from(document.querySelectorAll('#dynamic-sections section.event-section-wrap'));
+    return sections.find((section) => {
+      const heading = section.querySelector('.section-title');
+      return heading && /memories\s*&\s*smiles/i.test(heading.textContent || '');
+    }) || null;
+  }
+
+  function ensureDemoGallery() {
+    const templateSlug = getTemplateSlug();
+    if (!templateSlug) return;
+
+    const gallerySection = getGallerySection();
+    if (!gallerySection) return;
+
+    const grid = gallerySection.querySelector(':scope > div:last-child');
+    if (!grid) return;
+
+    const existingImages = Array.from(grid.querySelectorAll('img'));
+    const base = `/assets/templates/${templateSlug}`;
+    const sampleMedia = [
+      { src: `${base}/hero.webp`, caption: 'Featured template portrait' },
+      { src: `${base}/gallery-01.webp`, caption: 'Signature template moment' },
+      { src: `${base}/thumbnail.webp`, caption: 'Curated template detail' }
+    ];
+
+    // A newly created/template-preview event uses the renderer's default gallery.
+    // Keep any existing user/media entries and only fill missing demo slots.
+    sampleMedia.forEach((sample, index) => {
+      const existing = existingImages[index];
+      if (existing) {
+        const current = existing.getAttribute('src') || '';
+        if (/^\/?assets\/images\//i.test(current) || !current) {
+          existing.setAttribute('src', sample.src);
+          if (!existing.getAttribute('alt')) existing.setAttribute('alt', sample.caption);
+        }
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.style.cssText = 'border-radius: 12px; overflow: hidden; height: 240px; cursor: pointer; border: 3px solid #FFF; box-shadow: var(--shadow-card);';
+      const img = document.createElement('img');
+      img.src = sample.src;
+      img.alt = sample.caption;
+      img.loading = 'lazy';
+      img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s;';
+      img.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.06)'; });
+      img.addEventListener('mouseleave', () => { img.style.transform = 'scale(1)'; });
+      img.addEventListener('click', () => {
+        if (typeof window.openLightbox === 'function') window.openLightbox(sample.src, sample.caption);
+      });
+      card.appendChild(img);
+      grid.appendChild(card);
+    });
+  }
+
+  function refresh(root) {
+    fixLegacyImageSources(root);
+    ensureDemoGallery();
+  }
+
+  const observer = new MutationObserver((mutations) => {
+    let changed = false;
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList' && mutation.addedNodes.length) changed = true;
+    });
+    if (changed) refresh(document);
+  });
+
+  const start = () => {
+    refresh(document);
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
+  } else {
+    start();
+  }
+
+  window.RiwaayatTemplateDemoMedia = {
+    refresh,
+    rootLocalAssetUrl,
+    getTemplateSlug
+  };
+})();
