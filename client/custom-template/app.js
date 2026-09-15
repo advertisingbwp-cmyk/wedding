@@ -9,11 +9,14 @@
   const soundToggle = document.getElementById('soundToggle');
   const canvas = document.getElementById('petalCanvas');
   const ctx = canvas.getContext('2d');
-  const audio = document.getElementById('ambientAudio');
   const TARGET = new Date('2026-12-07T18:00:00+05:00').getTime();
   const themes = ['emerald', 'burgundy', 'sage'];
+  let audioContext = null;
+  let masterGain = null;
+  let ambientNodes = [];
   let ambientEnabled = false;
   let petals = [];
+  let envelopeOpened = false;
 
   document.querySelectorAll('.theme-btn').forEach((button) => {
     button.addEventListener('click', () => {
@@ -34,6 +37,8 @@
   } catch (_) {}
 
   function openInvitation() {
+    if (envelopeOpened) return;
+    envelopeOpened = true;
     envelope.classList.add('open');
     gate.classList.add('is-open');
     invitation.classList.remove('is-hidden');
@@ -46,23 +51,49 @@
     if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openInvitation(); }
   });
 
-  function startAmbientSound() {
-    // No audio asset is bundled in this repo yet; keep the control silent rather than hotlinking music.
-    ambientEnabled = false;
-    soundToggle.classList.remove('playing');
-    soundToggle.setAttribute('aria-pressed', 'false');
-    audio.pause();
+  function createAmbientSound() {
+    if (audioContext) return;
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    audioContext = new AudioCtx();
+    masterGain = audioContext.createGain();
+    masterGain.gain.value = 0.0001;
+    masterGain.connect(audioContext.destination);
+    const notes = [196, 246.94, 293.66, 392];
+    notes.forEach((frequency, index) => {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.type = index % 2 ? 'sine' : 'triangle';
+      oscillator.frequency.value = frequency;
+      gain.gain.value = 0.008 + index * 0.0015;
+      oscillator.connect(gain).connect(masterGain);
+      oscillator.start();
+      ambientNodes.push({ oscillator, gain });
+    });
   }
-  soundToggle.addEventListener('click', () => {
-    if (!audio.src) return;
-    if (audio.paused) { audio.play().then(() => setSoundState(true)).catch(() => {}); }
-    else { audio.pause(); setSoundState(false); }
-  });
+
   function setSoundState(enabled) {
     ambientEnabled = enabled;
     soundToggle.classList.toggle('playing', enabled);
     soundToggle.setAttribute('aria-pressed', String(enabled));
+    if (!masterGain || !audioContext) return;
+    const now = audioContext.currentTime;
+    masterGain.gain.cancelScheduledValues(now);
+    masterGain.gain.linearRampToValueAtTime(enabled ? 0.06 : 0.0001, now + 0.8);
   }
+
+  function startAmbientSound() {
+    createAmbientSound();
+    if (!audioContext) return;
+    audioContext.resume().then(() => setSoundState(true)).catch(() => {});
+  }
+
+  soundToggle.addEventListener('click', () => {
+    if (!audioContext) createAmbientSound();
+    if (!audioContext) return;
+    if (audioContext.state === 'suspended') audioContext.resume().catch(() => {});
+    setSoundState(!ambientEnabled);
+  });
 
   function renderCountdown() {
     const grid = document.getElementById('countdownGrid');
@@ -90,6 +121,7 @@
       card.style.width = `${wrapper.clientWidth}px`;
       card.style.height = `${wrapper.clientHeight}px`;
       g.setTransform(ratio, 0, 0, ratio, 0, 0);
+      g.globalCompositeOperation = 'source-over';
       g.fillStyle = '#b69450';
       g.fillRect(0, 0, wrapper.clientWidth, wrapper.clientHeight);
       g.fillStyle = 'rgba(255,255,255,.08)';
@@ -97,10 +129,7 @@
     };
     const point = (event) => {
       const rect = card.getBoundingClientRect();
-      const touch = event.touches?.[0];
-      const clientX = touch ? touch.clientX : event.clientX;
-      const clientY = touch ? touch.clientY : event.clientY;
-      return { x: clientX - rect.left, y: clientY - rect.top };
+      return { x: event.clientX - rect.left, y: event.clientY - rect.top };
     };
     const scratch = (event) => {
       if (!drawing) return;
