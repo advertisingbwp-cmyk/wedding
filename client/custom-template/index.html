@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en" data-theme="emerald">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A & S — Midnight Emerald Wedding Invitation | Riwaayat Venue</title>
+  <meta name="description" content="Interactive luxury wedding invitation demo with envelope reveal, countdown, scratch card, gallery and RSVP.">
+  <meta name="theme-color" content="#0d2b24">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="petalCanvas" aria-hidden="true"></canvas>
+
+  <section id="gate" class="gate" aria-label="Wedding invitation opening">
+    <div class="gate-noise"></div>
+    <div class="gate-shell">
+      <div class="gate-kicker">A private invitation</div>
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Tap to open invitation">
+        <div class="envelope-back"></div>
+        <div class="envelope-flap"></div>
+        <div class="envelope-front"></div>
+        <div class="seal-wrap">
+          <div class="wax-seal"><span>A&nbsp;&amp;&nbsp;S</span></div>
+        </div>
+      </div>
+      <button id="openInvitation" class="open-pill">Tap to open <span>✦</span></button>
+      <p class="gate-hint">Sound begins after you open the invitation.</p>
+    </div>
+  </section>
+
+  <main id="invitation" class="site is-hidden">
+    <header class="topbar">
+      <a class="brand" href="#top">RIWAAYAT <span>VENUE</span></a>
+      <div class="theme-switcher" role="group" aria-label="Choose invitation theme">
+        <button class="theme-btn active" data-theme-choice="emerald">Emerald</button>
+        <button class="theme-btn" data-theme-choice="burgundy">Burgundy</button>
+        <button class="theme-btn" data-theme-choice="sage">Sage</button>
+      </div>
+      <button id="soundToggle" class="icon-btn" aria-label="Toggle ambient sound" aria-pressed="false"><span class="bars"><i></i><i></i><i></i><i></i></span></button>
+    </header>
+
+    <section id="top" class="hero-section">
+      <div class="hero-copy">
+        <p class="eyebrow">Together with their families</p>
+        <h1><span>Ananya</span><em>&amp;</em><span>Shubham</span></h1>
+        <div class="ornament">❧ <span>07 • 12 • 2026</span> ❧</div>
+        <p class="hero-note">With joyful hearts, we invite you to celebrate our beginning.</p>
+        <a href="#countdown" class="gold-link">Save the date <span>↓</span></a>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img src="/assets/templates/royal-mandap/hero.webp" alt="Sample wedding portrait for the template" onerror="this.src='/assets/templates/marigold-bloom/hero.webp'">
+        </div>
+        <span class="photo-caption">A moment to remember</span>
+      </div>
+    </section>
+
+    <section class="intro-section section-shell">
+      <div class="section-rule"></div>
+      <p class="eyebrow">A note from us</p>
+      <h2>We found our forever in the little moments.</h2>
+      <p class="lead">From a first conversation to a thousand tiny memories, every chapter has brought us here. Thank you for being part of the story and for making this celebration feel like home.</p>
+    </section>
+
+    <section id="countdown" class="countdown-section section-shell">
+      <div>
+        <p class="eyebrow">The countdown</p>
+        <h2>Until we say, “I do.”</h2>
+      </div>
+      <div id="countdownGrid" class="countdown-grid" aria-live="polite">
+        <div><strong>—</strong><span>Days</span></div>
+        <div><strong>—</strong><span>Hours</span></div>
+        <div><strong>—</strong><span>Minutes</span></div>
+        <div><strong>—</strong><span>Seconds</span></div>
+      </div>
+    </section>
+
+    <section class="reveal-section section-shell">
+      <div class="reveal-card">
+        <div>
+          <p class="eyebrow">A little surprise</p>
+          <h2>Scratch to reveal.</h2>
+          <p>Reveal the dress-code note hidden beneath the gold.</p>
+        </div>
+        <div class="scratch-wrap">
+          <div class="scratch-message">Dress in jewel tones &amp; bring your dancing shoes.</div>
+          <canvas id="scratchCanvas" aria-label="Scratch this card to reveal a message"></canvas>
+          <div class="scratch-label">Scratch here</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="functions-section section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">Wedding weekend</p>
+        <h2>Five moments worth dressing up for.</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item"><span class="timeline-dot"></span><time>05 DEC · 11:00 AM</time><h3>Haldi</h3><p>Sunlit courtyard, marigold blooms, turmeric and laughter.</p><button class="calendar-btn" data-title="Haldi" data-date="2026-12-05T11:00">Add to calendar</button></article>
+        <article class="timeline-item"><span class="timeline-dot"></span><time>05 DEC · 04:00 PM</time><h3>Mehendi</h3><p>Henna, chai and an easy afternoon among the gardens.</p><button class="calendar-btn" data-title="Mehendi" data-date="2026-12-05T16:00">Add to calendar</button></article>
+        <article class="timeline-item"><span class="timeline-dot"></span><time>06 DEC · 07:30 PM</time><h3>Sangeet</h3><p>Music, family performances and a night made for dancing.</p><button class="calendar-btn" data-title="Sangeet" data-date="2026-12-06T19:30">Add to calendar</button></article>
+        <article class="timeline-item"><span class="timeline-dot"></span><time>07 DEC · 06:00 PM</time><h3>Pheras</h3><p>Golden-hour vows beneath the mandap as the evening begins.</p><button class="calendar-btn" data-title="Wedding Ceremony" data-date="2026-12-07T18:00">Add to calendar</button></article>
+        <article class="timeline-item"><span class="timeline-dot"></span><time>07 DEC · 09:00 PM</time><h3>Reception</h3><p>Dinner, toasts and one final dance together.</p><button class="calendar-btn" data-title="Reception" data-date="2026-12-07T21:00">Add to calendar</button></article>
+      </div>
+    </section>
+
+    <section class="venue-section section-shell">
+      <div class="venue-card">
+        <div class="venue-photo"><img src="/assets/templates/royal-mandap/gallery-01.webp" alt="Sample venue detail photo" loading="lazy"></div>
+        <div class="venue-copy">
+          <p class="eyebrow">The venue</p>
+          <h2>Umaid Bhawan Palace</h2>
+          <p>Circuit House Rd, Cantt Area, Jodhpur, Rajasthan 342006</p>
+          <a class="gold-link" href="https://maps.google.com/?q=Umaid+Bhawan+Palace+Jodhpur" target="_blank" rel="noopener">Get directions ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section section-shell">
+      <div class="section-heading"><p class="eyebrow">Moments</p><h2>A few frames from our story.</h2></div>
+      <div class="gallery-grid" id="galleryGrid">
+        <button class="gallery-tile tile-tall" data-full="/assets/templates/royal-mandap/hero.webp"><img src="/assets/templates/royal-mandap/hero.webp" alt="Sample couple portrait" loading="lazy"></button>
+        <button class="gallery-tile" data-full="/assets/templates/royal-mandap/gallery-01.webp"><img src="/assets/templates/royal-mandap/gallery-01.webp" alt="Sample wedding detail" loading="lazy"></button>
+        <button class="gallery-tile" data-full="/assets/templates/royal-mandap/thumbnail.webp"><img src="/assets/templates/royal-mandap/thumbnail.webp" alt="Sample invitation preview" loading="lazy"></button>
+      </div>
+    </section>
+
+    <section id="rsvp" class="rsvp-section section-shell">
+      <div class="rsvp-card">
+        <div class="rsvp-copy"><p class="eyebrow">Kindly reply</p><h2>Will you celebrate with us?</h2><p>This demo saves RSVP responses to this browser only. Production events should connect this form to the platform RSVP API.</p></div>
+        <form id="rsvpForm" class="rsvp-form">
+          <label>Name<input name="name" required autocomplete="name"></label>
+          <label>Attendance<select name="attendance" required><option value="joyfully_accept">Joyfully accept</option><option value="regretfully_decline">Regretfully decline</option></select></label>
+          <label>Guests<input name="guests" type="number" min="1" max="10" value="1" required></label>
+          <label>Blessing<textarea name="message" rows="4" maxlength="500" placeholder="Leave a note for the couple"></textarea></label>
+          <button class="primary-btn" type="submit">Send RSVP</button>
+          <p id="rsvpStatus" class="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer"><div class="monogram">A&nbsp;&amp;&nbsp;S</div><p>#AnanyaShubham</p><small>Designed as a Riwaayat Venue Studio template demo.</small></footer>
+  </main>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true"><button id="lightboxClose" class="lightbox-close" aria-label="Close gallery">×</button><img id="lightboxImage" src="" alt="Expanded wedding moment"></div>
+  <audio id="ambientAudio" loop preload="none" aria-hidden="true"></audio>
+  <script src="app.js"></script>
+</body>
+</html>
