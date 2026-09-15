@@ -2,8 +2,9 @@
  * PUBLIC & PRIVATE SHARE EVENT RENDERER ROUTE
  *
  * One renderer for both saved events and all canonical template previews.
- * Template previews are resolved from FirestoreStore by id/templateId/slug so
- * every published template can be opened directly from /event/:slug.
+ * Canonical previews are resolved directly by id/templateId/slug so every
+ * published template can be opened from /event/:slug without depending on
+ * list/filter behavior.
  */
 
 const express = require('express');
@@ -14,14 +15,28 @@ const { optionalAuth } = require('../middleware/auth');
 const { verifyPassword } = require('../config/security');
 
 function findCanonicalTemplate(identifier) {
-  const templates = FirestoreStore.getAllTemplates();
-  return (templates || []).find((tpl) => (
-    tpl && (
-      String(tpl.id || '') === identifier ||
-      String(tpl.templateId || '') === identifier ||
-      String(tpl.slug || '') === identifier
-    )
-  )) || null;
+  const value = String(identifier || '').trim();
+  if (!value) return null;
+
+  // getCanonicalTemplate already supports both canonical IDs and public slugs.
+  const byDirectLookup = typeof FirestoreStore.getCanonicalTemplate === 'function'
+    ? FirestoreStore.getCanonicalTemplate(value)
+    : null;
+  if (byDirectLookup) return byDirectLookup;
+
+  // Defensive fallback for any legacy alias/templateId mismatch.
+  if (typeof FirestoreStore.getAllTemplates === 'function') {
+    const templates = FirestoreStore.getAllTemplates() || [];
+    return templates.find((tpl) => (
+      tpl && (
+        String(tpl.id || '') === value ||
+        String(tpl.templateId || '') === value ||
+        String(tpl.slug || '') === value
+      )
+    )) || null;
+  }
+
+  return null;
 }
 
 function serializeTemplate(tpl) {
@@ -56,8 +71,7 @@ router.get('/:slug', optionalAuth, (req, res) => {
     const { slug } = req.params;
     const { invite, passcode } = req.query;
 
-    // FIRST: canonical template preview. This prevents /event/<template-slug>
-    // from falling through to the user-event lookup and returning 404.
+    // FIRST: canonical template preview.
     const canonicalTemplate = findCanonicalTemplate(slug);
     if (canonicalTemplate) {
       return res.json(serializeTemplate(canonicalTemplate));
@@ -161,7 +175,6 @@ router.get('/:slug', optionalAuth, (req, res) => {
   }
 });
 
-// Verify passcode for private invitations.
 router.post('/:slug/verify-passcode', (req, res) => {
   try {
     const { slug } = req.params;
