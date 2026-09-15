@@ -63,6 +63,10 @@ app.get('/templates', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/templates.html'));
 });
 
+app.get('/custom-template', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/custom-template/index.html'));
+});
+
 app.get('/how-it-works', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/how-it-works.html'));
 });
