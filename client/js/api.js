@@ -464,10 +464,12 @@ const API = {
     observer.observe(document.body, { childList: true, subtree: true });
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start, { once: true });
-  } else {
+  // api.js is loaded near the end of event-view.html, after <body> exists.
+  // Start immediately so fast API responses cannot race past DOMContentLoaded.
+  if (document.body) {
     start();
+  } else if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start, { once: true });
   }
 
   window.RiwaayatTemplateDemoMedia = {
